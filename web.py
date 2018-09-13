@@ -260,8 +260,8 @@ race/class combo. Each bonus will have two tiers; the second tier is more
 difficult and worth more points.</li>
 <li>Each challenge includes a list of gods. A bonus point can be earned upon
 reaching ****** piety (or on worship with Gozag or Xom) with one of the listed
-gods (but only if it is the first god worshipped that game, and you don't
-abandon or get excommunicated later). If the combo for the week is a zealot
+gods (but only if it is the first god worshipped that game, and you never
+abandon or get excommunicated). If the combo for the week is a zealot
 background or demigod, no god points are available.</li>
 <li>The season consists of 7 challenges total (i.e., 7 different combos). Each
 race and background will be selected at most once during the competition.</li>
