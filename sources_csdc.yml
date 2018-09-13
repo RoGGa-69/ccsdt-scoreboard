@@ -3,48 +3,57 @@ sources:
     base: http://crawl.akrasiac.org
     milestones: 'milestones22'
     logfile: 'logfile22'
+    rcfiles: 'rcfiles/crawl-0.22'
 
   - name: cdo
     base: http://crawl.develz.org
     milestones: 'milestones-0.22.txt'
     logfile: 'allgames-0.22.txt'
+    rcfiles: 'configs/0.22'
 
   - name: cue
     aliases:
       - cln
       - clan
-    base: http://underhound.eu:81/crawl/meta
-    logfile: '0.22/logfile'
-    milestones: '0.22/milestones'
+    base: http://underhound.eu:81/crawl/
+    logfile: 'meta/0.22/logfile'
+    milestones: 'meta/0.22/milestones'
+    rcfiles: 'rcfiles/crawl-0.22'
 
   - name: cwz
     base: http://webzook.net/soup
     logfile: '0.22/logfile'
     milestones: '0.22/milestones'
+    rcfiles: 'rcfiles/0.22'
 
   - name: cbro
     aliases:
       - cbo
-    base: http://crawl.berotato.org/crawl/meta
-    logfile: '0.22/logfile'
-    milestones: '0.22/milestones'
+    base: http://crawl.berotato.org/crawl/
+    logfile: 'meta/0.22/logfile'
+    milestones: 'meta/0.22/milestones'
+    rcfiles: 'rcfiles/crawl-0.22'
 
   - name: cxc
-    base: http://crawl.xtahua.com/crawl/meta
-    logfile: '0.22/logfile'
-    milestones: '0.22/milestones'
+    base: http://crawl.xtahua.com/crawl/
+    logfile: 'meta/0.22/logfile'
+    milestones: 'meta/0.22/milestones'
+    rcfiles: 'rcfiles/crawl-0.22'
 
   - name: lld
-    base: http://lazy-life.ddo.jp/mirror/meta
-    logfile: '0.22/logfile'
-    milestones: '0.22/milestones'
+    base: http://lazy-life.ddo.jp:8080/
+    logfile: 'meta/0.22/logfile'
+    milestones: 'meta/0.22/milestones'
+    rcfiles: 'rcfiles/0.22/'
 
   - name: cpo
     base: https://crawl.project357.org
     logfile: 'dcss-logfiles-0.22'
     milestones: 'dcss-milestones-0.22'
+    rcfiles: 'rc-files/0.22'
 
   - name: cjr
-    base: https://crawl.jorgrun.rocks/meta
-    logfile: '0.22/logfile'
-    milestones: '0.22/milestones'
+    base: https://crawl.jorgrun.rocks/
+    logfile: 'meta/0.22/logfile'
+    milestones: 'meta/0.22/milestones'
+    rcfiles: 'rcfiles/crawl-0.22'

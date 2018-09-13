@@ -6,6 +6,7 @@ import sys
 import subprocess
 import urllib.parse
 import re
+import glob
 import shlex
 from typing import Optional, Iterable, Sequence
 import logging
@@ -16,6 +17,10 @@ SIMULTANEOUS_DOWNLOADS = 10
 WGET_NAME = 'wget.exe' if sys.platform == 'win32' else 'wget'
 WGET_SOURCE_CMDLINE = ("%s --timeout 10 --no-verbose -c --tries 5 "
                        "-O '{outfile}' '{url}'" % WGET_NAME)
+WGET_RCFILE_CMDLINE = ("%s --no-verbose --no-directories --timestamping "
+                       "--no-parent --no-host-directories --recursive -l 1 "
+                       "--accept .rc -P '{prefix}' '{url}'" % WGET_NAME)
+GREP_COMMAND = ("grep --line-regexp --files-with-matches --ignore-case '#.*csdc.*'")
 # Ignored stuff: sprint & zotdef games, dead servers
 IGNORED_FILES_REGEX = re.compile(
     r'(sprint|zotdef|rl.heh.fi|crawlus.somatika.net|nostalgia|mulch|squarelos|combo_god)'
@@ -32,7 +37,7 @@ def sources(src: dict) -> dict:
     if not src['base'].endswith('/'):
         src['base'] += '/'
 
-    for x in ["milestones", "logfile"]:
+    for x in ["milestones", "logfile", "rcfiles"]:
         expanded_sources[x] = "{}{}".format(src['base'], src[x])
 
     return expanded_sources
@@ -123,8 +128,86 @@ def download_sources(sources_yaml_path: str, dest: str, servers: Optional[str]=N
         destdir = os.path.join(dest, src)
         if not os.path.exists(destdir):
             os.mkdir(destdir)
-        jobs.append(p.apply_async(download_source_files, (list(urls.values()), destdir)))
+        jobs.append(p.apply_async(download_source_files, 
+        	([urls["logfile"], urls["milestones"]], destdir)))
     for job in jobs:
         job.get()
     p.close()
     p.join()
+
+
+def download_source_rcfiles(url: str, dest: str) -> None:
+    """Download logfile/milestone files for a single source."""
+    destdir = os.path.join(dest, url_to_filename(url))
+    logging.debug("Downloading rcfiles to {}".format(destdir))
+
+# logging.debug("Downloading {} to {}".format(url, destfile))
+    cmdline = shlex.split(
+        WGET_RCFILE_CMDLINE.format(
+            prefix=destdir, url=url))
+    logging.debug("Executing subprocess: {}".format(cmdline))
+    p = subprocess.run(cmdline,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE)
+    if p.returncode:
+        logging.warning("Couldn't download {}. Error: {}".format(url, p.stderr))
+    else:
+        logging.debug("Finished downloading {}.".format(url))
+
+
+def download_rcfiles(sources_yaml_path: str, dest: str, servers: Optional[str]=None) -> None:
+    if not os.path.exists(dest):
+    	os.mkdir(dest)
+    all_sources = source_data(sources_yaml_path)
+    if servers:
+        temp = {}
+        for server in servers:
+            if server in all_sources:
+                temp[server] = all_sources[server]
+                logging.debug("Downloading from whitelisted server '%s'." % server)
+            else:
+                logging.info("Invalid server '%s' specified, skipping." % server)
+        all_sources = temp
+    # Not yet in typeshet
+    p = multiprocessing.Pool(SIMULTANEOUS_DOWNLOADS)  # type: ignore
+    jobs = []
+    for src, urls in all_sources.items():
+        destdir = os.path.join(dest, src)
+        if not os.path.exists(destdir):
+            os.mkdir(destdir)
+        jobs.append(p.apply_async(download_source_rcfiles, (urls["rcfiles"], destdir)))
+    for job in jobs:
+        job.get()
+    p.close()
+    p.join()
+
+
+def contestant_list(sources_yaml_path: str, dest: str, servers: Optional[str]=None) -> None:
+    if not os.path.exists(dest):
+    	os.mkdir(dest)
+    all_sources = source_data(sources_yaml_path)
+    if servers:
+        temp = {}
+        for server in servers:
+            if server in all_sources:
+                temp[server] = all_sources[server]
+                logging.debug("Downloading from whitelisted server '%s'." % server)
+            else:
+                logging.info("Invalid server '%s' specified, skipping." % server)
+        all_sources = temp
+    contestants = []
+    for src, urls in all_sources.items():
+        rcglob = os.path.join(dest, src, url_to_filename(urls["rcfiles"]), "*.rc")
+        cmdline = shlex.split(GREP_COMMAND) 
+        logging.debug("Executing subprocess: {}".format(cmdline + [rcglob]))
+        rcs = glob.glob(rcglob)
+        if len(rcs) == 0:
+        	continue
+        p = subprocess.run(cmdline + rcs, encoding='utf-8', stdout=subprocess.PIPE, 
+        stderr=subprocess.DEVNULL)
+        for line in p.stdout.split('\n'):
+        	line = line.rstrip()
+        	if len(line) == 0:
+        		continue
+        	contestants.append(os.path.splitext(os.path.basename(line))[0])
+    return contestants
