@@ -30,6 +30,7 @@ from orm import (
     Ktyp,
     Verb,
     Skill,
+    CsdcContestant,
     get_session,
 )
 
@@ -491,7 +492,15 @@ def list_players(s: sqlalchemy.orm.session.Session) -> Sequence[Player]:
 @_reraise_dberror
 def add_contestant(s: sqlalchemy.orm.session.Session, name: str) -> None:
     """Add a Csdc Contestant"""
-    s.add(CsdcContestant(player_id = get_player_id(name),division = 1))
+    pid = get_player_id(s, name)
+    c = s.query(CsdcContestant).filter(CsdcContestant.player_id == pid).one_or_none()
+
+    if c:
+        return;
+    else:
+        s.add(CsdcContestant(player_id = get_player_id(s, name),division = 1))
+        s.commit()
+
 
 def _generic_char_type_lister(
     s: sqlalchemy.orm.session.Session,
