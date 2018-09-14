@@ -21,6 +21,7 @@ if 'logging level' in CONFIG and hasattr(logging, CONFIG['logging level']):
     logging_level = getattr(logging, CONFIG['logging level'])
 
 logging.basicConfig(level=logging_level)
+#logging.getLogger('sqlalchemy.engine').setLevel(logging_level)
 
 if __name__=='__main__':
     orm.initialize(CONFIG['db uri'])
