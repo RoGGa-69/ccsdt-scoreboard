@@ -145,14 +145,17 @@ def _ifnone(x, d):
 def standingstable():
     with get_session() as s:
         sp = "<table>"
-        sp += '<tr class="head"><th>Player</th>'
+        sp += '<tr class="head"><th></th><th>Player</th>'
         sp += ''.join(['<th>' + description(wk, True) +'</th>' for wk in csdc.weeks
             ])
         sp +='<th>15 Rune Win</th><th>Win &lt;50k Turns</th><th>Zig:$</th>'
         sp +='<th>Zot @ XL20</th><th>No Lair Win</th><th>Ascetic Rune</th>'
         sp += '<th>Score</th></tr>'
+        place = 1
         for p in csdc.overview().with_session(s).all():
             sp += '<tr>'
+            sp += '<td class="total">{}.</td>'.format(place)
+            place += 1
             sp += '<td class="name">{}</td>'.format(p.CsdcContestant.player.name)
             sp += ('<td class="pt">{}</td>' * len(csdc.weeks)).format(
                     *[ _ifnone(getattr(p, "wk" + wk.number), "") for wk in csdc.weeks])
