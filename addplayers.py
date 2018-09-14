@@ -24,12 +24,12 @@ orm.initialize(CONFIG['db uri'])
 model.setup_database()
 
 t_i = time.time()
-#sources.download_rcfiles(CONFIG['sources file'], SOURCES_DIR)
+sources.download_rcfiles(CONFIG['sources file'], SOURCES_DIR)
 logging.info("Fetched rcfiles in {} seconds.".format(time.time() - t_i))
 
 with orm.get_session() as s:
 	for p in sources.contestant_list(CONFIG['sources file'], SOURCES_DIR):
-		#try:
+		try:
 			model.add_contestant(s, p)
-		#except BaseException as e:
-		#    logging.warning("Bad player {}. Exception: {}.".format(p, repr(e)))
+		except BaseException as e:
+		    logging.warning("Bad player {}. Exception: {}.".format(p, repr(e)))
