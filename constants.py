@@ -324,3 +324,44 @@ SKILLS = (
     "Evocations",
     "Stealth"
 )
+
+RUNE_BRANCHES = (
+    "Abyss",
+    "Coc",
+    "Dis",
+    "Geh",
+    "Pan",
+    "Swamp",
+    "Shoals",
+    "Slime",
+    "Snake",
+    "Spider",
+    "Tar",
+    "Tomb",
+    "Vaults",
+)
+    
+
+MULTI_LEVEL_BRANCHES = (
+    "Abyss",
+    "Coc",
+    "Dis",
+    "Geh",
+    "Pan",
+    "Swamp",
+    "Shoals",
+    "Slime",
+    "Snake",
+    "Spider",
+    "Tar",
+    "Tomb",
+    "Vaults",
+    "Lair",
+    "D",
+    "Depths",
+    "Zot",
+    "Orc",
+    "Elf",
+    "Zig",
+    "Crypt",
+)
