@@ -338,7 +338,7 @@ RUNE_BRANCHES = (
     "Spider",
     "Tar",
     "Tomb",
-    "Vaults",
+    "Vaults"
 )
     
 
@@ -363,5 +363,5 @@ MULTI_LEVEL_BRANCHES = (
     "Orc",
     "Elf",
     "Zig",
-    "Crypt",
+    "Crypt"
 )
