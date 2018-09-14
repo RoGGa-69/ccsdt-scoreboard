@@ -220,8 +220,8 @@ href="rules.html">rules page</a>.</li>
 <p>In order to sign up, set the first line of your 0.22 rcfile to</p> <pre
 id="rc"># csdc</pre><p>on <a
 href="https://crawl.develz.org/play.htm">any of the official online servers</a>
-before the start of the first week. Your name will appear in the standings once
-you've done this correctly.</p>
+before the end of the first week. Your name will appear in the standings once
+you've done this correctly (though it may take about 20 minutes before it does).</p>
 
 <h2>Credits</h2>
 
