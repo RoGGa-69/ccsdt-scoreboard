@@ -105,7 +105,7 @@ def scoretable(wk, div):
     </tr>""")
 
     with get_session() as s:
-        for g in wk.scorecard().with_session(s).all():
+        for g in wk.sortedscorecard().with_session(s).all():
             if g.Game == None:
                 sp += """<tr class="{}"><td class="name">{}</td>
                 <td colspan="9"></td><td class="total">0</td></tr>""".format(

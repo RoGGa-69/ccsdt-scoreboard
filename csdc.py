@@ -405,7 +405,7 @@ def overview():
     totalcols = [func.ifnull(getattr(sc.c, col), 0)
         for col in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune")]
     for wk in weeks:
-        a = wk.scorecard().subquery()
+        a = wk.sortedscorecard().subquery()
         totalcols.append(func.ifnull(a.c.total, 0))
         q = q.outerjoin(a, CsdcContestant.player_id == a.c.player_id
                 ).add_column( a.c.total.label("wk" + wk.number))
