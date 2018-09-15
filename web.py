@@ -159,7 +159,8 @@ def standingstable():
             sp += '<td class="name">{}</td>'.format(p.CsdcContestant.player.name)
             sp += ('<td class="pt">{}</td>' * len(csdc.weeks)).format(
                     *[ _ifnone(getattr(p, "wk" + wk.number), "") for wk in csdc.weeks])
-            sp += '<td class="pt"></td>' * 6
+            for c in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune"):
+                sp += ('<td class="pt">{}</td>').format(_ifnone(getattr(p, c), ""))
             sp += '<td class="total">{}</td>'.format(p.grandtotal)
             sp += '</tr>'
 

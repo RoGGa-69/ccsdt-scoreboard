@@ -402,8 +402,10 @@ def overview():
     q = Query(CsdcContestant)
     sc = onetimescorecard().subquery()
     q.outerjoin(sc, CsdcContestant.player_id == sc.c.player_id)
-    totalcols = [func.ifnull(getattr(sc.c, col), 0)
-        for col in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune")]
+    totalcols = []
+    for col in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune"):
+        totalcols.append(func.ifnull(getattr(sc.c, col), 0))
+        q = q.add_column(getattr(sc.c, col).label(col))
     for wk in weeks:
         a = wk.sortedscorecard().subquery()
         totalcols.append(func.ifnull(a.c.total, 0))
