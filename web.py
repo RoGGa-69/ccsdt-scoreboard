@@ -90,7 +90,7 @@ def description(wk, url):
 
 def scoretable(wk, div):
     sp = ""
-    sp += ("""<table><tr class="head">
+    sp += ("""<div class="card"><table><tr class="head">
     <th>Player</th>
     <th>Unique Kill</th>
     <th>Branch Enter</th>
@@ -132,7 +132,7 @@ def scoretable(wk, div):
                 g.total))
             sp += ('</tr>\n')
 
-    sp += '</table>'
+    sp += '</table></div>'
 
     return sp
 
@@ -144,7 +144,7 @@ def _ifnone(x, d):
 
 def standingstable():
     with get_session() as s:
-        sp = "<table>"
+        sp = '<div class="card"><table>'
         sp += '<tr class="head"><th></th><th>Player</th>'
         sp += ''.join(['<th>' + description(wk, True) +'</th>' for wk in csdc.weeks
             ])
@@ -163,6 +163,7 @@ def standingstable():
                 sp += ('<td class="pt">{}</td>').format(_ifnone(getattr(p, c), ""))
             sp += '<td class="total">{}</td>'.format(p.grandtotal)
             sp += '</tr>'
+        sp += '</table></div>'
 
         return sp
 
