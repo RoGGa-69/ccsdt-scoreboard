@@ -115,7 +115,7 @@ class CsdcWeek:
             ).join(latestmilestones, g1.gid == latestmilestones.c.gid
             ).add_column(latestmilestones.c.xl).cte()
         pg2 = possiblegames.alias()
-        self.gids = Query(possiblegames.c.gid).outerjoin(pg2,
+        self.gids = Query(possiblegames.c.gid.label("gid")).outerjoin(pg2,
                 and_(pg2.c.player_id == possiblegames.c.player_id,
                     possiblegames.c.start > pg2.c.start)
                 ).filter(or_(pg2.c.gid == None,
@@ -181,6 +181,67 @@ class CsdcWeek:
             Game.ktyp_id == ktyp_id,
             Game.end <= self.end), Integer)
 
+    def _fifteenrune(self):
+        with get_session() as s:
+            ktyp_id = get_ktyp(s, "winning").id
+
+        return type_coerce(and_(
+            Game.ktyp_id == ktyp_id,
+            Game.end <= self.end,
+            self._rune(15)), Integer)
+
+    def _sub50k(self):
+        with get_session() as s:
+            ktyp_id = get_ktyp(s, "winning").id
+
+        return type_coerce(and_(
+            Game.ktyp_id == ktyp_id,
+            Game.end <= self.end,
+            ~self._valid_milestone().filter(
+                Milestone.turn >= 50000).exists()
+        ), Integer)
+     
+    def _zig(self):
+        with get_session() as s: 
+            zexit = get_verb(s, "zig.exit").id
+            zplace = get_place_from_string(s, "Zig:27").id
+
+        return self._valid_milestone().filter(
+                Milestone.verb_id == zexit,
+                Milestone.oplace_id == zplace).exists()
+
+    def _lowxlzot(self):
+        with get_session() as s:
+            verb_id = get_verb(s, "br.enter").id
+            place = get_place_from_string(s, "Zot:1").id
+
+        return self._valid_milestone().filter(
+            Milestone.xl <= 20,
+            Milestone.verb_id == verb_id,
+            Milestone.place_id == place).exists()
+    
+    def _nolairwin(self):
+        with get_session() as s:
+            ktyp_id = get_ktyp(s, "winning").id
+            brenter = get_verb(s, "br.enter").id
+            lair = get_place_from_string(s, "Lair:1").id
+
+        return type_coerce(and_(Game.ktyp_id != None, 
+            Game.ktyp_id == ktyp_id,
+            Game.end <= self.end,
+            ~self._valid_milestone().filter(
+                Milestone.verb_id == brenter,
+                Milestone.place_id == lair).exists()), Integer)
+
+    def _asceticrune(self):
+        with get_session() as s:
+            verb_id = get_verb(s, "rune").id
+
+        return self._valid_milestone().filter(
+            Milestone.verb_id == verb_id,
+            Milestone.potionsused == 0,
+            Milestone.scrollsused == 0).exists()
+
     def _bonus(self, bonus):
         """in principle we support more than two bonuses"""
         return type_coerce(self._valid_milestone().filter(
@@ -199,12 +260,19 @@ class CsdcWeek:
             self._win().label("win"),
             self._bonus(self.tier1).label("bonusone"),
             self._bonus(self.tier2).label("bonustwo"),
+            self._fifteenrune().label("fifteenrune"),
+            self._sub50k().label("sub50k"),
+            type_coerce(self._zig(), Integer).label("zig"),
+            type_coerce(self._lowxlzot(), Integer).label("lowxlzot"),
+            self._nolairwin().label("nolairwin"),
+            type_coerce(self._asceticrune(), Integer).label("asceticrune"),
         ]).filter(Game.gid.in_(self.gids)).subquery()
 
         return Query( [Player, Game]).select_from(CsdcContestant).join(Player
                 ).outerjoin(sc, CsdcContestant.player_id ==
                         sc.c.player_id).outerjoin(Game,
                 Game.gid == sc.c.gid).add_columns(
+                    sc.c.player_id.label("player_id"),
                     sc.c.uniq,
                     sc.c.brenter,
                     sc.c.brend,
@@ -214,6 +282,12 @@ class CsdcWeek:
                     sc.c.win,
                     sc.c.bonusone,
                     sc.c.bonustwo,
+                    sc.c.fifteenrune.label("fifteenrune"),
+                    sc.c.sub50k.label("sub50k"),
+                    sc.c.zig.label("zig"),
+                    sc.c.lowxlzot.label("lowxlzot"),
+                    sc.c.nolairwin.label("nolairwin"),
+                    sc.c.asceticrune.label("asceticrune"),
                     func.max(
                         sc.c.uniq
                         + sc.c.brenter
@@ -225,7 +299,10 @@ class CsdcWeek:
                         + sc.c.bonusone
                         + sc.c.bonustwo
                     ).label("total")
-            ).group_by(CsdcContestant.player_id).order_by(desc("total"),Game.start)
+            )
+
+    def sortedscorecard(self):
+        return self.scorecard().group_by(CsdcContestant.player_id).order_by(desc("total"),Game.start)
 
 weeks = []
 
@@ -306,9 +383,27 @@ def initialize_weeks():
                 end = datetime.datetime(2018,11,29)))
 
 
+def all_games():
+    allgids = weeks[0].gids.union_all(*weeks[1:])
+    return Query(Game).filter(Game.gid.in_(allgids))
+
+def onetimescorecard():
+    sc = weeks[0].scorecard().union_all(*[wk.scorecard() for wk in weeks[1:]]).subquery()
+
+    return Query([sc.c.player_id,
+        ((func.sum(sc.c.fifteenrune) > 0) * 3).label("fifteenrune"),
+        ((func.sum(sc.c.sub50k) > 0) * 3).label("sub50k"),
+        ((func.sum(sc.c.zig) > 0) * 3).label("zig"),
+        ((func.sum(sc.c.lowxlzot) > 0) * 6).label("lowxlzot"),
+        ((func.sum(sc.c.nolairwin) > 0) * 6).label("nolairwin"),
+        ((func.sum(sc.c.asceticrune) > 0) * 6).label("asceticrune")]).group_by(sc.c.player_id)
+
 def overview():
     q = Query(CsdcContestant)
-    totalcols = []
+    sc = onetimescorecard().subquery()
+    q.outerjoin(sc, CsdcContestant.player_id == sc.c.player_id)
+    totalcols = [func.ifnull(getattr(sc.c, col), 0)
+        for col in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune")]
     for wk in weeks:
         a = wk.scorecard().subquery()
         totalcols.append(func.ifnull(a.c.total, 0))
