@@ -384,7 +384,7 @@ def initialize_weeks():
 
 
 def all_games():
-    allgids = weeks[0].gids.union_all(*weeks[1:])
+    allgids = weeks[0].gids.union_all(*[ wk.gids for wk in weeks[1:]]).subquery()
     return Query(Game).filter(Game.gid.in_(allgids))
 
 def onetimescorecard():
