@@ -8,6 +8,7 @@ import csdc
 import web
 import time
 import datetime
+import postquell
 
 SOURCES_DIR = './sources'
 CONFIG_FILE = 'config.yml'
@@ -53,3 +54,8 @@ if __name__=='__main__':
     with open(rules, 'w') as f:
         f.write(web.rulespage())
     os.umask(oldmask)
+
+    pqjson = os.path.join(CONFIG['www dir'],"postquell.json")
+    with open(pqjson, 'w') as f:
+        postquell.dumps(f)
+
