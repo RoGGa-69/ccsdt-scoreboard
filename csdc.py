@@ -31,7 +31,7 @@ from orm import (
     get_session,
 )
 
-from sqlalchemy import asc, desc, func, type_coerce, Integer, literal
+from sqlalchemy import asc, desc, func, type_coerce, Integer, literal, case
 from sqlalchemy.sql import and_, or_
 from sqlalchemy.orm.query import (
     aliased,
@@ -260,12 +260,6 @@ class CsdcWeek:
             self._win().label("win"),
             self._bonus(self.tier1).label("bonusone"),
             self._bonus(self.tier2).label("bonustwo"),
-            self._fifteenrune().label("fifteenrune"),
-            self._sub50k().label("sub50k"),
-            type_coerce(self._zig(), Integer).label("zig"),
-            type_coerce(self._lowxlzot(), Integer).label("lowxlzot"),
-            self._nolairwin().label("nolairwin"),
-            type_coerce(self._asceticrune(), Integer).label("asceticrune"),
         ]).filter(Game.gid.in_(self.gids)).subquery()
 
         return Query( [Player, Game]).select_from(CsdcContestant).join(Player
@@ -282,12 +276,6 @@ class CsdcWeek:
                     sc.c.win,
                     sc.c.bonusone,
                     sc.c.bonustwo,
-                    sc.c.fifteenrune.label("fifteenrune"),
-                    sc.c.sub50k.label("sub50k"),
-                    sc.c.zig.label("zig"),
-                    sc.c.lowxlzot.label("lowxlzot"),
-                    sc.c.nolairwin.label("nolairwin"),
-                    sc.c.asceticrune.label("asceticrune"),
                     func.max(
                         sc.c.uniq
                         + sc.c.brenter
@@ -300,6 +288,18 @@ class CsdcWeek:
                         + sc.c.bonustwo
                     ).label("total")
             )
+
+    def onetimes(self):
+        return Query([Game.gid,
+            Game.player_id.label("player_id"),
+            self._fifteenrune().label("fifteenrune"),
+            self._sub50k().label("sub50k"),
+            type_coerce(self._zig(), Integer).label("zig"),
+            type_coerce(self._lowxlzot(), Integer).label("lowxlzot"),
+            self._nolairwin().label("nolairwin"),
+            type_coerce(self._asceticrune(), Integer).label("asceticrune"),
+        ]).filter(Game.gid.in_(self.gids))
+
 
     def sortedscorecard(self):
         return self.scorecard().group_by(CsdcContestant.player_id).order_by(desc("total"),Game.start)
@@ -388,20 +388,20 @@ def all_games():
     return Query(Game).filter(Game.gid.in_(allgids))
 
 def onetimescorecard():
-    sc = weeks[0].scorecard().union_all(*[wk.scorecard() for wk in weeks[1:]]).subquery()
+    sc = weeks[0].onetimes().union_all(*[wk.onetimes() for wk in weeks[1:]]).subquery()
 
-    return Query([sc.c.player_id,
-        ((func.sum(sc.c.fifteenrune) > 0) * 3).label("fifteenrune"),
-        ((func.sum(sc.c.sub50k) > 0) * 3).label("sub50k"),
-        ((func.sum(sc.c.zig) > 0) * 3).label("zig"),
-        ((func.sum(sc.c.lowxlzot) > 0) * 6).label("lowxlzot"),
-        ((func.sum(sc.c.nolairwin) > 0) * 6).label("nolairwin"),
-        ((func.sum(sc.c.asceticrune) > 0) * 6).label("asceticrune")]).group_by(sc.c.player_id)
+    return Query([sc.c.player_id.label("player_id"),
+        type_coerce((func.sum(sc.c.fifteenrune) > 0) * 3, Integer).label("fifteenrune"),
+        type_coerce((func.sum(sc.c.sub50k) > 0) * 3, Integer).label("sub50k"),
+        type_coerce((func.sum(sc.c.zig) > 0) * 3, Integer).label("zig"),
+        type_coerce((func.sum(sc.c.lowxlzot) > 0) * 6, Integer).label("lowxlzot"),
+        type_coerce((func.sum(sc.c.nolairwin) > 0) * 6, Integer).label("nolairwin"),
+        type_coerce((func.sum(sc.c.asceticrune) > 0) * 6, Integer).label("asceticrune")]).group_by(sc.c.player_id)
 
 def overview():
     q = Query(CsdcContestant)
     sc = onetimescorecard().subquery()
-    q.outerjoin(sc, CsdcContestant.player_id == sc.c.player_id)
+    q = q.outerjoin(sc, CsdcContestant.player_id == sc.c.player_id)
     totalcols = []
     for col in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune"):
         totalcols.append(func.ifnull(getattr(sc.c, col), 0))
