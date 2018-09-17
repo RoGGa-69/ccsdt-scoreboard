@@ -36,8 +36,8 @@ html, body {
 
 #content {
     margin-bottom: 40px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: auto;
+    margin-right: auto;
     width: calc(100% - 20px);
 }
 
@@ -96,6 +96,8 @@ li {
 table {
     margin-top: 30px;
     width: calc(100% - 60px);
+    margin-left: auto;
+    margin-right: auto;
     border-collapse: collapse;
 }
 td.pt, td.total {
