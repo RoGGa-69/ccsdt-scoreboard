@@ -17,4 +17,4 @@ def gameline(g):
 def dumps(f):
     with orm.get_session() as s:
         return json.dump({ "v" : { "$in" : [ "0.22.0", "0.22.1" ] },
-           "$or" : [ postquellline(g) for g in csdc.all_games().with_session(s).all() ] }, f)
+           "$or" : [ gameline(g) for g in csdc.all_games().with_session(s).all() ] }, f)
