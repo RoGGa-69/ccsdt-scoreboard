@@ -258,8 +258,10 @@ finish a game using that combo. Only milestones recorded during the week will
 count for scoring.</li>
 <li>Your first {} game started on an official server during the week will count
 for scoring. This is the only allowed attempt, subject to rule 3 below.</li>
-<li>One redo per week is allowed if player XL < 5 (i.e., no redo once you hit
-XL 5). The highest CSDC score of the two games is counted towards your score.</li>
+<li>One redo per week is allowed if your first game ended in death with player
+XL < 5 (i.e., no redo once you hit XL 5). The redo game must be started after
+the end of the first game (no startscumming!).  The highest CSDC score of the
+two games is counted towards your score.</li>
 <li>Each challenge has an optional bonus challenge in addition to the
 race/class combo. Each bonus will have two tiers; the second tier is more
 difficult and worth more points.</li>
