@@ -14,7 +14,17 @@ def gameline(g):
         "start" : crawldate(g.start)
     }
 
-def dumps(f):
+def playerline(r, wk):
+    if r.Game:
+        return gameline(r.Game)
+    else:
+        return {
+            "name" : r.Player.name,
+            "char" : wk.char,
+        }
+
+
+def dumps(f, wk):
     with orm.get_session() as s:
         return json.dump({ "v" : { "$in" : [ "0.22.0", "0.22.1" ] },
-           "$or" : [ gameline(g) for g in csdc.all_games().with_session(s).all() ] }, f)
+           "$or" : [ playerline(r, wk) for r in wk.sortedscorecard().with_session(s).all() ] }, f)

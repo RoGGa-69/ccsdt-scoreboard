@@ -87,7 +87,7 @@ class CsdcWeek:
                 alias.species_id == self.species.id,
                 alias.background_id == self.background.id,
                 alias.start >= self.start,
-                alias.start <= self.end
+                alias.start < self.end
             )
 
 
@@ -96,6 +96,7 @@ class CsdcWeek:
             self.number = kwargs["number"]
             self.species = get_species(s, kwargs["species"])
             self.background = get_background(s, kwargs["background"])
+            self.char = self.species.short + self.background.short
             self.gods = [ get_god(s, g) for g in kwargs["gods"] ]
             self.start = kwargs["start"]
             self.end = kwargs["end"]
@@ -119,7 +120,8 @@ class CsdcWeek:
                 and_(pg2.c.player_id == possiblegames.c.player_id,
                     possiblegames.c.start > pg2.c.start)
                 ).filter(or_(pg2.c.gid == None,
-                    and_(pg2.c.end != None, pg2.c.xl < 5)))
+                    and_(pg2.c.end != None, pg2.c.xl < 5, 
+                    possiblegames.c.start > pg2.c.end)))
 
 
     def _valid_milestone(self):
@@ -415,5 +417,12 @@ def overview():
     return q.add_column(
             sum(totalcols).label("grandtotal")
         ).order_by(desc("grandtotal"))
+
+def current_week():
+    now = datetime.datetime.now()
+    for wk in weeks:
+        if wk.start <= now and now < wk.end:
+            return wk
+    return None
 
 divisions = [1]

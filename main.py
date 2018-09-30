@@ -57,5 +57,7 @@ if __name__=='__main__':
 
     pqjson = os.path.join(CONFIG['www dir'],"postquell.json")
     with open(pqjson, 'w') as f:
-        postquell.dumps(f)
+        curwk = csdc.current_week()
+        if curwk is not None:
+            postquell.dumps(f, curwk)
 
