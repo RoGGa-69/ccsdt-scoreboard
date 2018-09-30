@@ -25,6 +25,10 @@ def playerline(r, wk):
 
 
 def dumps(f, wk):
+    if wk is None:
+        json.dump({ "v" : { "$in" : [ "0.22.0", "0.22.1"  ] }, "$or" : [] }, f)
+        return
+
     with orm.get_session() as s:
         return json.dump({ "v" : { "$in" : [ "0.22.0", "0.22.1" ] },
            "$or" : [ playerline(r, wk) for r in wk.sortedscorecard().with_session(s).all() ] }, f)
