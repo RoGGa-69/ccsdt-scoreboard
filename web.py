@@ -220,6 +220,13 @@ href="rules.html">rules page</a>.</li>
 
 {}
 
+<h2>Cool Plays</h2>
+
+<p>If you do something particularly cool in your game make a note <code>cool
+play</code> with the <code>:</code> command. Follow it with a second note
+indicating where the play started and what makes it cool. The CSDC Replay team
+will look through cool plays and post highlight reels from each week.</p>
+
 <h2>Sign Up</h2>
 
 <p>In order to sign up, set the first line of your 0.22 rcfile to</p> <pre
