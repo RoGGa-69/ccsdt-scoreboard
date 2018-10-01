@@ -212,6 +212,7 @@ talk with other people about the competition.</p>
 <li>You get <em>one</em>  attempt to play each combo.</li>
 <li>The goal is to advance as far as possible (and win!) in each game, scoring
 points by reaching various in-game milestones.</li>
+<li>Only games played and milestones scored between 00:00 UTC on the start and end dates count.</li>
 <li>Details on rules and scoring are available on the <a
 href="rules.html">rules page</a>.</li>
 </ul>
@@ -258,11 +259,12 @@ href="http://crawl.akrasiac.org/scoring/players/ebering.html">ebering</a>."""
 def rulespage():
     pagestr ="""
     <ol>
-<li>Each challenge consists of playing a randomly chosen Crawl race/class
-combo (e.g. MiBe). The combo for each week of the competition will be announced
-at 00:00 UTC on the Thursday starting that week. All players have one week to
-finish a game using that combo. Only milestones recorded during the week will
-count for scoring.</li>
+<li>Each challenge consists of playing a randomly chosen Crawl race/class combo
+(e.g. MiBe). The combo for each week of the competition will be announced at
+00:00 UTC on the Thursday starting that week. All players have one week to
+finish a game using that combo. Only milestones recorded during the week (from
+00:00 UTC on the start date until 00:00 UTC on the end date) will count for
+scoring.</li>
 <li>Your first {} game started on an official server during the week will count
 for scoring. This is the only allowed attempt, subject to rule 3 below.</li>
 <li>One redo per week is allowed if your first game ended in death with player
