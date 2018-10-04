@@ -312,9 +312,9 @@ weeks = []
 def initialize_weeks():
     with get_session() as s:
         m2 = aliased(Milestone)
-        lairbonus = CsdcBonus("RuneInBranch",
-            "Get a rune without leaving any branch (other than D).",
-            [ Milestone.runes > 0,
+        runebranchlowskill = CsdcBonus("RuneBranchLowSkill",
+            "Enter a rune branch with all base skills < 11.",
+            [ Milestone.sklev < 11,
                 Milestone.id.in_(Query(m2.id).filter(
                     Milestone.gid == m2.gid,
                     m2.verb_id == get_verb(s, "br.exit").id,
@@ -322,17 +322,127 @@ def initialize_weeks():
                         Branch.id != get_branch(s, "D").id))
                     ).order_by(m2.time).limit(1)) ],
             1)
-        lair1 = get_place_from_string(s, "Lair:1")
-        alllairbonus = CsdcBonus("LairRunesInLair",
-            "Enter Lair with no runes and leave with at least three.",
-            [ Milestone.runes >= 3,
-                Milestone.verb_id == get_verb(s, "br.exit").id,
-                Milestone.oplace_id == lair1.id,
-                Query(m2).filter(
-                    m2.gid == Milestone.gid,
-                    m2.verb_id == get_verb(s, "br.enter").id,
-                    m2.place_id == lair1.id,
-                    m2.runes == 0).exists() ],
+        runelowskill = CsdcBonus("RuneLowSkill",
+            "Collect a rune with all base skills < 11.",
+            [ Milestone.sklev < 11,
+                Milestone.id.in_(Query(m2.id).filter(
+                    Milestone.gid == m2.gid,
+                    m2.verb_id == get_verb(s, "rune").id
+                ).order_by(m2.time).limit(1))],
+            "2")
+
+        slimefirst = CsdcBonus("EnterSlime2nd",
+            "Enter Slime as your second multi-level branch (don't get banished).",
+            [ Milestone.verb_id == get_verb(s, "br.enter").id,
+              Milestone.place_id == get_place_from_string(s, "Slime:1").id,
+              Query(func.count(m2.id)).filter(
+                  Milestone.gid == m2.gid,
+                  m2.turn < Milestone.turn, 
+                  m2.verb_id == get_verb(s, "br.enter").id,
+                  m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.MULTI_LEVEL_BRANCHES])
+              ).as_scalar() < 2],
+            "1")
+
+        slimerunefirst = CsdcBonus("GetTheSlimyRuneFirst",
+            "Get the slimy rune without entering any multi-level branch other than Lair, Slime, and D (don't get banished).",
+            [ Milestone.verb_id == get_verb(s, "rune").id,
+              Milestone.place_id  == get_place_from_string(s, "Slime:5").id,
+              Query(func.count(m2.id)).filter(
+                  Milestone.gid == m2.gid,
+                  m2.turn < Milestone.turn,
+                  m2.verb_id == get_verb(s, "br.enter").id,
+                  m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.MULTI_LEVEL_BRANCHES])
+              ).as_scalar() <= 2],
+            "2")
+
+        temple3k = CsdcBonus("TempleIn3kTurn",
+            "Enter the Temple in less than 3,000 turns.",
+            [ Milestone.verb_id == get_verb(s, "br.enter").id,
+              Milestone.place_id == get_place_from_string(s, "Temple").id,
+              Milestone.turn < 3000 ],
+            "1")
+
+        rune15k = CsdcBonus("RuneIn15kTurn",
+            "Collect a rune in less than 15,000 turns.",
+            [ Milestone.verb_id == get_verb(s, "rune").id,
+              Milestone.turn < 15000 ],
+            "2")
+
+        lairendxl12 = CsdcBonus("LairEndXL12",
+            "Reach the end of Lair at XL &leq; 12.",
+            [ Milestone.verb_id == get_verb(s, "br.end").id,
+              Milestone.place_id == get_place_from_string(s, "Lair:6").id,
+              Milestone.xl <= 12 ],
+            "1")
+
+        vaultendxl18 = CsdcBonus("VaultEndXL18",
+            "Reach the end of the Vaults at XL &leq; 18.",
+            [ Milestone.verb_id == get_verb(s, "br.end").id,
+              Milestone.place_id == get_place_from_string(s, "Vaults:5").id,
+              Milestone.xl <= 18 ],
+            "2")
+
+        elfbeforerune = CsdcBonus("Elf3BeforeRunes",
+            "Reach the end of Elf before entering a rune branch.",
+            [ Milestone.verb_id == get_verb(s, "br.end").id,
+              Milestone.place_id == get_place_from_string(s, "Elf:3").id,
+              ~Query(m2).filter( 
+                  m2.gid == Milestone.gid,
+                  m2.turn < Milestone.turn,
+                  m2.verb_id == get_verb(s, "br.enter").id,
+			      m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.RUNE_BRANCHES ]),
+			  ).exists() ],
+			"1")
+
+        depthsbeforerune = CsdcBonus("Depths5BeforeRunes",
+            "Reach the end of the Depths before entering a rune branch.",
+            [ Milestone.verb_id == get_verb(s, "br.end").id,
+              Milestone.place_id == get_place_from_string(s, "Depths:5").id,
+              ~Query(m2).filter( 
+                  m2.gid == Milestone.gid,
+                  m2.turn < Milestone.turn,
+                  m2.verb_id == get_verb(s, "br.enter").id,
+			      m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.RUNE_BRANCHES ]),
+			  ).exists() ],
+			"2")
+
+        geryonbeforerune = CsdcBonus("GeryonBeforeRune",
+            "Kill or slimify Geryon before entering a rune branch (excluding the Abyss).",
+            [ or_( Milestone.verb_id == get_verb(s, "uniq").id,
+                   Milestone.verb_id == get_verb(s, "uniq.slime").id),
+              Milestone.msg.like("%Geryon%"),
+              ~Query(m2).filter( 
+                  m2.gid == Milestone.gid,
+                  m2.turn < Milestone.turn,
+                  m2.verb_id == get_verb(s, "br.enter").id,
+                  m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in set(constants.RUNE_BRANCHES) - set(("Abyss",))]),
+              ).exists() ],
+            "1")
+
+        hellpanrunefirst = CsdcBonus("HellPanRuneFirst",
+            "Get a rune from Hell or Pan before entering any other rune branch (excluding the Abyss).",
+            [ Milestone.verb_id == get_verb(s, "rune").id,
+              ~Milestone.msg.like("%byssal%"),
+              ~Query(m2).filter( 
+                  m2.gid == Milestone.gid,
+                  m2.turn < Milestone.turn,
+                  m2.verb_id == get_verb(s, "br.enter").id,
+                  m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id 
+                      for b in set(constants.RUNE_BRANCHES) - set(("Abyss", "Coc", "Geh", "Dis", "Tar", "Pan"))]),
+              ).exists() ],
+            "2")
+
+        goldenrune = CsdcBonus("GoldenRune",
+            "Collect the golden rune.",
+            [ Milestone.verb_id == get_verb(s, "rune").id,
+              Milestone.place_id == get_place_from_string(s, "Tomb:3").id ],
+            "1")
+
+        vowofcourage = CsdcBonus("VowOfCourage",
+            "Collect at least 5 runes before entering the Depths.",
+            [ Milestone.verb_id == get_verb(s, "br.enter").id,
+              Milestone.place_id == get_place_from_string(s, "Depths:1").id,
+              Milestone.runes >= 5 ],
             "2")
 
         weeks.append(CsdcWeek(
