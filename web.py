@@ -113,7 +113,7 @@ def scoretable(wk, div):
                 continue
 
             sp += ('<tr class="{}">'.format(
-                "won" if g.Game.won and g.Game.end <= wk.end else
+                "won" if g.Game.won and g.Game.end.replace(tzinfo=datetime.timezone.utc) <= wk.end else
                 "alive" if g.Game.alive else
                 "dead"))
             namestr = '<td class="name"><a href="{url}">{name}</a></td>' if not g.Game.alive else '<td class="name">{name}</td>'
