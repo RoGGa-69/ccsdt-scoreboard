@@ -533,6 +533,7 @@ def overview():
     return q.add_columns(
             sum(totalcols).label("grandtotal"),
             sum(wkbonuses).label("tiebreak"),
+            sc.c.hiscore.label("hiscore"),
             (func.coalesce(*wktotal) != None).label("played")
         ).order_by(desc("grandtotal"),desc("tiebreak"),desc("hiscore"),desc("played"))
 

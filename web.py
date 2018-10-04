@@ -151,7 +151,7 @@ def standingstable():
             ])
         sp +='<th>15 Rune Win</th><th>Win &lt;50k Turns</th><th>Zig:$</th>'
         sp +='<th>Zot @ XL20</th><th>No Lair Win</th><th>Ascetic Rune</th>'
-        sp += '<th>Score</th></tr>'
+        sp += '<th>CSDC Score</th><th>Weekly Bonuses</th><th>Game High Score</th></tr>'
         place = 1
         for p in csdc.overview().with_session(s).all():
             sp += '<tr>'
@@ -163,6 +163,7 @@ def standingstable():
             for c in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune"):
                 sp += ('<td class="pt">{}</td>').format(_ifnone(getattr(p, c), ""))
             sp += '<td class="total">{}</td>'.format(p.grandtotal)
+            sp += '<td class="pt">{}</td><td class="pt">{}</td>'.format(p.tiebreak, _ifnone(p.hiscore, ""))
             sp += '</tr>'
         sp += '</table></div>'
 
