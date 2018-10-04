@@ -196,12 +196,12 @@ class CsdcWeek:
         with get_session() as s:
             ktyp_id = get_ktyp(s, "winning").id
 
-        return type_coerce(and_(
+        return type_coerce(func.ifnull(and_(
             Game.ktyp_id == ktyp_id,
             Game.end <= self.end,
             ~self._valid_milestone().filter(
                 Milestone.turn >= 50000).exists()
-        ), Integer)
+        ), 0), Integer)
      
     def _zig(self):
         with get_session() as s: 
