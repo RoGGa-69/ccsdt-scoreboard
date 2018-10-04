@@ -276,8 +276,8 @@ class CsdcWeek:
                     sc.c.rune,
                     sc.c.threerune,
                     sc.c.win,
-                    sc.c.bonusone,
-                    sc.c.bonustwo,
+                    sc.c.bonusone.label("bonusone"),
+                    sc.c.bonustwo.label("bonustwo"),
                     func.max(
                         sc.c.uniq
                         + sc.c.brenter
@@ -294,6 +294,7 @@ class CsdcWeek:
     def onetimes(self):
         return Query([Game.gid,
             Game.player_id.label("player_id"),
+            Game.score.label("score"),
             self._fifteenrune().label("fifteenrune"),
             self._sub50k().label("sub50k"),
             type_coerce(self._zig(), Integer).label("zig"),
@@ -398,25 +399,32 @@ def onetimescorecard():
         type_coerce((func.sum(sc.c.zig) > 0) * 3, Integer).label("zig"),
         type_coerce((func.sum(sc.c.lowxlzot) > 0) * 6, Integer).label("lowxlzot"),
         type_coerce((func.sum(sc.c.nolairwin) > 0) * 6, Integer).label("nolairwin"),
-        type_coerce((func.sum(sc.c.asceticrune) > 0) * 6, Integer).label("asceticrune")]).group_by(sc.c.player_id)
+        type_coerce((func.sum(sc.c.asceticrune) > 0) * 6, Integer).label("asceticrune"),
+        func.max(sc.c.score).label("hiscore")]).group_by(sc.c.player_id)
 
 def overview():
     q = Query(CsdcContestant)
     sc = onetimescorecard().subquery()
     q = q.outerjoin(sc, CsdcContestant.player_id == sc.c.player_id)
     totalcols = []
+    wktotal = []
+    wkbonuses = []
     for col in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune"):
         totalcols.append(func.ifnull(getattr(sc.c, col), 0))
         q = q.add_column(getattr(sc.c, col).label(col))
     for wk in weeks:
         a = wk.sortedscorecard().subquery()
         totalcols.append(func.ifnull(a.c.total, 0))
+        wktotal.append(a.c.total)
+        wkbonuses.append(func.ifnull(a.c.bonusone, 0) + func.ifnull(a.c.bonustwo, 0))
         q = q.outerjoin(a, CsdcContestant.player_id == a.c.player_id
                 ).add_column( a.c.total.label("wk" + wk.number))
 
-    return q.add_column(
-            sum(totalcols).label("grandtotal")
-        ).order_by(desc("grandtotal"))
+    return q.add_columns(
+            sum(totalcols).label("grandtotal"),
+            sum(wkbonuses).label("tiebreak"),
+            (func.coalesce(*wktotal) != None).label("played")
+        ).order_by(desc("grandtotal"),desc("tiebreak"),desc("hiscore"),desc("played"))
 
 def current_week():
     now = datetime.datetime.now(datetime.timezone.utc)
