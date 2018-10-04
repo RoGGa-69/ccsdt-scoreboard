@@ -116,8 +116,9 @@ def scoretable(wk, div):
                 "won" if g.Game.won and g.Game.end <= wk.end else
                 "alive" if g.Game.alive else
                 "dead"))
-            sp += ('<td class="name"><a href="{}">{}</a></td>'.format(
-                morgue_url(g.Game), g.Game.player.name))
+            namestr = '<td class="name"><a href="{url}">{name}</a></td>' if not g.Game.alive else '<td class="name">{name}</td>'
+            sp += (namestr.format(
+                url = morgue_url(g.Game), name = g.Game.player.name))
             sp += ( (('<td class="pt">{}</td>' * 9) 
                 + '<td class="total">{}</td>').format(
                 g.uniq,
