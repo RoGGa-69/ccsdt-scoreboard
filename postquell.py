@@ -31,4 +31,9 @@ def dumps(f, wk):
 
     with orm.get_session() as s:
         return json.dump({ "v" : { "$in" : [ "0.22.0", "0.22.1" ] },
-           "$or" : [ playerline(r, wk) for r in wk.sortedscorecard().with_session(s).all() ] }, f)
+           "$not" : {
+              "$or" : [
+                { "$not" : { "$or" : [ { "$not" : { "type" : { "$in" : [ "br.exit", "uniq" ] }}}]} },
+                { "$not" : { "$or" : [ playerline(r, wk) for r in wk.sortedscorecard().with_session(s).all() ] } }
+              ]
+          }}, f)
