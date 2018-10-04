@@ -339,50 +339,50 @@ def initialize_weeks():
                 species = "DD",
                 background = "Fi",
                 gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,10,4),
-                end = datetime.datetime(2018,10,11)))
+                start = datetime.datetime(2018,10,4, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2018,10,11, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "2",
                 species = "DD",
                 background = "Fi",
                 gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,10,11),
-                end = datetime.datetime(2018,10,18)))
+                start = datetime.datetime(2018,10,11, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2018,10,18, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "3",
                 species = "DD",
                 background = "Fi",
                 gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,10,18),
-                end = datetime.datetime(2018,10,25)))
+                start = datetime.datetime(2018,10,18, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2018,10,25, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "4",
                 species = "DD",
                 background = "Fi",
                 gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,10,25),
-                end = datetime.datetime(2018,11,1)))
+                start = datetime.datetime(2018,10,25, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2018,11,1, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "5",
                 species = "DD",
                 background = "Fi",
                 gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,11,8),
-                end = datetime.datetime(2018,11,15)))
+                start = datetime.datetime(2018,11,8, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2018,11,15, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "6",
                 species = "DD",
                 background = "Fi",
                 gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,11,15),
-                end = datetime.datetime(2018,11,22)))
+                start = datetime.datetime(2018,11,15, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2018,11,22, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "7",
                 species = "DD",
                 background = "Fi",
                 gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,11,22),
-                end = datetime.datetime(2018,11,29)))
+                start = datetime.datetime(2018,11,22, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2018,11,29, tzinfo=datetime.timezone.utc)))
 
 
 def all_games():
@@ -419,7 +419,7 @@ def overview():
         ).order_by(desc("grandtotal"))
 
 def current_week():
-    now = datetime.datetime.now()
+    now = datetime.datetime.now(datetime.timezone.utc)
     for wk in weeks:
         if wk.start <= now and now < wk.end:
             return wk

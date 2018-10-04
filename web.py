@@ -42,7 +42,7 @@ def wkmenu(wk):
         menuitem = ""
         if ((wk is None or 
             w.number != wk.number)
-            and w.start <= datetime.datetime.now()):
+            and w.start <= datetime.datetime.now(datetime.timezone.utc)):
             menuitem += wkurl(w)
         else:
             menuitem += '{}'
@@ -75,12 +75,12 @@ def wkurl(wk):
 def description(wk, url):
     s = ""
 
-    if wk.start > datetime.datetime.now():
+    if wk.start > datetime.datetime.now(datetime.timezone.utc):
         s += "Week {0}"
     else:
         s += "Week {0}&mdash;{1}{2}"
 
-    if url and wk.start <= datetime.datetime.now():
+    if url and wk.start <= datetime.datetime.now(datetime.timezone.utc):
         s = wkurl(wk).format(s)
 
     return s.format(wk.number, wk.species.short,
@@ -285,6 +285,7 @@ race and background will be selected at most once during the competition.</li>
 final outcome. The player with the highest CSDC score is the champion.</li>
 <li>Tiebreakers are (in order): number of weekly bonus points, highest in-game
 score.</li>
+<li>Don't play on more than one account. That misses the point.</li>
 </ol>
 
 <h2>Scoring</h2>
