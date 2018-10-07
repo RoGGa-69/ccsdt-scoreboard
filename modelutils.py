@@ -72,7 +72,7 @@ def _morgue_prefix(src: str, version: str) -> Optional[str]:
         prefix = "http://crawl.xtahua.com/crawl/morgue"
     elif src == "lld":
         prefix = "http://lazy-life.ddo.jp:8080/morgue"
-        prefix += "/" + version_url(version)
+        prefix += "-" + version_url(version)
     elif src == "cpo":
         prefix = "https://crawl.project357.org/morgue"
     elif src == "cjr":
