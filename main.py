@@ -53,9 +53,9 @@ if __name__=='__main__':
     rules = os.path.join(CONFIG['www dir'],"rules.html")
     with open(rules, 'w') as f:
         f.write(web.rulespage())
-    os.umask(oldmask)
 
     pqjson = os.path.join(CONFIG['www dir'],"postquell.json")
     with open(pqjson, 'w') as f:
         postquell.dumps(f, csdc.current_week())
+    os.umask(oldmask)
 
