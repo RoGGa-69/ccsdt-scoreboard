@@ -1,3 +1,4 @@
 *.db
 sources/*
+morgues/*
 __pycache__/*

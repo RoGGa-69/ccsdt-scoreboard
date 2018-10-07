@@ -2,3 +2,4 @@ logging level: INFO
 sources file: sources_csdc.yml
 db uri: sqlite:///crawl.db
 www dir: .
+morgue dir: morgues/
