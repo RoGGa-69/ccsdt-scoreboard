@@ -188,6 +188,7 @@ class CsdcWeek:
             ktyp_id = get_ktyp(s, "winning").id
 
         return type_coerce(and_(
+            Game.ktyp_id != None,
             Game.ktyp_id == ktyp_id,
             Game.end <= self.end,
             self._rune(15)), Integer)
@@ -278,6 +279,7 @@ class CsdcWeek:
                     sc.c.win,
                     sc.c.bonusone.label("bonusone"),
                     sc.c.bonustwo.label("bonustwo"),
+                    (sc.c.bonusone + sc.c.bonustwo).label("bonus"),
                     func.max(
                         sc.c.uniq
                         + sc.c.brenter
@@ -295,17 +297,18 @@ class CsdcWeek:
         return Query([Game.gid,
             Game.player_id.label("player_id"),
             Game.score.label("score"),
-            self._fifteenrune().label("fifteenrune"),
-            self._sub50k().label("sub50k"),
+            type_coerce(self._fifteenrune(), Integer).label("fifteenrune"),
+            type_coerce(self._sub50k(), Integer).label("sub50k"),
             type_coerce(self._zig(), Integer).label("zig"),
             type_coerce(self._lowxlzot(), Integer).label("lowxlzot"),
-            self._nolairwin().label("nolairwin"),
+            type_coerce(self._nolairwin(), Integer).label("nolairwin"),
             type_coerce(self._asceticrune(), Integer).label("asceticrune"),
         ]).filter(Game.gid.in_(self.gids))
 
 
     def sortedscorecard(self):
-        return self.scorecard().group_by(CsdcContestant.player_id).order_by(desc("total"),Game.start)
+        return self.scorecard().group_by(CsdcContestant.player_id).order_by(desc("total"), desc("bonus"),
+        desc(Game.score), Game.start)
 
 weeks = []
 
