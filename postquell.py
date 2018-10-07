@@ -33,7 +33,8 @@ def dumps(f, wk):
         return json.dump({ "v" : { "$in" : [ "0.22.0", "0.22.1" ] },
            "$not" : {
               "$or" : [
-                { "$not" : { "$or" : [ { "$not" : { "type" : { "$in" : [ "br.exit", "uniq" ] }}}]} },
+                { "$not" : { "$or" : [ { "$not" : { "type" : { "$in" : [ "zig", "br.exit", "uniq" ] }}},
+                    { "type" : "zig", "lvl" : { "$in" : [ "7", "14", "21", "27"] } } ] }  },
                 { "$not" : { "$or" : [ playerline(r, wk) for r in wk.sortedscorecard().with_session(s).all() ] } }
               ]
           }}, f)
