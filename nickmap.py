@@ -21,3 +21,4 @@ with orm.get_session() as s:
             buf = p.player.name
         else: 
             buf = buf + " " + p.player.name
+    print("!nick csdc22 " + buf)
