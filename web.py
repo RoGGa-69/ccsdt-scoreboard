@@ -230,13 +230,8 @@ play</code> with the <code>:</code> command. Follow it with a second note
 indicating where the play started and what makes it cool. The CSDC Replay team
 will look through cool plays and post highlight reels from each week.</p>
 
-<h2>Sign Up</h2>
 
-<p>In order to sign up, set the first line of your 0.22 rcfile to</p> <pre
-id="rc"># csdc</pre><p>on <a
-href="https://crawl.develz.org/play.htm">any of the official online servers</a>
-before the end of the first week. Your name will appear in the standings once
-you've done this correctly (though it may take about 20 minutes before it does).</p>
+{}
 
 <h2>Credits</h2>
 
@@ -249,14 +244,27 @@ href="https://github.com/crawl/crawl/blob/master/crawl-ref/CREDITS.txt">Stone
 Soup Team</a>. Thank you to all the players who made runs in the beta. I am your host, <a
 href="http://crawl.akrasiac.org/scoring/players/ebering.html">ebering</a>."""
 
-    wklist = "<ul id=schedule>"
+    wklist = '<ul id="schedule">'
     for wk in csdc.weeks:
-        wklist += '<li><span class=label>{}:</span> {} to {}'.format(description(wk,True),
+        wklist += '<li><span class="label">{}:</span> {} to {}'.format(description(wk,True),
                 wk.start.strftime(DATEFMT),
                 wk.end.strftime(DATEFMT))
     wklist += "</ul>"
 
-    return page( static = True, title="Crawl Sudden Death Challenges", content = pagestr.format(wklist))
+    signup = ""
+    if datetime.datetime.now(datetime.timezone.utc) <= csdc.weeks[0].end:
+        signup ="""
+<h2>Sign Up</h2>
+
+<p>In order to sign up, set the first line of your 0.22 rcfile to</p> <pre
+id="rc"># csdc</pre><p>on <a
+href="https://crawl.develz.org/play.htm">any of the official online servers</a>
+before the end of the first week. Your name will appear in the standings once
+you've done this correctly (though it may take about 20 minutes before it does).</p>"""
+    else:
+        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed. See you in 0.23.</p>"
+
+    return page( static = True, title="Crawl Sudden Death Challenges", content = pagestr.format(wklist,signup))
 
 def rulespage():
     pagestr ="""
@@ -278,9 +286,9 @@ race/class combo. Each bonus will have two tiers; the second tier is more
 difficult and worth more points.</li>
 <li>Each challenge includes a list of gods. A bonus point can be earned upon
 reaching ****** piety (or on worship with Gozag or Xom) with one of the listed
-gods (but only if it is the first god worshipped that game, and you never
-abandon or get excommunicated). If the combo for the week is a zealot
-background or demigod, no god points are available.</li>
+gods. The point is lost if you ever abandon your god or are excommunicated. If
+the combo for the week is a zealot background, god points are only for sticking
+with the starting god. If the combo for the week is a demigod, the god point is automatically awarded.</li>
 <li>The season consists of 7 challenges total (i.e., 7 different combos). Each
 race and background will be selected at most once during the competition.</li>
 <li>The final rankings will be tallied at the end of week 7 and represent the
