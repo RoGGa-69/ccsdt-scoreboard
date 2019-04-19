@@ -149,8 +149,8 @@ def standingstable():
         sp += '<tr class="head"><th></th><th>Player</th>'
         sp += ''.join(['<th>' + description(wk, True) +'</th>' for wk in csdc.weeks
             ])
-        sp +='<th>15 Rune Win</th><th>Win &lt;50k Turns</th><th>Zig:$</th>'
-        sp +='<th>Zot @ XL20</th><th>No Lair Win</th><th>Ascetic Rune</th>'
+        sp +='<th>15 Rune Win</th><th>Zig:$</th><th>Zot @ XL20</th>'
+        sp +='<th>Win &lt;40k Turns</th><th>No Lair Win</th><th>Ascetic Rune</th>'
         sp += '<th>CSDC Score</th><th>Weekly Bonuses</th><th>Game High Score</th></tr>'
         place = 1
         for p in csdc.overview().with_session(s).all():
@@ -160,7 +160,7 @@ def standingstable():
             sp += '<td class="name">{}</td>'.format(p.CsdcContestant.player.name)
             sp += ('<td class="pt">{}</td>' * len(csdc.weeks)).format(
                     *[ _ifnone(getattr(p, "wk" + wk.number), "") for wk in csdc.weeks])
-            for c in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune"):
+            for c in ("fifteenrune", "zig", "lowxlzot", "sub40k", "nolairwin", "asceticrune"):
                 sp += ('<td class="pt">{}</td>').format(_ifnone(getattr(p, c), ""))
             sp += '<td class="total">{}</td>'.format(p.grandtotal)
             sp += '<td class="pt">{}</td><td class="pt">{}</td>'.format(p.tiebreak, _ifnone(p.hiscore, ""))
@@ -318,9 +318,9 @@ week)</th><th></th></tr>
 <tr class="head" id="onetime"><th>One-time points (earned once in the
 competition)</th><th></th></tr>
 <tr><td class="name">Win a game with 15 runes:</td><td class="pt">3</td></tr>
-<tr><td class="name">Win a game in under 50,000 turns:</td><td class="pt">3</td></tr>
 <tr><td class="name">Clear a Ziggurat:</td><td class="pt">3</td></tr>
 <tr><td class="name">Enter Zot at XL 20 or lower:</td><td class="pt">6</td></tr>
+<tr><td class="name">Win a game in under 40,000 turns:</td><td class="pt">6</td></tr>
 <tr><td class="name">Win a game without entering lair:</td><td class="pt">6</td></tr>
 <tr><td class="name">Get a rune without using potions or scrolls:</td><td class="pt">6</td></tr>
 </table>

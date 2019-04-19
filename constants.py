@@ -150,7 +150,7 @@ BRANCHES = {
     Branch("Ossuary", "Ossuary", False),
     Branch("IceCv", "Ice Cave", False),
     Branch("Hell", "Vestibule of Hell", False),
-    Branch("Lab", "Labyrinth", False),
+    Branch("Gauntlet", "Gauntlet", False),
     Branch("Bailey", "Bailey", False),
     Branch("Volcano", "Volcano", False),
     Branch("Tomb", "Tomb of the Ancients", True),

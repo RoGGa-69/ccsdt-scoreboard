@@ -1,9 +1,11 @@
 import datetime
+import constants
 from collections import namedtuple
 from model import (
     latestmilestones,
     get_species,
     get_background,
+    get_place,
     get_branch,
     get_place_from_string,
     get_god,
@@ -193,7 +195,7 @@ class CsdcWeek:
             Game.end <= self.end,
             self._rune(15)), Integer)
 
-    def _sub50k(self):
+    def _sub40k(self):
         with get_session() as s:
             ktyp_id = get_ktyp(s, "winning").id
 
@@ -201,7 +203,7 @@ class CsdcWeek:
             Game.ktyp_id == ktyp_id,
             Game.end <= self.end,
             ~self._valid_milestone().filter(
-                Milestone.turn >= 50000).exists()
+                Milestone.turn >= 40000).exists()
         ), 0), Integer)
      
     def _zig(self):
@@ -298,7 +300,7 @@ class CsdcWeek:
             Game.player_id.label("player_id"),
             Game.score.label("score"),
             type_coerce(self._fifteenrune(), Integer).label("fifteenrune"),
-            type_coerce(self._sub50k(), Integer).label("sub50k"),
+            type_coerce(self._sub40k(), Integer).label("sub40k"),
             type_coerce(self._zig(), Integer).label("zig"),
             type_coerce(self._lowxlzot(), Integer).label("lowxlzot"),
             type_coerce(self._nolairwin(), Integer).label("nolairwin"),
@@ -512,9 +514,9 @@ def onetimescorecard():
 
     return Query([sc.c.player_id.label("player_id"),
         type_coerce((func.sum(sc.c.fifteenrune) > 0) * 3, Integer).label("fifteenrune"),
-        type_coerce((func.sum(sc.c.sub50k) > 0) * 3, Integer).label("sub50k"),
+        type_coerce((func.sum(sc.c.lowxlzot) > 0) * 3, Integer).label("lowxlzot"),
         type_coerce((func.sum(sc.c.zig) > 0) * 3, Integer).label("zig"),
-        type_coerce((func.sum(sc.c.lowxlzot) > 0) * 6, Integer).label("lowxlzot"),
+        type_coerce((func.sum(sc.c.sub40k) > 0) * 6, Integer).label("sub40k"),
         type_coerce((func.sum(sc.c.nolairwin) > 0) * 6, Integer).label("nolairwin"),
         type_coerce((func.sum(sc.c.asceticrune) > 0) * 6, Integer).label("asceticrune"),
         func.max(sc.c.score).label("hiscore")]).group_by(sc.c.player_id)
@@ -526,7 +528,7 @@ def overview():
     totalcols = []
     wktotal = []
     wkbonuses = []
-    for col in ("fifteenrune", "sub50k", "zig", "lowxlzot", "nolairwin", "asceticrune"):
+    for col in ("fifteenrune", "sub40k", "zig", "lowxlzot", "nolairwin", "asceticrune"):
         totalcols.append(func.ifnull(getattr(sc.c, col), 0))
         q = q.add_column(getattr(sc.c, col).label(col))
     for wk in weeks:
