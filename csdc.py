@@ -443,9 +443,13 @@ def initialize_weeks():
 
         vowofcourage = CsdcBonus("VowOfCourage",
             "Collect at least 5 runes before entering the Depths.",
-            [ Milestone.verb_id == get_verb(s, "br.enter").id,
-              Milestone.place_id == get_place_from_string(s, "Depths:1").id,
-              Milestone.runes >= 5 ],
+            [ Milestone.verb_id == get_verb(s, "rune").id,
+              Milestone.runes >= 5,
+              ~Query(m2).filter(
+                  m2.gid == Milestone.gid,
+                  m2.turn < Milestone.turn,
+                  m2.verb_id == get_verb(s, "br.enter").id,
+                  m2.place_id == get_place_from_string(s, "Depths:1").id).exists() ],
             "2")
 
         weeks.append(CsdcWeek(
