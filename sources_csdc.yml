@@ -16,9 +16,9 @@ sources:
       - cln
       - clan
     base: http://underhound.eu:81/crawl/
-    logfile: 'meta/0.22/logfile'
-    milestones: 'meta/0.22/milestones'
-    rcfiles: 'rcfiles/crawl-0.22'
+    logfile: 'meta/0.23/logfile'
+    milestones: 'meta/0.23/milestones'
+    rcfiles: 'rcfiles/crawl-0.23'
 
   - name: cwz
     base: http://webzook.net/soup

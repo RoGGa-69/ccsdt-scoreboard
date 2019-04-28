@@ -262,7 +262,7 @@ href="https://crawl.develz.org/play.htm">any of the official online servers</a>
 before the end of the first week. Your name will appear in the standings once
 you've done this correctly (though it may take about 20 minutes before it does).</p>"""
     else:
-        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed. See you in 0.23.</p>"
+        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed. See you in 0.24.</p>"
 
     return page( static = True, title="Crawl Sudden Death Challenges", content = pagestr.format(wklist,signup))
 
@@ -271,7 +271,7 @@ def rulespage():
     <ol>
 <li>Each challenge consists of playing a randomly chosen Crawl race/class combo
 (e.g. MiBe). The combo for each week of the competition will be announced at
-00:00 UTC on the Thursday starting that week. All players have one week to
+00:00 UTC on the Friday starting that week. All players have one week to
 finish a game using that combo. Only milestones recorded during the week (from
 00:00 UTC on the start date until 00:00 UTC on the end date) will count for
 scoring.</li>
@@ -289,9 +289,9 @@ reaching ****** piety (or on worship with Gozag or Xom) with one of the listed
 gods. The point is lost if you ever abandon your god or are excommunicated. If
 the combo for the week is a zealot background, god points are only for sticking
 with the starting god. If the combo for the week is a demigod, the god point is automatically awarded.</li>
-<li>The season consists of 7 challenges total (i.e., 7 different combos). Each
+<li>The season consists of 5 challenges total (i.e., 5 different combos). Each
 race and background will be selected at most once during the competition.</li>
-<li>The final rankings will be tallied at the end of week 7 and represent the
+<li>The final rankings will be tallied at the end of week 5 and represent the
 final outcome. The player with the highest CSDC score is the champion.</li>
 <li>Tiebreakers are (in order): number of weekly bonus points, highest in-game
 score.</li>
@@ -319,7 +319,7 @@ week)</th><th></th></tr>
 competition)</th><th></th></tr>
 <tr><td class="name">Win a game with 15 runes:</td><td class="pt">3</td></tr>
 <tr><td class="name">Clear a Ziggurat:</td><td class="pt">3</td></tr>
-<tr><td class="name">Enter Zot at XL 20 or lower:</td><td class="pt">6</td></tr>
+<tr><td class="name">Enter Zot at XL 20 or lower:</td><td class="pt">3</td></tr>
 <tr><td class="name">Win a game in under 40,000 turns:</td><td class="pt">6</td></tr>
 <tr><td class="name">Win a game without entering lair:</td><td class="pt">6</td></tr>
 <tr><td class="name">Get a rune without using potions or scrolls:</td><td class="pt">6</td></tr>
