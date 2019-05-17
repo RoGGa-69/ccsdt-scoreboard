@@ -62,8 +62,6 @@ def _morgue_prefix(src: str, version: str) -> Optional[str]:
     elif src == "cdo":
         prefix = "http://crawl.develz.org/morgues"
         prefix += "/" + version_url(version)
-    elif src == "cszo":
-        prefix = "http://dobrazupa.org/morgue"
     elif src == "cue" or src == "clan":
         prefix = "http://underhound.eu/crawl/morgue"
     elif src == "cbro":
@@ -75,12 +73,12 @@ def _morgue_prefix(src: str, version: str) -> Optional[str]:
         prefix += "-" + version_url(version)
     elif src == "cpo":
         prefix = "https://crawl.project357.org/morgue"
-    elif src == "cjr":
-        prefix = "http://www.jorgrun.rocks/morgue"
+    elif src == "cko":
+        prefix = "http://crawl.kelbi.org/crawl/morgue"
     elif src == "cwz":
         prefix = "http://webzook.net/soup/morgue/"
         prefix += "/" + version_url(version)
-    elif src in ("ckr", "csn", "rhf"):
+    elif src in ("ckr", "csn", "rhf", "cjr", "cszo"):
         return None
     else:
         raise ValueError("No prefix for %s" % src)

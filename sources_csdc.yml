@@ -52,8 +52,8 @@ sources:
     milestones: 'dcss-milestones-0.22'
     rcfiles: 'rc-files/0.22'
 
-  - name: cjr
-    base: https://crawl.jorgrun.rocks/
-    logfile: 'meta/0.22/logfile'
-    milestones: 'meta/0.22/milestones'
-    rcfiles: 'rcfiles/crawl-0.22'
+  - name: cko
+    base: https://crawl.kelbi.org/crawl/
+    logfile: 'meta/0.23/logfile'
+    milestones: 'meta/0.23/milestones'
+    rcfiles: 'rcfiles/crawl-0.23'
