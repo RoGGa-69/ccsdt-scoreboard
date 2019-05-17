@@ -154,6 +154,11 @@ tr.none:nth-child(even) {background-color: #000;}
 	padding-left: 10px;
 }
 
+img.flag {
+    vertical-align: middle;
+    padding-right: 8px;
+}
+
 .menuspacer {
 	margin-left: 10px;
 	border-left: 3px solid #ccc;

@@ -1,5 +1,5 @@
 import datetime
-from orm import get_session
+from orm import get_session, Account
 from modelutils import morgue_url
 import csdc
 
@@ -35,6 +35,8 @@ def mainmenu():
         '<span class="menu"><a href="standings.html">Standings</a></span>' +
         '<span class="menuspacer"></span>')
 
+def serverflag(src):
+    return '<img src="static/{}.png" class="flag" />'.format(src)
 
 def wkmenu(wk):
     sp = ""
@@ -116,9 +118,10 @@ def scoretable(wk, div):
                 "won" if g.Game.won and g.Game.end.replace(tzinfo=datetime.timezone.utc) <= wk.end else
                 "alive" if g.Game.alive else
                 "dead"))
-            namestr = '<td class="name"><a href="{url}">{name}</a></td>' if not g.Game.alive else '<td class="name">{name}</td>'
+            namestr = '<td class="name">{flag}<a href="{url}">{name}</a></td>' if not g.Game.alive else '<td class="name">{flag}{name}</td>'
             sp += (namestr.format(
-                url = morgue_url(g.Game), name = g.Game.player.name))
+                url = morgue_url(g.Game), name = g.Game.player.name,
+                flag = serverflag(g.Game.account.server.name)))
             sp += ( (('<td class="pt">{}</td>' * 9) 
                 + '<td class="total">{}</td>').format(
                 g.uniq,
@@ -154,10 +157,12 @@ def standingstable():
         sp += '<th>CSDC Score</th><th>Weekly Bonuses</th><th>Game High Score</th></tr>'
         place = 1
         for p in csdc.overview().with_session(s).all():
+            acct = s.query(Account).filter_by(id = p.account_id).first();
             sp += '<tr>'
             sp += '<td class="total">{}.</td>'.format(place)
             place += 1
-            sp += '<td class="name">{}</td>'.format(p.CsdcContestant.player.name)
+            sp += '<td class="name">{}{}</td>'.format(
+            serverflag(acct.server.name) if acct else "", p.CsdcContestant.player.name)
             sp += ('<td class="pt">{}</td>' * len(csdc.weeks)).format(
                     *[ _ifnone(getattr(p, "wk" + wk.number), "") for wk in csdc.weeks])
             for c in ("fifteenrune", "zig", "lowxlzot", "sub40k", "nolairwin", "asceticrune"):

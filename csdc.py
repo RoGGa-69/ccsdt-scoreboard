@@ -297,6 +297,7 @@ class CsdcWeek:
 
     def onetimes(self):
         return Query([Game.gid,
+            Game.account_id.label("account_id"), 
             Game.player_id.label("player_id"),
             Game.score.label("score"),
             type_coerce(self._fifteenrune(), Integer).label("fifteenrune"),
@@ -559,6 +560,7 @@ def onetimescorecard():
     sc = weeks[0].onetimes().union_all(*[wk.onetimes() for wk in weeks[1:]]).subquery()
 
     return Query([sc.c.player_id.label("player_id"),
+        func.min(sc.c.account_id).label("account_id"),
         type_coerce((func.sum(sc.c.fifteenrune) > 0) * 3, Integer).label("fifteenrune"),
         type_coerce((func.sum(sc.c.lowxlzot) > 0) * 3, Integer).label("lowxlzot"),
         type_coerce((func.sum(sc.c.zig) > 0) * 3, Integer).label("zig"),
@@ -586,6 +588,7 @@ def overview():
                 ).add_column( a.c.total.label("wk" + wk.number))
 
     return q.add_columns(
+            sc.c.account_id.label("account_id"),
             sum(totalcols).label("grandtotal"),
             sum(wkbonuses).label("tiebreak"),
             sc.c.hiscore.label("hiscore"),
