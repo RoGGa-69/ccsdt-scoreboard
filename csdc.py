@@ -85,7 +85,9 @@ class CsdcWeek:
  
         add_columns can specify further columns, but as-is this is hit by a
         covering index"""
-        return Query(alias.gid).filter(
+        return Query(alias.gid).join(Account,
+            alias.account_id == Account.id).filter(
+                ~Account.blacklisted,
                 alias.species_id == self.species.id,
                 alias.background_id == self.background.id,
                 alias.start >= self.start,
