@@ -25,7 +25,7 @@ orm.initialize(CONFIG['db uri'])
 model.setup_database()
 csdc.initialize_weeks()
 
-GREP_COMMAND = ("grep -i -C4 --ignore-case 'cool[[:space:]]*play'")
+GREP_COMMAND = ("grep -i -C4 --ignore-case '|.*cool[[:space:]]*play'")
 
 for wk in csdc.weeks:
     download_morgues(wk, CONFIG['morgue dir'])
