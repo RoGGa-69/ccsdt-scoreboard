@@ -21,10 +21,10 @@ sources:
     rcfiles: 'rcfiles/crawl-0.23'
 
   - name: cwz
-    base: http://webzook.net/soup
-    logfile: '0.22/logfile'
-    milestones: '0.22/milestones'
-    rcfiles: 'rcfiles/0.22'
+    base: https://webzook.net/soup
+    logfile: '0.23/logfile'
+    milestones: '0.23/milestones'
+    rcfiles: 'rcfiles/0.23'
 
   - name: cbro
     aliases:

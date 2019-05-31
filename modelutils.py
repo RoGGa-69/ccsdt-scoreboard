@@ -76,7 +76,7 @@ def _morgue_prefix(src: str, version: str) -> Optional[str]:
     elif src == "cko":
         prefix = "http://crawl.kelbi.org/crawl/morgue"
     elif src == "cwz":
-        prefix = "http://webzook.net/soup/morgue/"
+        prefix = "https://webzook.net/soup/morgue/"
         prefix += "/" + version_url(version)
     elif src in ("ckr", "csn", "rhf", "cjr", "cszo"):
         return None
