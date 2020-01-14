@@ -11,7 +11,7 @@ import constants as const
 def logline_to_dict(logline: str) -> dict:
     """Convert a logline into a sanitized dict"""
     data = {}
-    pairs = re.split('(?<!:):(?!:)', logline.strip())
+    pairs = re.split('(?<!:):(?!:)', logline.strip().strip('\0'))
     for p in pairs:
         p = p.replace('::',':')
         keyval = p.split('=')
