@@ -179,7 +179,7 @@ class CsdcWeek:
             Milestone.runes >= n
         ).exists()
 
-    def _orb(self, n):
+    def _orb(self):
         with get_session() as s:
             verb_id = get_verb(s, "orb").id
 
