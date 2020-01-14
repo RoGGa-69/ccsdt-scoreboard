@@ -1,59 +1,47 @@
 sources:
   - name: cao
-    base: http://crawl.akrasiac.org
-    milestones: 'milestones22'
-    logfile: 'logfile22'
-    rcfiles: 'rcfiles/crawl-0.22'
-
-  - name: cdo
-    base: http://crawl.develz.org
-    milestones: 'milestones-0.22.txt'
-    logfile: 'allgames-0.22.txt'
-    rcfiles: 'configs/0.22'
+    base: https://crawl.akrasiac.org
+    milestones: 'milestones32'
+    logfile: 'logfile32'
+    rcfiles: 'rcfiles/crawl-0.32'
 
   - name: cue
     aliases:
       - cln
       - clan
     base: http://underhound.eu:81/crawl/
-    logfile: 'meta/0.23/logfile'
-    milestones: 'meta/0.23/milestones'
-    rcfiles: 'rcfiles/crawl-0.23'
-
-  - name: cwz
-    base: https://webzook.net/soup
-    logfile: '0.23/logfile'
-    milestones: '0.23/milestones'
-    rcfiles: 'rcfiles/0.23'
+    logfile: 'meta/0.32/logfile'
+    milestones: 'meta/0.32/milestones'
+    rcfiles: 'rcfiles/crawl-0.32'
 
   - name: cbro
     aliases:
-      - cbo
-    base: http://crawl.berotato.org/crawl/
-    logfile: 'meta/0.22/logfile'
-    milestones: 'meta/0.22/milestones'
-    rcfiles: 'rcfiles/crawl-0.22'
+      - cbro2
+    base: http://cbro.berotato.org/
+    logfile: 'meta/0.32/logfile'
+    milestones: 'meta/0.32/milestones'
+    rcfiles: 'rcfiles/crawl-0.32'
 
   - name: cxc
     base: http://crawl.xtahua.com/crawl/
-    logfile: 'meta/0.22/logfile'
-    milestones: 'meta/0.22/milestones'
-    rcfiles: 'rcfiles/crawl-0.22'
-
-  - name: lld
-    base: http://lazy-life.ddo.jp:8080/
-    logfile: 'meta/0.22/logfile'
-    milestones: 'meta/0.22/milestones'
-    rcfiles: 'rcfiles/0.22/'
+    logfile: 'meta/0.32/logfile'
+    milestones: 'meta/0.32/milestones'
+    rcfiles: 'rcfiles/crawl-0.32'
 
   - name: cpo
     base: https://crawl.project357.org
-    logfile: 'dcss-logfiles-0.22'
-    milestones: 'dcss-milestones-0.22'
-    rcfiles: 'rc-files/0.22'
+    logfile: 'dcss-logfiles-0.32'
+    milestones: 'dcss-milestones-0.32'
+    rcfiles: 'rc-files/0.32'
 
-  - name: cko
-    base: https://crawl.kelbi.org/crawl/
-    logfile: 'meta/0.23/logfile'
-    milestones: 'meta/0.23/milestones'
-    rcfiles: 'rcfiles/crawl-0.23'
+  - name: cdi
+    base: https://crawl.dcss.io/crawl/
+    logfile: 'meta/crawl-0.32/logfile'
+    milestones: 'meta/crawl-0.32/milestones'
+    rcfiles: 'rcfiles/crawl-0.32'
+
+  - name: cnc
+    base: https://archive.nemelex.cards/
+    logfile: 'meta/crawl-0.32/logfile'
+    milestones: 'meta/crawl-0.32/milestones'
+    rcfiles: 'rcfiles/crawl-0.32'

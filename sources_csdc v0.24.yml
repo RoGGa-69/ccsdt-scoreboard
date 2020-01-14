@@ -1,0 +1,47 @@
+sources:
+  - name: cao
+    base: http://crawl.akrasiac.org
+    milestones: 'milestones24'
+    logfile: 'logfile24'
+    rcfiles: 'rcfiles/crawl-0.24'
+
+  - name: cdo
+    base: http://crawl.develz.org
+    milestones: 'milestones-0.24.txt'
+    logfile: 'allgames-0.24.txt'
+    rcfiles: 'configs/0.24'
+
+  - name: cue
+    aliases:
+      - cln
+      - clan
+    base: http://underhound.eu:81/crawl/
+    logfile: 'meta/0.24/logfile'
+    milestones: 'meta/0.24/milestones'
+    rcfiles: 'rcfiles/crawl-0.24'
+
+  - name: cbro
+    aliases:
+      - cbo
+    base: http://crawl.berotato.org/crawl/
+    logfile: 'meta/0.24/logfile'
+    milestones: 'meta/0.24/milestones'
+    rcfiles: 'rcfiles/crawl-0.24'
+
+  - name: cxc
+    base: http://crawl.xtahua.com/crawl/
+    logfile: 'meta/0.24/logfile'
+    milestones: 'meta/0.24/milestones'
+    rcfiles: 'rcfiles/crawl-0.24'
+
+  - name: cpo
+    base: https://crawl.project357.org
+    logfile: 'dcss-logfiles-0.24'
+    milestones: 'dcss-milestones-0.24'
+    rcfiles: 'rc-files/0.24'
+
+  - name: cko
+    base: https://crawl.kelbi.org/crawl/
+    logfile: 'meta/0.24/logfile'
+    milestones: 'meta/0.24/milestones'
+    rcfiles: 'rcfiles/crawl-0.24'

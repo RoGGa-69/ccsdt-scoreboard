@@ -135,7 +135,7 @@ def get_player_id(s: sqlalchemy.orm.session.Session, name: str, create=True) -> 
         return player[0]
     elif create:
         return _add_player(s, name).id
-    else
+    else:
         return None
 
 

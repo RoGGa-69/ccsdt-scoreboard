@@ -68,7 +68,7 @@ def _morgue_prefix(src: str, version: str) -> Optional[str]:
     elif src == "cue" or src == "clan":
         prefix = "http://underhound.eu/crawl/morgue"
     elif src == "cbro":
-        prefix = "http://crawl.berotato.org/crawl/morgue"
+        prefix = "https://cbro.berotato.org/morgue/"
     elif src == "cxc":
         prefix = "http://crawl.xtahua.com/crawl/morgue"
     elif src == "lld":
@@ -78,9 +78,11 @@ def _morgue_prefix(src: str, version: str) -> Optional[str]:
         prefix = "https://crawl.project357.org/morgue"
     elif src == "cko":
         prefix = "http://crawl.kelbi.org/crawl/morgue"
-    elif src == "cwz":
-        prefix = "https://webzook.net/soup/morgue/"
-        prefix += "/" + version_url(version)
+    elif src == "cdi":
+        prefix = "https://crawl.dcss.io/crawl/morgue/"
+    elif src == "cnc":
+        prefix = "https://archive.nemelex.cards/morgue/"
+#        prefix += "/" + version_url(version)
     elif src in ("ckr", "csn", "rhf", "cjr", "cszo"):
         return None
     else:

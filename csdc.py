@@ -550,53 +550,41 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "1",
-                species = "DD",
-                background = "Fi",
-                gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,10,4, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2018,10,11, tzinfo=datetime.timezone.utc)))
+                species = "At",
+                background = "Hu",
+                gods = ("Ashenzari", "Jiyva", "Yredelemnul"),
+                start = datetime.datetime(2024,9,23, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc),
+                bonus1=rune15k,
+                bonus2=tworunedontdie))
         weeks.append(CsdcWeek(
                 number = "2",
-                species = "DD",
-                background = "Fi",
-                gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,10,11, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2018,10,18, tzinfo=datetime.timezone.utc)))
+                species = "Op",
+                background = "Su",
+                gods = ("Cheibriados", "Jiyva", "Yredelemnul"),
+                start = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "3",
-                species = "DD",
+                species = "Mf",
                 background = "Fi",
-                gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,10,18, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2018,10,25, tzinfo=datetime.timezone.utc)))
+                gods = ("Okawaru", "Jiyva", "Yredelemnul"),
+                start = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "4",
-                species = "DD",
-                background = "Fi",
-                gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,10,25, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2018,11,1, tzinfo=datetime.timezone.utc)))
+                species = "Ds",
+                background = "IE",
+                gods = ("Sif Muna", "Jiyva", "Yredelemnul"),
+                start = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "5",
-                species = "DD",
+                species = "Hu",
                 background = "Fi",
-                gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,11,8, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2018,11,15, tzinfo=datetime.timezone.utc)))
-        weeks.append(CsdcWeek(
-                number = "6",
-                species = "DD",
-                background = "Fi",
-                gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,11,15, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2018,11,22, tzinfo=datetime.timezone.utc)))
-        weeks.append(CsdcWeek(
-                number = "7",
-                species = "DD",
-                background = "Fi",
-                gods = ("Makhleb", "Trog", "Okawaru"),
-                start = datetime.datetime(2018,11,22, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2018,11,29, tzinfo=datetime.timezone.utc)))
+                gods = ("Lugonu", "Jiyva", "Yredelemnul"),
+                start = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,10,28, tzinfo=datetime.timezone.utc)))
 
 def all_games():
     allgids = weeks[0].gids.union_all(*[ wk.gids for wk in weeks[1:]]).subquery()

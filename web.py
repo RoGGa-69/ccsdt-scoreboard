@@ -19,7 +19,7 @@ def head(static, title):
     {1}</head>""".format(title, refresh)
 
 
-version = '0.22'
+version = '0.32'
 
 def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
@@ -111,7 +111,7 @@ def scoretable(wk, div):
         for g in wk.sortedscorecard().with_session(s).all():
             if g.Game == None:
                 sp += """<tr class="{}"><td class="name">{}</td>
-                <td colspan="9"></td><td class="total">0</td></tr>""".format(
+                <td colspan="10"></td><td class="total">0</td></tr>""".format(
                         "none", g.Player.name)
                 continue
 
@@ -338,20 +338,6 @@ Tier II bonus implies that you have earned a Tier I bonus, these points can be
 awarded separately. Unless specified, a bonus or one time point does not
 require you to win to earn the point.</p>
 
-<h2>Fair Crawling</h2>
-
-<p>All contestants will compete with commonly recognized principles of
-sportsmanship and fair play. Failure to do so will result in disqualification
-without recourse and your entry will be deleted from the scoring database. If
-you are uncertain if something is "fair play" then ask for clarification before
-doing it. Ignorance and negligence are not excuses for poor behavior.</p>
-
-<p>All contestants acknowledge an obligation not to commit misconduct in
-relation to their participation.  Misconduct is any act that is a breach of
-good manners, a breach of good sportsmanship, or unethical behavior. Misconduct
-will also result in disqualification without recourse and your entry will be
-deleted from the scoring database. Severe misconduct will lead to exclusion from
-future CSDC events.</p>
 """
     return page(static=True, subhead="Rules", content = pagestr.format("0.22"))
 
