@@ -319,13 +319,17 @@ def initialize_weeks():
         m2 = aliased(Milestone)
         runebranchlowskill = CsdcBonus("RuneBranchLowSkill",
             "Enter a rune branch with all base skills < 11.",
-            [ Milestone.sklev < 11,
-                Milestone.id.in_(Query(m2.id).filter(
-                    Milestone.gid == m2.gid,
-                    m2.verb_id == get_verb(s, "br.exit").id,
-                    ~m2.place_id.in_(Query(Place.id).join(Branch).filter(
-                        Branch.id != get_branch(s, "D").id))
-                    ).order_by(m2.time).limit(1)) ],
+            [ or_(
+                and_(Milestone.sklev < 11,
+                    Milestone.id.in_(Query(m2.id).filter(
+                        Milestone.gid == m2.gid,
+                        m2.verb_id == get_verb(s, "br.enter").id,
+                        m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.RUNE_BRANCHES]))
+                    )),
+                and_(Milestone.sklev < 11,
+                    Milestone.id.in_(Query(m2.id).filter(
+                        Milestone.gid == m2.gid,
+                        m2.verb_id == get_verb(s, "abyss.enter").id)))) ],
             1)
         runelowskill = CsdcBonus("RuneLowSkill",
             "Collect a rune with all base skills < 11.",
@@ -333,7 +337,7 @@ def initialize_weeks():
                 Milestone.id.in_(Query(m2.id).filter(
                     Milestone.gid == m2.gid,
                     m2.verb_id == get_verb(s, "rune").id
-                ).order_by(m2.time).limit(1))],
+                ))],
             "2")
 
         slimefirst = CsdcBonus("EnterSlime2nd",
@@ -454,6 +458,49 @@ def initialize_weeks():
                   m2.place_id == get_place_from_string(s, "Depths:1").id).exists() ],
             "2")
 
+        runenosbranch = CsdcBonus("RuneNoSBranch",
+            "Collect a rune before entering Shoals, Snake, Spider, or Swamp.",
+            [Milestone.verb_id == get_verb(s, "rune").id,
+             ~Query(m2).filter(
+             m2.gid == Milestone.gid,
+             m2.turn < Milestone.turn,
+             m2.verb_id == get_verb(
+             s, "br.enter").id,
+             m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in ("Shoals", "Snake", "Spider", "Swamp")] )
+             ).exists() ],
+            "1")
+
+        runenolair = CsdcBonus("RuneNoLair",
+            "Collect a rune before entering Lair.",
+            [Milestone.verb_id == get_verb(s, "rune").id,
+             ~Query(m2).filter(
+             m2.gid == Milestone.gid,
+             m2.turn < Milestone.turn,
+             m2.verb_id == get_verb(
+                 s, "br.enter").id,
+             m2.place_id == get_place_from_string(
+                 s, "Lair:1").id,
+             ).exists() ],
+            "2")
+
+        runedontdie = CsdcBonus("RuneDontDie",
+            "Collect a rune without dying.",
+            [Milestone.verb_id == get_verb(s, "rune").id,
+             ~Query(m2).filter(
+             m2.gid == Milestone.gid,
+             m2.turn < Milestone.turn,
+             m2.verb_id == get_verb(s, "death").id).exists()],
+            "1")
+
+        tworunedontdie = CsdcBonus("2RuneDont2Die",
+            "Collect two runes without dying twice.",
+            [Milestone.verb_id == get_verb(s, "rune").id,
+             Query(func.count(m2.id)).filter(
+             m2.gid == Milestone.gid,
+             m2.turn < Milestone.turn,
+             m2.verb_id == get_verb(s, "death").id).as_scalar() < 2],
+            "2")
+
         weeks.append(CsdcWeek(
                 number = "1",
                 species = "DD",
@@ -503,7 +550,6 @@ def initialize_weeks():
                 gods = ("Makhleb", "Trog", "Okawaru"),
                 start = datetime.datetime(2018,11,22, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2018,11,29, tzinfo=datetime.timezone.utc)))
-
 
 def all_games():
     allgids = weeks[0].gids.union_all(*[ wk.gids for wk in weeks[1:]]).subquery()
