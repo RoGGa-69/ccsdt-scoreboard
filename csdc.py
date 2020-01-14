@@ -455,6 +455,19 @@ def initialize_weeks():
               ).exists() ],
             "1")
 
+        hellrunefirst = CsdcBonus("HellRuneFirst",
+            "Get a rune from Hell before entering any other rune branch (excluding the Abyss).",
+            [ Milestone.verb_id == get_verb(s, "rune").id,
+              ~Milestone.msg.like("%byssal%"),
+              ~Query(m2).filter( 
+                  m2.gid == Milestone.gid,
+                  m2.turn < Milestone.turn,
+                  m2.verb_id == get_verb(s, "br.enter").id,
+                  m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id 
+                      for b in set(constants.RUNE_BRANCHES) - set(("Abyss", "Coc", "Geh", "Dis", "Tar"))]),
+              ).exists() ],
+            "1")
+
         goldenrune = CsdcBonus("GoldenRune",
             "Collect the golden rune.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
@@ -514,6 +527,26 @@ def initialize_weeks():
              m2.turn < Milestone.turn,
              m2.verb_id == get_verb(s, "death").id).as_scalar() < 2],
             "1")
+
+        batformuniq = CsdcBonus("BatformUniq",
+                "Kill a unique in bat form.",
+                [ Milestone.verb_id == get_verb(s, "uniq").id,
+                    Milestone.status.like("%bat-form%")],
+                "1")
+
+        batformuniq = CsdcBonus("BatformHellPanLord",
+                "Kill a unique in bat form.",
+                [ Milestone.verb_id == get_verb(s, "uniq").id,
+                  Milestone.status.like("%bat-form%"),
+                  or_(Milestone.msg.like("%Cerebov%"),
+                      Milestone.msg.like("%Mnoleg%"),
+                      Milestone.msg.like("%Lom Lobon%"),
+                      Milestone.msg.like("%Gloorx Vloq%"),
+                      Milestone.msg.like("%Asmodeus%"),
+                      Milestone.msg.like("%Antaeus%"),
+                      Milestone.msg.like("%Dispater%"),
+                      Milestone.msg.like("%Ereshkigal%")) ],
+                "1")
 
         weeks.append(CsdcWeek(
                 number = "1",
