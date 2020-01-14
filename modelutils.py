@@ -23,6 +23,9 @@ def logline_to_dict(logline: str) -> dict:
     if "god" not in data:
         data["god"] = "GOD_NO_GOD"
 
+    if "status" not in data:
+        data["status"] = ""
+
     data["god"] = const.GOD_NAME_FIXUPS.get(data["god"],data["god"])
     if "end" in data:
         data["time"] = data["end"]

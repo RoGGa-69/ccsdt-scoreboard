@@ -391,6 +391,7 @@ class Milestone(Base):
     time = Column(DateTime, nullable=False, index=True)  # type: DateTime
     potionsused = Column(Integer, nullable=True)  # type: int
     scrollsused = Column(Integer, nullable=True)  # type: int
+    status = Column(String(1000), nullable=True) # type: str
 
     skill_id = Column(Integer, ForeignKey("skills.id"), nullable=True)
     skill = relationship("Skill")

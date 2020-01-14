@@ -404,7 +404,8 @@ def add_event(s: sqlalchemy.orm.session.Session, data: dict) -> None:
         "skill_id" : get_skill(s, data["sk"]).id,
         "sklev"    : data["sklev"],
         "verb_id"  : get_verb(s, data["type"]).id,
-        "msg"     : data["milestone"]
+        "msg"      : data["milestone"],
+        "status"   : data["status"],
     }
 
     s.add(Milestone(**m))
