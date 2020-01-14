@@ -122,7 +122,7 @@ def get_player(s: sqlalchemy.orm.session.Session, name: str) -> Player:
 
 
 @functools.lru_cache(maxsize=128)
-def get_player_id(s: sqlalchemy.orm.session.Session, name: str) -> Player:
+def get_player_id(s: sqlalchemy.orm.session.Session, name: str, create=True) -> Player:
     """Get a player's id, creating them if needed.
 
     Note that player names are not case sensitive, so names are stored with
@@ -133,8 +133,10 @@ def get_player_id(s: sqlalchemy.orm.session.Session, name: str) -> Player:
     )
     if player:
         return player[0]
-    else:
+    elif create:
         return _add_player(s, name).id
+    else
+        return None
 
 
 def _add_player(s, name: str) -> Player:
@@ -493,7 +495,10 @@ def list_players(s: sqlalchemy.orm.session.Session) -> Sequence[Player]:
 @_reraise_dberror
 def add_contestant(s: sqlalchemy.orm.session.Session, name: str) -> None:
     """Add a Csdc Contestant"""
-    pid = get_player_id(s, name)
+    pid = get_player_id(s, name, False)
+    if pid is None:
+        return;
+
     c = s.query(CsdcContestant).filter(CsdcContestant.player_id == pid).one_or_none()
 
     if c:

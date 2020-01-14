@@ -267,7 +267,7 @@ href="http://crawl.akrasiac.org/scoring/players/ebering.html">ebering</a>."""
 id="rc"># csdc</pre><p>on <a
 href="https://crawl.develz.org/play.htm">any of the official online servers</a>
 before the end of the first week. Your name will appear in the standings once
-you've done this correctly (though it may take about 20 minutes before it does).</p>"""
+you've done this correctly and started at least one 0.24 game (though it may take about 20 minutes before it does).</p>"""
     else:
         signup = "<h2>Sign Up</h2> <p>Sign ups are now closed. See you in 0.24.</p>"
 
