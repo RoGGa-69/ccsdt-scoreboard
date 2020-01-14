@@ -272,7 +272,7 @@ class CsdcWeek:
             type_coerce(self._god(), Integer).label("god"),
             type_coerce(self._rune(1), Integer).label("rune"),
             type_coerce(self._rune(3), Integer).label("threerune"),
-            type_coerce(self._orb(), Integer).).label("orb"),
+            type_coerce(self._orb(), Integer).label("orb"),
             self._win().label("win"),
             self._bonus(self.tier1).label("bonusone"),
             self._bonus(self.tier2).label("bonustwo"),
