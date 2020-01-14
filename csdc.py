@@ -179,6 +179,14 @@ class CsdcWeek:
             Milestone.runes >= n
         ).exists()
 
+    def _orb(self, n):
+        with get_session() as s:
+            verb_id = get_verb(s, "orb").id
+
+        return self._valid_milestone().filter(
+            Milestone.verb_id == verb_id
+        ).exists()
+
     def _win(self):
         with get_session() as s:
             ktyp_id = get_ktyp(s, "winning").id
@@ -264,6 +272,7 @@ class CsdcWeek:
             type_coerce(self._god(), Integer).label("god"),
             type_coerce(self._rune(1), Integer).label("rune"),
             type_coerce(self._rune(3), Integer).label("threerune"),
+            type_coerce(self._orb(), Integer).).label("orb"),
             self._win().label("win"),
             self._bonus(self.tier1).label("bonusone"),
             self._bonus(self.tier2).label("bonustwo"),
@@ -280,6 +289,7 @@ class CsdcWeek:
                     sc.c.god,
                     sc.c.rune,
                     sc.c.threerune,
+                    sc.c.orb,
                     sc.c.win,
                     sc.c.bonusone.label("bonusone"),
                     sc.c.bonustwo.label("bonustwo"),
@@ -292,6 +302,7 @@ class CsdcWeek:
                         + sc.c.rune
                         + sc.c.threerune
                         + sc.c.win
+                        + sc.c.orb
                         + sc.c.bonusone
                         + sc.c.bonustwo
                     ).label("total")
@@ -341,7 +352,7 @@ def initialize_weeks():
                     Milestone.gid == m2.gid,
                     m2.verb_id == get_verb(s, "rune").id
                 ))],
-            "2")
+            "1")
 
         slimefirst = CsdcBonus("EnterSlime2nd",
             "Enter Slime as your second multi-level branch (don't get banished).",
@@ -365,20 +376,20 @@ def initialize_weeks():
                   m2.verb_id == get_verb(s, "br.enter").id,
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.MULTI_LEVEL_BRANCHES])
               ).as_scalar() <= 2],
-            "2")
+            "1")
 
-        temple3k = CsdcBonus("TempleIn3kTurn",
-            "Enter the Temple in less than 3,000 turns.",
+        temple4k = CsdcBonus("TempleIn4kTurn",
+            "Enter the Temple in less than 4,000 turns.",
             [ Milestone.verb_id == get_verb(s, "br.enter").id,
               Milestone.place_id == get_place_from_string(s, "Temple").id,
-              Milestone.turn < 3000 ],
+              Milestone.turn < 4000 ],
             "1")
 
         rune15k = CsdcBonus("RuneIn15kTurn",
             "Collect a rune in less than 15,000 turns.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.turn < 15000 ],
-            "2")
+            "1")
 
         lairendxl12 = CsdcBonus("LairEndXL12",
             "Reach the end of Lair at XL &leq; 12.",
@@ -392,7 +403,7 @@ def initialize_weeks():
             [ Milestone.verb_id == get_verb(s, "br.end").id,
               Milestone.place_id == get_place_from_string(s, "Vaults:5").id,
               Milestone.xl <= 18 ],
-            "2")
+            "1")
 
         elfbeforerune = CsdcBonus("Elf3BeforeRunes",
             "Reach the end of Elf before entering a rune branch.",
@@ -416,7 +427,7 @@ def initialize_weeks():
                   m2.verb_id == get_verb(s, "br.enter").id,
 			      m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.RUNE_BRANCHES ]),
 			  ).exists() ],
-			"2")
+			"1")
 
         geryonbeforerune = CsdcBonus("GeryonBeforeRune",
             "Kill or slimify Geryon before entering a rune branch (excluding the Abyss).",
@@ -442,7 +453,7 @@ def initialize_weeks():
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id 
                       for b in set(constants.RUNE_BRANCHES) - set(("Abyss", "Coc", "Geh", "Dis", "Tar", "Pan"))]),
               ).exists() ],
-            "2")
+            "1")
 
         goldenrune = CsdcBonus("GoldenRune",
             "Collect the golden rune.",
@@ -459,7 +470,7 @@ def initialize_weeks():
                   m2.turn < Milestone.turn,
                   m2.verb_id == get_verb(s, "br.enter").id,
                   m2.place_id == get_place_from_string(s, "Depths:1").id).exists() ],
-            "2")
+            "1")
 
         runenosbranch = CsdcBonus("RuneNoSBranch",
             "Collect a rune before entering Shoals, Snake, Spider, or Swamp.",
@@ -484,7 +495,7 @@ def initialize_weeks():
              m2.place_id == get_place_from_string(
                  s, "Lair:1").id,
              ).exists() ],
-            "2")
+            "1")
 
         runedontdie = CsdcBonus("RuneDontDie",
             "Collect a rune without dying.",
@@ -502,7 +513,7 @@ def initialize_weeks():
              m2.gid == Milestone.gid,
              m2.turn < Milestone.turn,
              m2.verb_id == get_verb(s, "death").id).as_scalar() < 2],
-            "2")
+            "1")
 
         weeks.append(CsdcWeek(
                 number = "1",

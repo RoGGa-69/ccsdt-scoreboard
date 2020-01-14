@@ -100,6 +100,7 @@ def scoretable(wk, div):
     <th>Champion God</th>
     <th>Collect a Rune</th>
     <th>Collect 3 Runes</th>
+    <th>Obtain the Orb</th>
     <th>Win</th>
     <th>Bonus I</th>
     <th>Bonus II</th>
@@ -122,7 +123,7 @@ def scoretable(wk, div):
             sp += (namestr.format(
                 url = morgue_url(g.Game), name = g.Game.player.name,
                 flag = serverflag(g.Game.account.server.name)))
-            sp += ( (('<td class="pt">{}</td>' * 9) 
+            sp += ( (('<td class="pt">{}</td>' * 10) 
                 + '<td class="total">{}</td>').format(
                 g.uniq,
                 g.brenter,
@@ -130,6 +131,7 @@ def scoretable(wk, div):
                 g.god,
                 g.rune,
                 g.threerune,
+                g.orb,
                 g.win,
                 g.bonusone,
                 g.bonustwo,
@@ -317,9 +319,10 @@ week)</th><th></th></tr>
 <tr><td class="name">Champion a listed god:</td><td class="pt">1</td></tr>
 <tr><td class="name">Collect a rune:</td><td class="pt">1</td></tr>
 <tr><td class="name">Collect 3 or more runes:</td><td class="pt">1</td></tr>
+<tr><td class="name">Collect the Orb:</td><td class="pt">1</td></tr>
 <tr><td class="name">Win:</td><td class="pt">1</td></tr>
 <tr><td class="name">Complete a Tier I bonus:</td><td class="pt">1</td></tr>
-<tr><td class="name">Complete a Tier II bonus:</td><td class="pt">2</td></tr>
+<tr><td class="name">Complete a Tier II bonus:</td><td class="pt">1</td></tr>
 <tr class="head" id="onetime"><th>One-time points (earned once in the
 competition)</th><th></th></tr>
 <tr><td class="name">Win a game with 15 runes:</td><td class="pt">3</td></tr>
