@@ -19,7 +19,7 @@ def head(static, title):
     {1}</head>""".format(title, refresh)
 
 
-version = '0.22'
+version = '0.32'
 
 def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
@@ -111,7 +111,7 @@ def scoretable(wk, div):
         for g in wk.sortedscorecard().with_session(s).all():
             if g.Game == None:
                 sp += """<tr class="{}"><td class="name">{}</td>
-                <td colspan="9"></td><td class="total">0</td></tr>""".format(
+                <td colspan="10"></td><td class="total">0</td></tr>""".format(
                         "none", g.Player.name)
                 continue
 
