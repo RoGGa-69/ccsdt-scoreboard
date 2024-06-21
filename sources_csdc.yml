@@ -22,8 +22,8 @@ sources:
 
   - name: cbro
     aliases:
-      - cbo
-    base: http://crawl.berotato.org/crawl/
+      - cbro2
+    base: http://cbro.berotato.org/crawl/
     logfile: 'meta/0.31/logfile'
     milestones: 'meta/0.31/milestones'
     rcfiles: 'rcfiles/crawl-0.31'
