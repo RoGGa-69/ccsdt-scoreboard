@@ -21,7 +21,6 @@ SPECIES = {
     Species("Gh", "Ghoul"),
     Species("Gn", "Gnoll"),
     Species("Gr", "Gargoyle"),
-    Species("Ha", "Halfling"),
     Species("Hu", "Human"),
     Species("Ko", "Kobold"),
     Species("Mf", "Merfolk"),
