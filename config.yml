@@ -1,5 +1,5 @@
 logging level: INFO
 sources file: sources_csdc.yml
 db uri: sqlite:///crawl.db
-www dir: ./web
+www dir: /home/rogga/ccsdt_web
 morgue dir: morgues/
