@@ -554,7 +554,9 @@ def initialize_weeks():
                 background = "Hu",
                 gods = ("Ashenzari", "Trog", "Okawaru"),
                 start = datetime.datetime(2024,9,23, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc)))
+                end = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc),
+                tier1 = "lairendxl12",
+                tier2 = "vaultendxl18"))
         weeks.append(CsdcWeek(
                 number = "2",
                 species = "Op",
