@@ -10,8 +10,7 @@ God = namedtuple("God", ["name"])
 SPECIES = {
     Species("At", "Armataur"),
     Species("Ba", "Barachi"),
-    Species("Ce", "Centaur"),
-    Species("DD", "Deep Dwarf"),
+    Species("Co", "Coglin"),
     Species("DE", "Deep Elf"),
     Species("Dg", "Demigod"),
     Species("Dj", "Djinni"),
@@ -22,7 +21,6 @@ SPECIES = {
     Species("Gh", "Ghoul"),
     Species("Gn", "Gnoll"),
     Species("Gr", "Gargoyle"),
-    Species("HO", "Hill Orc"),
     Species("Ha", "Halfling"),
     Species("Hu", "Human"),
     Species("Ko", "Kobold"),
