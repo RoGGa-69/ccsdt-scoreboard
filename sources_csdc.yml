@@ -2,7 +2,7 @@ sources:
   - name: cao
     base: https://crawl.akrasiac.org
     milestones: 'milestones32'
-    logfile: 'logfile31'
+    logfile: 'logfile32'
     rcfiles: 'rcfiles/crawl-0.32'
 
   - name: cue
