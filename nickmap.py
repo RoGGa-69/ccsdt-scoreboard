@@ -12,13 +12,13 @@ CONFIG = yaml.safe_load(open(CONFIG_FILE, encoding='utf8'))
 
 orm.initialize(CONFIG['db uri'])
 model.setup_database()
-print("!nick -rm csdc23")
+print("!nick -rm ccsdt32")
 with orm.get_session() as s:
     buf = "";
     for p in s.query(orm.CsdcContestant).all():
         if len(buf + " " + p.player.name) > 275:
-            print("!nick csdc23 " + buf)
+            print("!nick ccsdt32 " + buf)
             buf = p.player.name
         else: 
             buf = buf + " " + p.player.name
-    print("!nick csdc23 " + buf)
+    print("!nick ccsdt32 " + buf)
