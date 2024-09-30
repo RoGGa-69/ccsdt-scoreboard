@@ -5,12 +5,6 @@ sources:
     logfile: 'logfile31'
     rcfiles: 'rcfiles/crawl-0.32'
 
-  - name: cdo
-    base: http://crawl.develz.org
-    milestones: 'milestones-0.32.txt'
-    logfile: 'allgames-0.32.txt'
-    rcfiles: 'configs/0.32'
-
   - name: cue
     aliases:
       - cln
