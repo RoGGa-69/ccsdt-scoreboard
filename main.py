@@ -42,15 +42,15 @@ if __name__=='__main__':
     logging.info("Rebuilt score pages in {} seconds.".format(time.time() -
         t_i))
 
-    standings = os.path.join(CONFIG['www dir'],"standings.html")
+    standings = os.path.join(CONFIG['www dir'],"standings.html.php")
     with open(standings, 'w') as f:
         f.write(web.standingspage())
 
-    index = os.path.join(CONFIG['www dir'],"index.html")
+    index = os.path.join(CONFIG['www dir'],"index.html.php")
     with open(index, 'w') as f:
         f.write(web.overviewpage())
 
-    rules = os.path.join(CONFIG['www dir'],"rules.html")
+    rules = os.path.join(CONFIG['www dir'],"rules.html.php")
     with open(rules, 'w') as f:
         f.write(web.rulespage())
 

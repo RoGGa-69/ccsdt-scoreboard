@@ -30,9 +30,9 @@ def logoblock(subhead):
 
 
 def mainmenu():
-    return ('<span class="menu"><a href="index.html">Overview</a></span>' +
-        '<span class="menu"><a href="rules.html">Rules</a></span>' + 
-        '<span class="menu"><a href="standings.html">Standings</a></span>' +
+    return ('<span class="menu"><a href="index.html.php">Overview</a></span>' +
+        '<span class="menu"><a href="rules.html.php">Rules</a></span>' + 
+        '<span class="menu"><a href="standings.html.php">Standings</a></span>' +
         '<span class="menuspacer"></span>')
 
 def serverflag(src):
@@ -218,7 +218,7 @@ not normally consider.</p>
 points by reaching various in-game milestones.</li>
 <li>Only games played and milestones scored between 00:00 UTC on the start and end dates count.</li>
 <li>Details on rules and scoring are available on the <a
-href="rules.html">rules page</a>.</li>
+href="rules.html.php">rules page</a>.</li>
 </ul>
 
 <h2>Schedule</h2>
