@@ -35,7 +35,7 @@ if __name__=='__main__':
     for wk in csdc.weeks:
         if wk.start > now:
             continue
-        scorepage = os.path.join(CONFIG['www dir'],"{}.html".format(wk.number))
+        scorepage = os.path.join(CONFIG['www dir'],"{}.html.php".format(wk.number))
 
         with open(scorepage, 'w') as f:
             f.write(web.scorepage(wk))
