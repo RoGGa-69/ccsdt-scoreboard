@@ -3,3 +3,5 @@ sources/*
 morgues/*
 __pycache__/*
 /web
+/csdcvenv
+crawl.db-journal

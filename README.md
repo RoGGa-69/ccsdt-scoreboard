@@ -12,3 +12,6 @@ I am allergic to frameworks so the way this thing runs is there's gonna be a
 
 There's also gonna be an `endweek.py` that finalizes a week and handles
 promotion and relegation. Also a cronjob.
+
+
+pip install sqlalchemy=='1.3.24'
