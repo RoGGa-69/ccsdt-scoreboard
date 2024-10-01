@@ -555,15 +555,17 @@ def initialize_weeks():
                 gods = ("Ashenzari", "Trog", "Okawaru"),
                 start = datetime.datetime(2024,9,23, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc),
-                tier1 = lairendxl12,
-                tier2 = vaultendxl18))
+                bonus1 = lairendxl12,
+                bonus2 = vaultendxl18))
         weeks.append(CsdcWeek(
                 number = "2",
                 species = "Op",
                 background = "Su",
                 gods = ("Cheibriados", "Trog", "Okawaru"),
                 start = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc)))
+                end = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc),
+                bonus1 = runebranchlowskill,
+                bonus2 = runelowskill))
         weeks.append(CsdcWeek(
                 number = "3",
                 species = "Mf",

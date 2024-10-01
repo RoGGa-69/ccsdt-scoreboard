@@ -209,11 +209,6 @@ a lower time commitment event that aims to challenge players while
 simultaneously encouraging unusual characters and play styles that you might
 not normally consider.</p>
 
-<p>Milestones from CSDC games will be announced in the IRC channel
-<code>##csdc</code> on <a href="http://freenode.net">freenode</a>. 
-It's a great place to hang out if you want to live spectate ongoing games or
-talk with other people about the competition.</p>
-
 <h2>Competition Format</h2>
 
 <ul>
@@ -230,26 +225,13 @@ href="rules.html">rules page</a>.</li>
 
 {}
 
-<h2>Cool Plays</h2>
-
-<p>If you do something particularly cool in your game make a note <code>cool
-play</code> with the <code>:</code> command. Follow it with a second note
-indicating where the play started and what makes it cool. The CSDC Replay team
-will look through cool plays and post highlight reels from each week.</p>
-
-
 {}
 
 <h2>Credits</h2>
 
-<p>Original CSDC rules and organization by <a
-href="http://crawl.akrasiac.org/scoring/players/walkerboh.html">WalkerBoh</a>.
-Postquell IRC support by <a
-href="http://crawl.akrasiac.org/scoring/players/kramin.html">Kramin</a>. Dungeon
-Crawl Stone Soup by the <a
-href="https://github.com/crawl/crawl/blob/master/crawl-ref/CREDITS.txt">Stone
-Soup Team</a>. Thank you to all the players who made runs in the beta. I am your host, <a
-href="http://crawl.akrasiac.org/scoring/players/ebering.html">ebering</a>."""
+<p>Original CSDC rules and organization by <a href="http://crawl.akrasiac.org/scoring/players/walkerboh.html">WalkerBoh</a> and 
+<a href="http://crawl.akrasiac.org/scoring/players/ebering.html">ebering</a>.
+Thank you to scrubbdaddy for python assistance. I am your host, RoGGa."""
 
     wklist = '<ul id="schedule">'
     for wk in csdc.weeks:
@@ -263,13 +245,13 @@ href="http://crawl.akrasiac.org/scoring/players/ebering.html">ebering</a>."""
         signup ="""
 <h2>Sign Up</h2>
 
-<p>In order to sign up, set the first line of your 0.22 rcfile to</p> <pre
+<p>In order to sign up, set the first line of your 0.32 rcfile to</p> <pre
 id="rc"># csdc</pre><p>on <a
 href="https://crawl.develz.org/play.htm">any of the official online servers</a>
 before the end of the first week. Your name will appear in the standings once
-you've done this correctly and started at least one 0.24 game (though it may take about 20 minutes before it does).</p>"""
+you've done this correctly and started at least one 0.32 game (though it may take about 20 minutes before it does).</p>"""
     else:
-        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed. See you in 0.24.</p>"
+        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed. See you in 0.33.</p>"
 
     return page( static = True, title="Crawl Sudden Death Challenges", content = pagestr.format(wklist,signup))
 
