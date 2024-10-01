@@ -25,7 +25,7 @@ def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
     return """<div id="title">
     <img id="logo" src="static/logo.png">
-    <h1 id="sdc">{} sudden death challenges</h1>
+    <h1 id="sdc">{} Sudden Death Tournament</h1>
     {}</div>""".format(version, sh)
 
 
@@ -71,7 +71,7 @@ def wkinfo(wk):
 
 
 def wkurl(wk):
-    return '<a href="'+ wk.number + '.html">{}</a>'
+    return '<a href="'+ wk.number + '.html.php">{}</a>'
 
 
 def description(wk, url):
@@ -94,17 +94,17 @@ def scoretable(wk, div):
     sp = ""
     sp += ("""<div class="card"><table><tr class="head">
     <th>Player</th>
-    <th>Unique Kill</th>
-    <th>Branch Enter</th>
-    <th>Branch End</th>
-    <th>Champion God</th>
-    <th>Collect a Rune</th>
-    <th>Collect 3 Runes</th>
-    <th>Obtain the Orb</th>
-    <th>Win</th>
-    <th>Bonus I</th>
-    <th>Bonus II</th>
-    <th>Total</th>
+    <th>| Unique Kill</th>
+    <th>| Branch Enter</th>
+    <th>| Branch End</th>
+    <th>| Champion God</th>
+    <th>| Collect a Rune</th>
+    <th>| Collect 3 Runes</th>
+    <th>| Obtain the Orb</th>
+    <th>| Win</th>
+    <th>| Bonus I</th>
+    <th>| Bonus II</th>
+    <th>| Total</th>
     </tr>""")
 
     with get_session() as s:
@@ -200,7 +200,7 @@ def overviewpage():
 _You are suddenly pulled into a different region of the Abyss!
 _A floating eye, a glowing orange brain, 4 small abominations and 8 large
  abominations come into view.</pre>
-<p>The Crawl Sudden Death Challenges is a competition that aims to fill a
+<p>The Crawl Cosplay Sudden Death Tournament is a competition that aims to fill a
 Crawl niche not currently filled by the biannual version release tournaments.
 The idea is for players to compete by trying to do as well as possible in a
 game of Crawl with one attempt only; if you die, that challenge is over (thus
@@ -253,7 +253,7 @@ you've done this correctly and started at least one 0.32 game (though it may tak
     else:
         signup = "<h2>Sign Up</h2> <p>Sign ups are now closed. See you in 0.33.</p>"
 
-    return page( static = True, title="Crawl Sudden Death Challenges", content = pagestr.format(wklist,signup))
+    return page( static = True, title="Crawl Cosplay Sudden Death Tournament", content = pagestr.format(wklist,signup))
 
 def rulespage():
     pagestr ="""

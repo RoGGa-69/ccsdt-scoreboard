@@ -552,7 +552,7 @@ def initialize_weeks():
                 number = "1",
                 species = "At",
                 background = "Hu",
-                gods = ("Ashenzari", "Trog", "Okawaru"),
+                gods = ("Ashenzari", "Ashenzari", "Ashenzari"),
                 start = datetime.datetime(2024,9,23, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc),
                 bonus1 = lairendxl12,
@@ -561,7 +561,7 @@ def initialize_weeks():
                 number = "2",
                 species = "Op",
                 background = "Su",
-                gods = ("Cheibriados", "Trog", "Okawaru"),
+                gods = ("Cheibriados", "Cheibriados", "Cheibriados"),
                 start = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc),
                 bonus1 = runebranchlowskill,
@@ -570,21 +570,21 @@ def initialize_weeks():
                 number = "3",
                 species = "Mf",
                 background = "Fi",
-                gods = ("Okawaru", "Trog", "Makhleb"),
+                gods = ("Okawaru", "Okawaru", "Okawaru"),
                 start = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "4",
                 species = "Ds",
                 background = "IE",
-                gods = ("Sif Muna", "Trog", "Okawaru"),
+                gods = ("Sif Muna", "Sif Muna", "Sif Muna"),
                 start = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "5",
                 species = "Hu",
                 background = "Wr",
-                gods = ("Lugonu", "Trog", "Okawaru"),
+                gods = ("Lugonu", "Lugonu", "Lugonu"),
                 start = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2024,10,28, tzinfo=datetime.timezone.utc)))
 
