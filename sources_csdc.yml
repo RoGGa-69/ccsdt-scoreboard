@@ -45,3 +45,9 @@ sources:
     logfile: 'meta/crawl-0.32/logfile'
     milestones: 'meta/crawl-0.32/milestones'
     rcfiles: 'rcfiles/crawl-0.32'
+
+  - name: lld
+    base: http://lazy-life.ddo.jp/
+    logfile: 'mirror/meta/0.32/logfile'
+    milestones: 'mirror/meta/0.32/milestones'
+    rcfiles: 'rcfiles/0.32/'
