@@ -14,9 +14,9 @@ def updated():
 
 def head(static, title):
     refresh = '<meta http-equiv="refresh" content="300">' if not static else ""
-    return """<head><title>{0}</title>
-    <link rel="stylesheet" href="static/score.css">
-    {1}</head>""".format(title, refresh)
+    return """<title>{0}</title>
+    <?php $this->layout = 'ccsdt'; ?>
+    {1}""".format(title, refresh)
 
 
 version = '0.32'
@@ -24,18 +24,18 @@ version = '0.32'
 def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
     return """<div id="title">
-    <h1 id="sdc">{} Sudden Death Tournament</h1>
+    <h2 id="sdc"><center>CCSDT for DCSS v{}</center></h2>
     {}</div>""".format(version, sh)
 
 
 def mainmenu():
-    return ('<span class="menu"><a href="index.html">Overview</a></span>' +
-        '<span class="menu"><a href="rules.html">Rules</a></span>' + 
+    return ('<span class="menu"><a href="../ccsdt.html">Overview</a> - </span>' +
+        '<span class="menu"><a href="../about_ccsdt.html">Details</a> - </span>' + 
         '<span class="menu"><a href="standings.html">Standings</a></span>' +
         '<span class="menuspacer"></span>')
 
 def serverflag(src):
-    return '<img src="static/{}.png" class="flag" />'.format(src)
+    return ''.format(src)
 
 def wkmenu(wk):
     sp = ""
@@ -47,7 +47,7 @@ def wkmenu(wk):
             menuitem += wkurl(w)
         else:
             menuitem += '{}'
-        sp += '<span class="menu">{}</span>'.format(menuitem.format("Week " +
+        sp += '<span class="menu">{} - </span>'.format(menuitem.format("Week " +
             w.number))
     return sp
 
@@ -197,9 +197,8 @@ def overviewpage():
     pagestr = """
     <pre id="cover">
 _You are suddenly pulled into a different region of the Abyss!
-_A floating eye, a glowing orange brain, 4 small abominations and 8 large
- abominations come into view.</pre>
-<p>The Crawl Cosplay Sudden Death Tournament is a competition that aims to fill a
+_A floating eye, a glowing orange brain, 4 small abominations and 8 large abominations come into view.</pre>
+<p>The Crawl Cosplay Sudden Death Tournament (CCSTD) is a competition that aims to fill a
 Crawl niche not currently filled by the biannual version release tournaments.
 The idea is for players to compete by trying to do as well as possible in a
 game of Crawl with one attempt only; if you die, that challenge is over (thus
@@ -324,8 +323,8 @@ require you to win to earn the point.</p>
 
 def page(**kwargs):
     """static, title, subhead, content"""
-    return """<html>{}<body>{}<div id="content">{}</div>
-    <div id="bottomtext">{}</div></body></html>""".format(
+    return """{}{}<div id="content">{}</div>
+    <div id="bottomtext">{}""".format(
             head(kwargs["static"],kwargs.get("title",kwargs.get("subhead",""))),
             logoblock(kwargs.get("subhead","")),
             kwargs["content"],
