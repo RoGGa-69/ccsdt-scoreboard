@@ -50,4 +50,4 @@ sources:
     base: http://lazy-life.ddo.jp/
     logfile: 'mirror/meta/0.32/logfile'
     milestones: 'mirror/meta/0.32/milestones'
-    rcfiles: 'rcfiles/0.32/'
+    rcfiles: 'mirror/meta/0.32/rcfiles'
