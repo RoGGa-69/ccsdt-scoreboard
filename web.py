@@ -24,15 +24,14 @@ version = '0.32'
 def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
     return """<div id="title">
-    <img id="logo" src="static/logo.png">
     <h1 id="sdc">{} Sudden Death Tournament</h1>
     {}</div>""".format(version, sh)
 
 
 def mainmenu():
-    return ('<span class="menu"><a href="index.html.php">Overview</a></span>' +
-        '<span class="menu"><a href="rules.html.php">Rules</a></span>' + 
-        '<span class="menu"><a href="standings.html.php">Standings</a></span>' +
+    return ('<span class="menu"><a href="index.html">Overview</a></span>' +
+        '<span class="menu"><a href="rules.html">Rules</a></span>' + 
+        '<span class="menu"><a href="standings.html">Standings</a></span>' +
         '<span class="menuspacer"></span>')
 
 def serverflag(src):
@@ -71,7 +70,7 @@ def wkinfo(wk):
 
 
 def wkurl(wk):
-    return '<a href="'+ wk.number + '.html.php">{}</a>'
+    return '<a href="'+ wk.number + '.html">{}</a>'
 
 
 def description(wk, url):
@@ -94,17 +93,17 @@ def scoretable(wk, div):
     sp = ""
     sp += ("""<div class="card"><table><tr class="head">
     <th>Player</th>
-    <th>| Unique Kill</th>
-    <th>| Branch Enter</th>
-    <th>| Branch End</th>
-    <th>| Champion God</th>
-    <th>| Collect a Rune</th>
-    <th>| Collect 3 Runes</th>
-    <th>| Obtain the Orb</th>
-    <th>| Win</th>
-    <th>| Bonus I</th>
-    <th>| Bonus II</th>
-    <th>| Total</th>
+    <th>Unique Kill</th>
+    <th>Branch Enter</th>
+    <th>Branch End</th>
+    <th>Champion God</th>
+    <th>Collect a Rune</th>
+    <th>Collect 3 Runes</th>
+    <th>Obtain the Orb</th>
+    <th>Win</th>
+    <th>Bonus I</th>
+    <th>Bonus II</th>
+    <th>Total</th>
     </tr>""")
 
     with get_session() as s:
