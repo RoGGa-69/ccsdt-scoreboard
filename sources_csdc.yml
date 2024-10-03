@@ -1,6 +1,6 @@
 sources:
   - name: cao
-    base: https://crawl.akrasiac.org
+    base: https://crawl.akrasiac.org/
     milestones: 'milestones32'
     logfile: 'logfile32'
     rcfiles: 'rcfiles/crawl-0.32'
@@ -29,7 +29,7 @@ sources:
     rcfiles: 'rcfiles/crawl-0.32'
 
   - name: cpo
-    base: https://crawl.project357.org
+    base: https://crawl.project357.org/
     logfile: 'dcss-logfiles-0.32'
     milestones: 'dcss-milestones-0.32'
     rcfiles: 'rc-files/0.32'
