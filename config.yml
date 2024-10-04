@@ -1,4 +1,4 @@
-logging level: INFO
+logging level: DEBUG
 sources file: sources_csdc.yml
 db uri: sqlite:///crawl.db
 www dir: /home/rogga/crawl_cosplay/content/pages/ccsdt/0.32
