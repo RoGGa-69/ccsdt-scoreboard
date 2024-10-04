@@ -169,7 +169,7 @@ def standingstable():
             for c in ("fifteenrune", "zig", "lowxlzot", "sub40k", "nolairwin", "asceticrune"):
                 sp += ('<td class="pt">{}</td>').format(_ifnone(getattr(p, c), ""))
             sp += '<td class="total">{}</td>'.format(p.grandtotal)
-            sp += '<td class="pt">{}</td><td class="pt">{}</td>'.format(p.tiebreak, _ifnone(p.hiscore, ""))
+            sp += '<td class="pt">{}</td><td class="hs">{}</td>'.format(p.tiebreak, _ifnone(p.hiscore, ""))
             sp += '</tr>'
         sp += '</table></div>'
 

@@ -141,7 +141,7 @@ def download_source_rcfiles(url: str, dest: str) -> None:
     destdir = os.path.join(dest, url_to_filename(url))
     logging.debug("Downloading rcfiles to {}".format(destdir))
 
-# logging.debug("Downloading {} to {}".format(url, destfile))
+    logging.debug("Downloading {} to {}".format(url, "/home/rogga/csdc-scoreboard/sources/download_source_rcfiles.log"))
     cmdline = shlex.split(
         WGET_RCFILE_CMDLINE.format(
             prefix=destdir, url=url))
