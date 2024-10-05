@@ -11,9 +11,11 @@ I am allergic to frameworks so the way this thing runs is there's gonna be a
 
 You'll need sqlalchemy 1.3.24 to make his scripts work. 
 In Ubuntu terminal type:
+
    pip install sqlalchemy=='1.3.24'
 
 I've made quite a few tweaks to the webpages to make it integrate with the Crawl Cosplay website: cosplay.kelbi.org
+
 If you are thinking of forking this repo, I would suggest you fork ebering's since it work out-of-the-box
 
 A big thank you to scrubdaddy for helping me figure out what to change in the python scripts.
