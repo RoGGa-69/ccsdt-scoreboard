@@ -1,4 +1,4 @@
-# Crawl Cosplay sudden Death Tournament scoreboard
+# Crawl Cosplay Sudden Death Tournament scoreboard
 
 ebering wrote in his repo: 
 
@@ -16,6 +16,6 @@ In Ubuntu terminal type:
 
 I've made quite a few tweaks to the webpages to make it integrate with the Crawl Cosplay website: cosplay.kelbi.org
 
-If you are thinking of forking this repo, I would suggest you fork ebering's since it work out-of-the-box
+If you are thinking of forking this repo, I would suggest you fork ebering's since it works out-of-the-box except for the 2 bonuses which are not setup. (see: middle of csdc.py
 
 A big thank you to scrubdaddy for helping me figure out what to change in the python scripts.
