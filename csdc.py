@@ -394,7 +394,7 @@ def initialize_weeks():
         lairendxl12 = CsdcBonus("LairEndXL12",
             "Reach the end of Lair at XL &leq; 12.",
             [ Milestone.verb_id == get_verb(s, "br.end").id,
-              Milestone.place_id == get_place_from_string(s, "Lair:6").id,
+              Milestone.place_id == get_place_from_string(s, "Lair:5").id,
               Milestone.xl <= 12 ],
             "1")
 
@@ -417,10 +417,10 @@ def initialize_weeks():
 			  ).exists() ],
 			"1")
 
-        depthsbeforerune = CsdcBonus("Depths5BeforeRunes",
+        depthsbeforerune = CsdcBonus("Depths4BeforeRunes",
             "Reach the end of the Depths before entering a rune branch.",
             [ Milestone.verb_id == get_verb(s, "br.end").id,
-              Milestone.place_id == get_place_from_string(s, "Depths:5").id,
+              Milestone.place_id == get_place_from_string(s, "Depths:4").id,
               ~Query(m2).filter( 
                   m2.gid == Milestone.gid,
                   m2.turn < Milestone.turn,
