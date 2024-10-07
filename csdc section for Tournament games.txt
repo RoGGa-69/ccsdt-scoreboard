@@ -6,8 +6,8 @@
                 gods = ("Gozag", "Cheibriados", "Uskayaw"),
                 start = datetime.datetime(2024,11,1, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2024,11,8, tzinfo=datetime.timezone.utc),
-                bonus1 = Elf3BeforeRunes,
-                bonus2 = GeryonBeforeRune))
+                bonus1 = elf3beforerune,
+                bonus2 = geryonbeforerune))
 
         weeks.append(CsdcWeek(
                 number = "2",

@@ -367,7 +367,7 @@ def initialize_weeks():
             "1")
 
         slimerunefirst = CsdcBonus("GetTheSlimyRuneFirst",
-            "Get the slimy rune without entering any multi-level branch other than Lair, Slime, and D (don't get banished).",
+            "Get the slimy rune without entering any multi-level branch other than Lair, Slime, and Dungeon (don't get banished).",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.place_id  == get_place_from_string(s, "Slime:5").id,
               Query(func.count(m2.id)).filter(
@@ -405,7 +405,7 @@ def initialize_weeks():
               Milestone.xl <= 18 ],
             "1")
 
-        elfbeforerune = CsdcBonus("Elf3BeforeRunes",
+        elf3beforerune = CsdcBonus("Elf3BeforeRunes",
             "Reach the end of Elf before entering a rune branch.",
             [ Milestone.verb_id == get_verb(s, "br.end").id,
               Milestone.place_id == get_place_from_string(s, "Elf:3").id,
@@ -535,7 +535,7 @@ def initialize_weeks():
                 "1")
 
         batformuniq = CsdcBonus("BatformHellPanLord",
-                "Kill a unique in bat form.",
+                "Kill a Hell or Pan Lord unique in bat form.",
                 [ Milestone.verb_id == get_verb(s, "uniq").id,
                   Milestone.status.like("%bat-form%"),
                   or_(Milestone.msg.like("%Cerebov%"),
@@ -581,14 +581,18 @@ def initialize_weeks():
                 background = "IE",
                 gods = ("Sif Muna", "Sif Muna", "Sif Muna"),
                 start = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc)))
+                end = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc),
+                bonus1 = elf3beforerune,
+                bonus2 = geryonbeforerune))
         weeks.append(CsdcWeek(
                 number = "5",
                 species = "Hu",
                 background = "Wr",
                 gods = ("Lugonu", "Lugonu", "Lugonu"),
                 start = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,28, tzinfo=datetime.timezone.utc)))
+                end = datetime.datetime(2024,10,28, tzinfo=datetime.timezone.utc),
+                bonus1 = runenosbranch,
+                bonus2 = vowofcourage))
 
 
 def all_games():
