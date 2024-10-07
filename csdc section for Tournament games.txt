@@ -13,39 +13,39 @@
                 number = "2",
                 species = "Te",
                 background = "AE",
-                gods = ("???", "???", "???"),
+                gods = ("Qazlal", "Vehumet", "The Shining One"),
                 start = datetime.datetime(2024,11,8, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2024,11,15, tzinfo=datetime.timezone.utc),
-                bonus1 = ???,
-                bonus2 = ???))
+                bonus1 = lairendxl12,
+                bonus2 = goldenrune))
 
         weeks.append(CsdcWeek(
                 number = "3",
                 species = "Sp",
                 background = "En",
-                gods = ("???", "???", "???"),
-                start = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc),
-                bonus1 = ???,
-                bonus2 = ???))
+                gods = ("Ashenzari", "Dithmenos", "Lugonu"),
+                start = datetime.datetime(2024,11,15, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,10,22, tzinfo=datetime.timezone.utc),
+                bonus1 = RuneNoSBranch,
+                bonus2 = VowOfCourage))
 	    
         weeks.append(CsdcWeek(
                 number = "4",
                 species = "Fe",
                 background = "Ne",
-                gods = ("???", "???", "???"),
-                start = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc),
-                bonus1 = ???,
-                bonus2 = ???))
+                gods = ("Dithmenos", "Kikubaaqudgha", "Yredelemnul"),
+                start = datetime.datetime(2024,11,22, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,11,29, tzinfo=datetime.timezone.utc),
+                bonus1 = runenolair,
+                bonus2 = tworunedontdie))
 
         weeks.append(CsdcWeek(
                 number = "5",
                 species = "Ds",
                 background = "Al",
-                gods = ("???", "???", "???"),
-                start = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,28, tzinfo=datetime.timezone.utc),
-                bonus1 = ???,
-                bonus2 = ???))                
+                gods = ("", "", ""),
+                start = datetime.datetime(2024,11,29, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,12,06, tzinfo=datetime.timezone.utc),
+                bonus1 = ,
+                bonus2 = ))                
 

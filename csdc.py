@@ -572,10 +572,7 @@ def initialize_weeks():
                 background = "Fi",
                 gods = ("Okawaru", "Okawaru", "Okawaru"),
                 start = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc),
-                bonus1 = lairendxl12,
-                bonus2 = depthsbeforerune))
-	    
+                end = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc)))
         weeks.append(CsdcWeek(
                 number = "4",
                 species = "Ds",
