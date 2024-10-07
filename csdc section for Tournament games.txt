@@ -43,9 +43,9 @@
                 number = "5",
                 species = "Ds",
                 background = "Al",
-                gods = ("", "", ""),
+                gods = ("Jiyva", "Nemelex Xobeh", "Makhleb"),
                 start = datetime.datetime(2024,11,29, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2024,12,06, tzinfo=datetime.timezone.utc),
-                bonus1 = ,
-                bonus2 = ))                
+                bonus1 = runebranchlowskill,
+                bonus2 = rune15k))                
 

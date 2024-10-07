@@ -435,7 +435,7 @@ def _new_game(s: sqlalchemy.orm.session.Session, data:dict) -> None:
 @_reraise_dberror
 def _end_game(s: sqlalchemy.orm.session.Session, data:dict) -> None:
     g = _games(s, gid=data["gid"]).first()
-#    print(data) 
+#    print(modelutils.crawl_date_to_datetime(data["end"])) 
     g.end = modelutils.crawl_date_to_datetime(data["end"])
     g.ktyp = get_ktyp(s, data["ktyp"])
     g.score = data["sc"]
