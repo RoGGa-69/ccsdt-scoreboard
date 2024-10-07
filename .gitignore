@@ -5,3 +5,4 @@ __pycache__/*
 /web
 /csdcvenv
 crawl.db-journal
+history.log.txt

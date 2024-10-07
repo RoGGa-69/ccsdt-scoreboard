@@ -1,3 +1,10 @@
+sources:
+  - name: cao
+    base: https://crawl.akrasiac.org
+    milestones: 'milestones32'
+    logfile: 'logfile32'
+    rcfiles: 'rcfiles/crawl-0.32'
+
   - name: cue
     aliases:
       - cln
@@ -6,3 +13,30 @@
     logfile: 'meta/0.32/logfile'
     milestones: 'meta/0.32/milestones'
     rcfiles: 'rcfiles/crawl-0.32'
+
+  - name: cbro
+    aliases:
+      - cbro2
+    base: http://cbro.berotato.org/
+    logfile: 'meta/0.32/logfile'
+    milestones: 'meta/0.32/milestones'
+    rcfiles: 'rcfiles/crawl-0.32'
+
+  - name: cxc
+    base: http://crawl.xtahua.com/crawl/
+    logfile: 'meta/0.32/logfile'
+    milestones: 'meta/0.32/milestones'
+    rcfiles: 'rcfiles/crawl-0.32'
+
+  - name: cdi
+    base: https://crawl.dcss.io/crawl/
+    logfile: 'meta/crawl-0.32/logfile'
+    milestones: 'meta/crawl-0.32/milestones'
+    rcfiles: 'rcfiles/crawl-0.32'
+
+  - name: cnc
+    base: https://archive.nemelex.cards/
+    logfile: 'meta/crawl-0.32/logfile'
+    milestones: 'meta/crawl-0.32/milestones'
+    rcfiles: 'rcfiles/crawl-0.32'
+
