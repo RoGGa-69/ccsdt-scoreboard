@@ -155,7 +155,7 @@ def standingstable():
             ])
         sp +='<th>15 Rune Win</th><th>Zig:$</th><th>Zot @ XL20</th>'
         sp +='<th>Win &lt;40k Turns</th><th>No Lair Win</th><th>Ascetic Rune</th>'
-        sp += '<th>CCSDT Score</th><th>Weekly Bonuses</th><th>Game High Score</th></tr>'
+        sp += '<th>CCSDT Total Score</th><th>Weekly Bonuses</th><th>Game High Score</th></tr>'
         place = 1
         for p in csdc.overview().with_session(s).all():
             acct = s.query(Account).filter_by(id = p.account_id).first();
