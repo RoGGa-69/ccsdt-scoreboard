@@ -9,7 +9,7 @@ DATETIMEFMT = DATEFMT + " " + TIMEFMT
 
 def updated():
     now = datetime.datetime.now(datetime.timezone.utc).strftime(DATETIMEFMT)
-    return '<span id="updated"><span class="label">Updated: </span>{}</span></div>'.format(now)
+    return '<span id="updated"><span class="label">Updates every 10 mins. Last Updated: </span>{}</span></div>'.format(now)
 
 
 def head(static, title):
@@ -58,9 +58,9 @@ def wkinfo(wk):
     sp += wk.start.strftime(DATEFMT) + '</span></div>'
     sp += ('<div id="combo"><span class="label">Character: </span>' +
             '{0} {1}</div>\n'.format(wk.species.name, wk.background.name))
-    sp += ('<div id="bonus"><span class="label">Tier I Bonus: </span>'
+    sp += ('<div id="bonus"><span class="label">Bonus 1: </span>'
             + wk.tier1.description + '<br/>\n'
-            + '<span class="label">Tier II Bonus: </span>'
+            + '<span class="label">Bonus 2: </span>'
             + wk.tier2.description +'</div>\n')
     sp += ('<div id="gods"><span class="label">Gods: </span>')
     sp += ", ".join([ g.name for g in wk.gods])
@@ -101,8 +101,8 @@ def scoretable(wk, div):
     <th>Collect 3 Runes</th>
     <th>Obtain the Orb</th>
     <th>Win</th>
-    <th>Bonus I</th>
-    <th>Bonus II</th>
+    <th>Bonus 1</th>
+    <th>Bonus 2</th>
     <th>Total</th>
     </tr>""")
 
@@ -268,10 +268,9 @@ for scoring. This is the only allowed attempt, subject to rule 3 below.</li>
 XL < 5 (i.e., no redo once you hit XL 5). The redo game must be started after
 the end of the first game (no startscumming!).  The highest CSDC score of the
 two games is counted towards your score.</li>
-<li>Each challenge has an optional bonus challenge in addition to the
-race/class combo. Each bonus will have two tiers; the second tier is more
-difficult and worth more points.</li>
-<li>Each challenge includes a list of gods. A bonus point can be earned upon
+<li>Each challenge has 2 optional bonus challenges in addition to the
+race/class combo.</li>
+<li>Each challenge includes a list of gods. A point can be earned upon
 reaching ****** piety (or on worship with Gozag or Xom) with one of the listed
 gods. The point is lost if you ever abandon your god or are excommunicated. If
 the combo for the week is a zealot background, god points are only for sticking
@@ -301,8 +300,8 @@ week)</th><th></th></tr>
 <tr><td class="name">Collect 3 or more runes:</td><td class="pt">1</td></tr>
 <tr><td class="name">Collect the Orb:</td><td class="pt">1</td></tr>
 <tr><td class="name">Win:</td><td class="pt">1</td></tr>
-<tr><td class="name">Complete a Tier I bonus:</td><td class="pt">1</td></tr>
-<tr><td class="name">Complete a Tier II bonus:</td><td class="pt">1</td></tr>
+<tr><td class="name">Complete Bonus 1:</td><td class="pt">1</td></tr>
+<tr><td class="name">Complete Bonus 2:</td><td class="pt">1</td></tr>
 <tr class="head" id="onetime"><th>One-time points (earned once in the competition)</th><th></th></tr>
 <tr><td class="name">Win a game with 15 runes:</td><td class="pt">3</td></tr>
 <tr><td class="name">Clear a Ziggurat:</td><td class="pt">3</td></tr>
@@ -312,9 +311,7 @@ week)</th><th></th></tr>
 <tr><td class="name">Get a rune without using potions or scrolls:</td><td class="pt">6</td></tr>
 </table>
 
-<p class="notes"> It will not always be the case that earning a
-Tier II bonus implies that you have earned a Tier I bonus, these points can be
-awarded separately. Unless specified, a bonus or one time point does not
+<p class="notes"> Unless specified, a bonus or one time point does not
 require you to win to earn the point.</p>
 
 """
