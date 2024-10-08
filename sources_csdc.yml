@@ -39,3 +39,9 @@ sources:
     logfile: 'meta/crawl-0.32/logfile'
     milestones: 'meta/crawl-0.32/milestones'
     rcfiles: 'rcfiles/crawl-0.32'
+
+  - name: cpo
+    base: https://crawl.project357.org
+    logfile: 'dcss-logfiles-0.32'
+    milestones: 'dcss-milestones-0.32'
+    rcfiles: 'rc-files/0.32'
