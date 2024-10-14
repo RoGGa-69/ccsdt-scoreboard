@@ -9,11 +9,11 @@ DATETIMEFMT = DATEFMT + " " + TIMEFMT
 
 def updated():
     now = datetime.datetime.now(datetime.timezone.utc).strftime(DATETIMEFMT)
-    return '<span id="updated"><span class="label">Updates every 10 mins. Last Updated: </span>{}</span></div>'.format(now)
+    return '<span id="updated"><span class="label">Updates every 10 mins. Last Update: </span>{}</span></div>'.format(now)
 
 
 def head(static, title):
-    refresh = '<meta http-equiv="refresh" content="300">' if not static else ""
+    refresh = '<meta http-equiv="refresh" content="240">' if not static else ""
     return """<title>{0}</title>
     <?php $this->layout = 'ccsdt'; ?>
     {1}""".format(title, refresh)
@@ -214,7 +214,7 @@ simultaneously encouraging unusual characters and play styles that you might not
 points by reaching various in-game milestones.</li>
 <li>Only games played and milestones scored between 00:00 UTC on the start and end dates count.</li>
 <li>Details on rules and scoring are available on the <a
-href="rules.html.php">rules page</a>.</li>
+href="rules.html">rules page</a>.</li>
 </ul>
 
 <h2>Schedule</h2>

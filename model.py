@@ -436,9 +436,9 @@ def _new_game(s: sqlalchemy.orm.session.Session, data:dict) -> None:
 def _end_game(s: sqlalchemy.orm.session.Session, data:dict) -> None:
     g = _games(s, gid=data["gid"]).first()
 #    print(data)
-#    print(data["gid"])
+    print(data["gid"])
 #    print(_games(s, gid=data["gid"]))
-#    print(_games(s, gid=data["gid"]).first())
+    print(_games(s, gid=data["gid"]).first())
 #    print(g)
     g.end = modelutils.crawl_date_to_datetime(data["end"])
     g.ktyp = get_ktyp(s, data["ktyp"])
