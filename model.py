@@ -588,7 +588,7 @@ def _games(
             q = q.filter(Game.ktyp_id != ktyp.id)
     if boring is not None:
         boring_ktyps = [
-            get_ktyp(s, ktyp).id for ktyp in ("quitting", "leaving", "wizmode")
+            get_ktyp(s, ktyp).id for ktyp in ("quitting", "leaving", "wizmode", "exploremode")
         ]
         if boring:
             q = q.filter(Game.ktyp_id.in_(boring_ktyps))
