@@ -45,3 +45,9 @@ sources:
     logfile: 'dcss-logfiles-0.32'
     milestones: 'dcss-milestones-0.32'
     rcfiles: 'rc-files/0.32'
+
+  - name: lld
+    base: http://lazy-life.ddo.jp/
+    logfile: 'mirror/meta/0.31/logfile'
+    milestones: 'mirror/meta/0.31/milestones'
+    rcfiles: 'mirror/meta/0.31/rcfiles'
