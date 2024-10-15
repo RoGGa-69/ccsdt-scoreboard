@@ -406,26 +406,26 @@ def initialize_weeks():
             "1")
 
         elf3beforerune = CsdcBonus("Elf3BeforeRunes",
-            "Reach the end of Elf before entering a rune branch.",
+            "Reach the end of Elf before entering a rune branch (excluding the Abyss).",
             [ Milestone.verb_id == get_verb(s, "br.end").id,
               Milestone.place_id == get_place_from_string(s, "Elf:3").id,
               ~Query(m2).filter( 
                   m2.gid == Milestone.gid,
                   m2.turn < Milestone.turn,
                   m2.verb_id == get_verb(s, "br.enter").id,
-			      m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.RUNE_BRANCHES ]),
+			      m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.RUNE_BRANCHES - set(("Abyss",))]),
 			  ).exists() ],
 			"1")
 
         depthsbeforerune = CsdcBonus("Depths4BeforeRunes",
-            "Reach the end of the Depths before entering a rune branch.",
+            "Reach the end of the Depths before entering a rune branch (excluding the Abyss).",
             [ Milestone.verb_id == get_verb(s, "br.end").id,
               Milestone.place_id == get_place_from_string(s, "Depths:4").id,
               ~Query(m2).filter( 
                   m2.gid == Milestone.gid,
                   m2.turn < Milestone.turn,
                   m2.verb_id == get_verb(s, "br.enter").id,
-			      m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.RUNE_BRANCHES ]),
+			      m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.RUNE_BRANCHES - set(("Abyss",))]),
 			  ).exists() ],
 			"1")
 
