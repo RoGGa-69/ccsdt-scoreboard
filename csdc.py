@@ -550,49 +550,53 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "1",
-                species = "At",
-                background = "Hu",
-                gods = ("Ashenzari", "Ashenzari", "Ashenzari"),
-                start = datetime.datetime(2024,9,23, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc),
-                bonus1 = lairendxl12,
-                bonus2 = vaultendxl18))
-        weeks.append(CsdcWeek(
-                number = "2",
-                species = "Op",
-                background = "Su",
-                gods = ("Cheibriados", "Cheibriados", "Cheibriados"),
-                start = datetime.datetime(2024,9,30, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc),
-                bonus1 = runebranchlowskill,
-                bonus2 = runelowskill))
-        weeks.append(CsdcWeek(
-                number = "3",
-                species = "Mf",
-                background = "Fi",
-                gods = ("Okawaru", "Okawaru", "Okawaru"),
-                start = datetime.datetime(2024,10,7, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc),
-                bonus1 = lairendxl12,
-                bonus2 = depthsbeforerune))
-        weeks.append(CsdcWeek(
-                number = "4",
-                species = "Ds",
-                background = "IE",
-                gods = ("Sif Muna", "Sif Muna", "Sif Muna"),
-                start = datetime.datetime(2024,10,14, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc),
+                species = "Hu",
+                background = "Gl",
+                gods = ("Gozag", "Cheibriados", "Uskayaw"),
+                start = datetime.datetime(2024,11,1, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,11,8, tzinfo=datetime.timezone.utc),
                 bonus1 = elf3beforerune,
                 bonus2 = geryonbeforerune))
+
         weeks.append(CsdcWeek(
-                number = "5",
-                species = "Hu",
-                background = "Wr",
-                gods = ("Lugonu", "Lugonu", "Lugonu"),
-                start = datetime.datetime(2024,10,21, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,28, tzinfo=datetime.timezone.utc),
+                number = "2",
+                species = "Te",
+                background = "AE",
+                gods = ("Qazlal", "Vehumet", "The Shining One"),
+                start = datetime.datetime(2024,11,8, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,11,15, tzinfo=datetime.timezone.utc),
+                bonus1 = lairendxl12,
+                bonus2 = goldenrune))
+
+        weeks.append(CsdcWeek(
+                number = "3",
+                species = "Sp",
+                background = "En",
+                gods = ("Ashenzari", "Dithmenos", "Lugonu"),
+                start = datetime.datetime(2024,11,15, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,10,22, tzinfo=datetime.timezone.utc),
                 bonus1 = runenosbranch,
                 bonus2 = vowofcourage))
+	    
+        weeks.append(CsdcWeek(
+                number = "4",
+                species = "Fe",
+                background = "Ne",
+                gods = ("Dithmenos", "Kikubaaqudgha", "Yredelemnul"),
+                start = datetime.datetime(2024,11,22, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,11,29, tzinfo=datetime.timezone.utc),
+                bonus1 = runenolair,
+                bonus2 = tworunedontdie))
+
+        weeks.append(CsdcWeek(
+                number = "5",
+                species = "Ds",
+                background = "Al",
+                gods = ("Jiyva", "Nemelex Xobeh", "Makhleb"),
+                start = datetime.datetime(2024,11,29, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,12,6, tzinfo=datetime.timezone.utc),
+                bonus1 = runebranchlowskill,
+                bonus2 = rune15k))                
 
 
 def all_games():
