@@ -18,7 +18,7 @@ WGET_NAME = 'wget.exe' if sys.platform == 'win32' else 'wget'
 WGET_SOURCE_CMDLINE = ("%s --timeout 10 --no-verbose -c --tries 5 "
                        "-O '{outfile}' '{url}'" % WGET_NAME)
 WGET_RCFILE_CMDLINE = ("%s --no-verbose --no-directories --timestamping "
-                       "--no-parent --no-host-directories --recursive -l 1 "
+                       "--no-parent --no-host-directories --recursive -l 1 -e robots=off "
                        "--accept .rc -P '{prefix}' '{url}'" % WGET_NAME)
 GREP_COMMAND = ("grep --line-regexp --files-with-matches --ignore-case '#.*ccsdt.*'")
 # Ignored stuff: sprint & zotdef games, dead servers
