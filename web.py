@@ -9,7 +9,7 @@ DATETIMEFMT = DATEFMT + " " + TIMEFMT
 
 def updated():
     now = datetime.datetime.now(datetime.timezone.utc).strftime(DATETIMEFMT)
-    return '<span id="updated"><span class="label">Updates every 10 mins. Last Update: </span>{}</span></div>'.format(now)
+    return '<span id="updated"><span class="label">Updates every 5 mins. Last Update: </span>{}</span></div>'.format(now)
 
 
 def head(static, title):
@@ -313,7 +313,7 @@ week)</th><th></th></tr>
 require you to win to earn the point.</p>
 
 """
-    return page(static=True, subhead="Rules", content = pagestr.format("0.22"))
+    return page(static=True, subhead="Rules", content = pagestr.format("0.32"))
 
 
 def page(**kwargs):
