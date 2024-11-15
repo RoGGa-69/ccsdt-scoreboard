@@ -574,7 +574,7 @@ def initialize_weeks():
                 background = "En",
                 gods = ("Ashenzari", "Dithmenos", "Lugonu"),
                 start = datetime.datetime(2024,11,15, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,10,22, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,11,22, tzinfo=datetime.timezone.utc),
                 bonus1 = runenosbranch,
                 bonus2 = vowofcourage))
 	    
