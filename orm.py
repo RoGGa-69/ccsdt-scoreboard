@@ -16,7 +16,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, column_property
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
@@ -318,6 +318,21 @@ class Game(Base):
         return self.ktyp != None and self.ktyp.name == "winning"
 
     @property
+    def dead(self) -> bool:
+        """Is this character dead, not by winning"""
+        return self.ktyp != None and self.ktyp.name != "winning"
+
+    @property
+    def status(self) -> str:
+        """What is the status of this game"""
+        if self.won:
+            return "won"
+        elif self.alive:
+            return "alive"
+        else:
+            return "dead"
+
+    @property
     def quit(self) -> bool:
         """Was this game quit."""
         return self.ktyp != None and self.ktyp.name == "quitting"
@@ -458,7 +473,7 @@ session_factory = None
 def initialize(uri):
     engine = create_engine(uri)
     global session_factory 
-    session_factory = sessionmaker(bind=engine, expire_on_commit=False, autocommit=False)
+    session_factory = sessionmaker(bind=engine, expire_on_commit=False, autocommit=False,autoflush=False)
     Base.metadata.create_all(engine)
 
 @contextmanager
