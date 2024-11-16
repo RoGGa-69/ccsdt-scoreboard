@@ -318,6 +318,21 @@ class Game(Base):
         return self.ktyp != None and self.ktyp.name == "winning"
 
     @property
+    def dead(self) -> bool:
+        """Is this character dead, not by winning"""
+        return self.ktyp != None and self.ktyp.name != "winning"
+
+    @property
+    def status(self) -> str:
+        """What is the status of this game"""
+        if self.won:
+            return "won"
+        elif self.alive:
+            return "alive"
+        else:
+            return "dead"
+
+    @property
     def quit(self) -> bool:
         """Was this game quit."""
         return self.ktyp != None and self.ktyp.name == "quitting"

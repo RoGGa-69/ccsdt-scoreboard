@@ -33,7 +33,7 @@ from orm import (
     get_session,
 )
 
-from sqlalchemy import asc, desc, func, type_coerce, Integer, literal, case
+from sqlalchemy import asc, desc, func, type_coerce, Integer, literal, case, literal_column
 from sqlalchemy.sql import and_, or_
 from sqlalchemy.orm.query import (
     aliased,
@@ -282,6 +282,7 @@ class CsdcWeek:
                 ).outerjoin(sc, CsdcContestant.player_id ==
                         sc.c.player_id).outerjoin(Game,
                 Game.gid == sc.c.gid).add_columns(
+                    Game.gid,
                     sc.c.player_id.label("player_id"),
                     sc.c.uniq,
                     sc.c.brenter,
@@ -305,8 +306,7 @@ class CsdcWeek:
                         + sc.c.orb
                         + sc.c.bonusone
                         + sc.c.bonustwo
-                    ).label("total")
-            )
+                    ).label("total"))
 
     def onetimes(self):
         return Query([Game.gid,
@@ -632,7 +632,7 @@ def overview():
         wktotal.append(a.c.total)
         wkbonuses.append(func.ifnull(a.c.bonusone, 0) + func.ifnull(a.c.bonustwo, 0))
         q = q.outerjoin(a, CsdcContestant.player_id == a.c.player_id
-                ).add_column( a.c.total.label("wk" + wk.number))
+                ).add_columns( a.c.total.label("wk" + wk.number), a.c.gid.label("wk" + wk.number + "gid"))
 
     return q.add_columns(
             sc.c.account_id.label("account_id"),

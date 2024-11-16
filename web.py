@@ -1,6 +1,7 @@
 import datetime
 from orm import get_session, Account
 from modelutils import morgue_url
+from model import get_game
 import csdc
 
 TIMEFMT = "%H:%M %Z"
@@ -141,6 +142,17 @@ def scoretable(wk, div):
 
     return sp
 
+def game_status(gid):
+    with get_session() as s:
+        game = get_game(s,gid=gid)
+        if game == None:
+            return "none"
+        elif game.alive:
+            return "alive"
+        elif game.won:
+            return "won"
+        else:
+            return "dead"
 
 def _ifnone(x, d):
     """this should be a language builtin like it is in sql"""
@@ -164,8 +176,9 @@ def standingstable():
             place += 1
             sp += '<td class="name">{}{}</td>'.format(
             serverflag(acct.server.name) if acct else "", p.CsdcContestant.player.name)
-            sp += ('<td class="pt">{}</td>' * len(csdc.weeks)).format(
-                    *[ _ifnone(getattr(p, "wk" + wk.number), "") for wk in csdc.weeks])
+            for wk in csdc.weeks:
+                sp += '<td class="pt{}">{}</td>'.format(game_status(getattr(p,"wk" + wk.number + "gid")),
+                                                        _ifnone(getattr(p, "wk" + wk.number), ""))
             for c in ("fifteenrune", "zig", "lowxlzot", "sub40k", "nolairwin", "asceticrune"):
                 sp += ('<td class="pt">{}</td>').format(_ifnone(getattr(p, c), ""))
             sp += '<td class="total">{}</td>'.format(p.grandtotal)
