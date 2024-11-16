@@ -16,7 +16,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-from sqlalchemy.orm import relationship, column_property
+from sqlalchemy.orm import relationship
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
@@ -473,7 +473,7 @@ session_factory = None
 def initialize(uri):
     engine = create_engine(uri)
     global session_factory 
-    session_factory = sessionmaker(bind=engine, expire_on_commit=False, autocommit=False,autoflush=False)
+    session_factory = sessionmaker(bind=engine, expire_on_commit=False, autocommit=False)
     Base.metadata.create_all(engine)
 
 @contextmanager
