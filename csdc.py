@@ -511,7 +511,7 @@ def initialize_weeks():
             "1")
 
         runedontdie = CsdcBonus("RuneDontDie",
-            "Collect a rune without dying.",
+            "Collect a rune without dying (felids).",
             [Milestone.verb_id == get_verb(s, "rune").id,
              ~Query(m2).filter(
              m2.gid == Milestone.gid,
@@ -520,7 +520,7 @@ def initialize_weeks():
             "1")
 
         tworunedontdie = CsdcBonus("2RuneDont2Die",
-            "Collect two runes without dying twice.",
+            "Collect two runes without dying twice (felids).",
             [Milestone.verb_id == get_verb(s, "rune").id,
              Query(func.count(m2.id)).filter(
              m2.gid == Milestone.gid,
@@ -529,13 +529,13 @@ def initialize_weeks():
             "1")
 
         batformuniq = CsdcBonus("BatformUniq",
-                "Kill a unique in bat form.",
+                "Kill a unique in bat form (vampires).",
                 [ Milestone.verb_id == get_verb(s, "uniq").id,
                     Milestone.status.like("%bat-form%")],
                 "1")
 
         batformuniq = CsdcBonus("BatformHellPanLord",
-                "Kill a Hell or Pan Lord unique in bat form.",
+                "Kill a Hell or Pan Lord unique in bat form (vampires).",
                 [ Milestone.verb_id == get_verb(s, "uniq").id,
                   Milestone.status.like("%bat-form%"),
                   or_(Milestone.msg.like("%Cerebov%"),
