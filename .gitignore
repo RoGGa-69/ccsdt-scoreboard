@@ -4,6 +4,4 @@ morgues/*
 __pycache__/*
 /csdcvenv
 crawl.db-journal
-history.log.txt
-csdc section for Tournament games.txt
 ssh-key-for-github
