@@ -522,6 +522,7 @@ def initialize_weeks():
         tworunedontdie = CsdcBonus("2RuneDont2Die",
             "Collect two runes without dying twice (felids).",
             [Milestone.verb_id == get_verb(s, "rune").id,
+             Milestone.runes >= 2,
              Query(func.count(m2.id)).filter(
              m2.gid == Milestone.gid,
              m2.turn < Milestone.turn,
