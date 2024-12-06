@@ -536,7 +536,7 @@ def initialize_weeks():
                 "1")
 
         batformuniq = CsdcBonus("BatformHellPanLord",
-                "Kill a Hell or Pan Lord unique in bat form (vampires).",
+            "Kill a Hell or Pan Lord unique in bat form (vampires).",
                 [ Milestone.verb_id == get_verb(s, "uniq").id,
                   Milestone.status.like("%bat-form%"),
                   or_(Milestone.msg.like("%Cerebov%"),
@@ -548,6 +548,12 @@ def initialize_weeks():
                       Milestone.msg.like("%Dispater%"),
                       Milestone.msg.like("%Ereshkigal%")) ],
                 "1")
+
+	runebeforexl17 = CsdcBonus("RuneBeforeXL17",
+            "Collect a rune before reaching XL17",
+            [ Milestone.verb_id == get_verb(s, "rune").id,
+              Milestone.xl < 17 ],
+            "1")
 
         weeks.append(CsdcWeek(
                 number = "1",
