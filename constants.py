@@ -51,6 +51,7 @@ BACKGROUNDS = {
     Background("En", "Enchanter"),
     Background("FE", "Fire Elementalist"),
     Background("Fi", "Fighter"),
+    Background("Fw", "Forgewright"),
     Background("Gl", "Gladiator"),
     Background("Hu", "Hunter"),
     Background("HW", "Hedge Wizard"),
