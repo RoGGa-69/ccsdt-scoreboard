@@ -549,7 +549,7 @@ def initialize_weeks():
                       Milestone.msg.like("%Ereshkigal%")) ],
                 "1")
 
-	runebeforexl17 = CsdcBonus("RuneBeforeXL17",
+    	runebeforexl17 = CsdcBonus("RuneBeforeXL17",
             "Collect a rune before reaching XL17",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.xl < 17 ],
