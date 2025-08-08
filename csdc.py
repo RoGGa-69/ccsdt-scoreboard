@@ -549,7 +549,7 @@ def initialize_weeks():
                       Milestone.msg.like("%Ereshkigal%")) ],
                 "1")
 
-    	runebeforexl17 = CsdcBonus("RuneBeforeXL17",
+        runebeforexl17 = CsdcBonus("RuneBeforeXL17",
             "Collect a rune before reaching XL17",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.xl < 17 ],
@@ -557,51 +557,51 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "1",
-                species = "Hu",
-                background = "Gl",
-                gods = ("Gozag", "Cheibriados", "Uskayaw"),
-                start = datetime.datetime(2024,11,1, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,11,8, tzinfo=datetime.timezone.utc),
+                species = "Na",
+                background = "Al",
+                gods = ("Ru", "Uskayaw", "Wu Jian"),
+                start = datetime.datetime(2025,7,28, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2025,8,4, tzinfo=datetime.timezone.utc),
                 bonus1 = elf3beforerune,
                 bonus2 = geryonbeforerune))
 
         weeks.append(CsdcWeek(
                 number = "2",
-                species = "Te",
-                background = "AE",
-                gods = ("Qazlal", "Vehumet", "The Shining One"),
-                start = datetime.datetime(2024,11,8, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,11,15, tzinfo=datetime.timezone.utc),
+                species = "Ds",
+                background = "Al",
+                gods = ("Qazlal", "Vehumet", "Lugonu"),
+                start = datetime.datetime(2025,8,4, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2025,8,11, tzinfo=datetime.timezone.utc),
                 bonus1 = lairendxl12,
                 bonus2 = goldenrune))
 
         weeks.append(CsdcWeek(
                 number = "3",
-                species = "Sp",
-                background = "En",
-                gods = ("Ashenzari", "Dithmenos", "Lugonu"),
-                start = datetime.datetime(2024,11,15, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,11,22, tzinfo=datetime.timezone.utc),
+                species = "Op",
+                background = "Al",
+                gods = ("Vehumet", "GOD_NO_GOD", "GOD_NO_GOD"),
+                start = datetime.datetime(2025,8,11, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2025,8,18, tzinfo=datetime.timezone.utc),
                 bonus1 = runenosbranch,
                 bonus2 = vowofcourage))
 	    
         weeks.append(CsdcWeek(
                 number = "4",
-                species = "Fe",
-                background = "Ne",
-                gods = ("Dithmenos", "Kikubaaqudgha", "Yredelemnul"),
-                start = datetime.datetime(2024,11,22, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,11,29, tzinfo=datetime.timezone.utc),
+                species = "Mi",
+                background = "Fi",
+                gods = ("Makhleb", "Kikubaaqudgha", "Yredelemnul"),
+                start = datetime.datetime(2025,8,18, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2025,8,25, tzinfo=datetime.timezone.utc),
                 bonus1 = runenolair,
                 bonus2 = tworunedontdie))
 
         weeks.append(CsdcWeek(
                 number = "5",
-                species = "Ds",
-                background = "Al",
+                species = "Dj",
+                background = "FE",
                 gods = ("Jiyva", "Nemelex Xobeh", "Makhleb"),
-                start = datetime.datetime(2024,11,29, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2024,12,6, tzinfo=datetime.timezone.utc),
+                start = datetime.datetime(2025,8,25, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2024,9,1, tzinfo=datetime.timezone.utc),
                 bonus1 = runebranchlowskill,
                 bonus2 = rune15k))                
 

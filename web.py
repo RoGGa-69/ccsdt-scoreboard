@@ -10,7 +10,7 @@ DATETIMEFMT = DATEFMT + " " + TIMEFMT
 
 def updated():
     now = datetime.datetime.now(datetime.timezone.utc).strftime(DATETIMEFMT)
-    return '<span id="updated"><span class="label">Updates every 5 mins. Last Update: </span>{}</span></div>'.format(now)
+    return '<span id="updated"><span class="label">Updates every 10 mins. Last Update: </span>{}</span></div>'.format(now)
 
 
 def head(static, title):
@@ -20,7 +20,7 @@ def head(static, title):
     {1}""".format(title, refresh)
 
 
-version = '0.32'
+version = '0.33'
 
 def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
@@ -254,11 +254,11 @@ Thank you to scrubbdaddy for python assistance. I am your host, RoGGa."""
         signup ="""
 <h2>Sign Up</h2>
 
-<p>In order to sign up, set the first line of your 0.32 rcfile to</p> <pre
+<p>In order to sign up, set the first line of your 0.33 rcfile to</p> <pre
 id="rc"># csdc</pre><p>on <a
 href="https://crawl.develz.org/play.htm">any of the official online servers</a>
 before the end of the first week. Your name will appear in the standings once
-you've done this correctly and started at least one 0.32 game (though it may take about 20 minutes before it does).</p>"""
+you've done this correctly and started at least one 0.33 game (though it may take about 20 minutes before it does).</p>"""
     else:
         signup = "<h2>Sign Up</h2> <p>Sign ups are now closed. See you in 0.33.</p>"
 
@@ -326,7 +326,7 @@ week)</th><th></th></tr>
 require you to win to earn the point.</p>
 
 """
-    return page(static=True, subhead="Rules", content = pagestr.format("0.32"))
+    return page(static=True, subhead="Rules", content = pagestr.format("0.33"))
 
 
 def page(**kwargs):
