@@ -30,7 +30,7 @@ def logoblock(subhead):
 
 
 def mainmenu():
-    return ('<span class="menu"><a href="../ccsdt.html">Overview</a> - </span>' +
+    return ('<span class="menu"><a href="index.html">Overview</a> - </span>' +
         '<span class="menu"><a href="../about_ccsdt.html">Details</a> - </span>' + 
         '<span class="menu"><a href="standings.html">Standings</a></span>' +
         '<span class="menuspacer"></span>')

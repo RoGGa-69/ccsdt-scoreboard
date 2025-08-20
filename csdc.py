@@ -579,11 +579,11 @@ def initialize_weeks():
                 number = "3",
                 species = "Op",
                 background = "Al",
-                gods = ("Vehumet", "GOD_NO_GOD", "GOD_NO_GOD"),
+                gods = ("Vehumet", "Okawaru", "Makhleb"),
                 start = datetime.datetime(2025,8,11, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2025,8,18, tzinfo=datetime.timezone.utc),
-                bonus1 = runenosbranch,
-                bonus2 = vowofcourage))
+                bonus1 = slimefirst,
+                bonus2 = runebranchlowskill))
 	    
         weeks.append(CsdcWeek(
                 number = "4",
@@ -592,8 +592,8 @@ def initialize_weeks():
                 gods = ("Makhleb", "Kikubaaqudgha", "Yredelemnul"),
                 start = datetime.datetime(2025,8,18, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2025,8,25, tzinfo=datetime.timezone.utc),
-                bonus1 = runenolair,
-                bonus2 = tworunedontdie))
+                bonus1 = temple4k,
+                bonus2 = vaultendxl18))
 
         weeks.append(CsdcWeek(
                 number = "5",

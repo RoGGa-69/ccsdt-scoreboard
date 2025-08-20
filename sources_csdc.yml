@@ -51,3 +51,9 @@ sources:
     logfile: 'mirror/meta/0.33/logfile'
     milestones: 'mirror/meta/0.33/milestones'
     rcfiles: 'mirror/meta/0.33/rcfiles'
+
+  - name: cco
+    base: https://data.crawlcosplay.org/
+    logfile: 'meta/crawl-0.33/logfile'
+    milestones: 'meta/crawl-0.33/milestones'
+    rcfiles: 'rcfiles/crawl-0.33'
