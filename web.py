@@ -25,7 +25,7 @@ version = '0.33'
 def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
     return """<div id="title">
-    <h2 id="sdc"><center>CCSDT for DCSS v{}</center></h2>
+    <h2 id="sdc"><center>CCSDT#2 for DCSS v{}</center></h2>
     {}</div>""".format(version, sh)
 
 
