@@ -83,6 +83,8 @@ def _morgue_prefix(src: str, version: str) -> Optional[str]:
     elif src == "cnc":
         prefix = "https://archive.nemelex.cards/morgue/"
 #        prefix += "/" + version_url(version)
+    elif src == "cco":
+        prefix = "https://data.crawlcosplay.org/morgue/"
     elif src in ("ckr", "csn", "rhf", "cjr", "cszo"):
         return None
     else:

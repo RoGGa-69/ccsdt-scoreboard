@@ -210,25 +210,30 @@ def overviewpage():
     pagestr = """
     <pre id="cover">
 _You are suddenly pulled into a different region of the Abyss!
-_A floating eye, a glowing orange brain, 4 small abominations and 8 large abominations come into view.</pre>
-<p>The Crawl Cosplay Sudden Death Tournament (CCSTD) is a competition that aims to fill a
-Crawl niche not currently filled by the version release tournament and the other 3 Crawl Cosplay initiatives.
+_A floating eye, a glowing orange brain and 8 large abominations come into view.</pre>
+<p>The Crawl Cosplay Sudden Death Tournament (CCSTD) is a competition 
+that aims to fill a
+Crawl niche not currently filled by the version release tournament 
+and the other Crawl Cosplay initiatives.
 The idea is for players to compete by trying to do as well as possible in a
 game of Crawl with one attempt only; if you die, that week's challenge is over (thus
-"sudden death". This competition is a lower time commitment event that aims to challenge players while
+"sudden death".)* 
+This competition is a lower time commitment event that aims to challenge players while
 simultaneously encouraging unusual characters and play styles that you might not normally consider.</p>
 
 <h2>Competition Format</h2>
 
 <ul>
 <li>Each challenge consists of playing a randomly chosen Crawl combo.</li>
-<li>You get <em>one</em> attempt to play each combo.</li>
+<li>You get <em>one</em> attempt to play each combo.*</li>
 <li>The goal is to advance as far as possible (and win!) in each game, scoring
 points by reaching various in-game milestones.</li>
 <li>Only games played and milestones scored between 00:00 UTC on the start and end dates count.</li>
 <li>Details on rules and scoring are available on the <a
-href="rules.html">rules page</a>.</li>
+href="../about_ccsdt.html">details/about page</a>.</li>
 </ul>
+
+<p>* There is 1 caveat detailed on the details/about page at item 4.</p>
 
 <h2>Schedule</h2>
 
@@ -240,7 +245,7 @@ href="rules.html">rules page</a>.</li>
 
 <p>Original CSDC rules and organization by <a href="http://crawl.akrasiac.org/scoring/players/walkerboh.html">WalkerBoh</a> and 
 <a href="http://crawl.akrasiac.org/scoring/players/ebering.html">ebering</a>.
-Thank you to scrubbdaddy for python assistance. I am your host, RoGGa."""
+Thank you to scrubbdaddy for python assistance. I am your host, RoGGa.</p>"""
 
     wklist = '<ul id="schedule">'
     for wk in csdc.weeks:
@@ -250,17 +255,17 @@ Thank you to scrubbdaddy for python assistance. I am your host, RoGGa."""
     wklist += "</ul>"
 
     signup = ""
-    if datetime.datetime.now(datetime.timezone.utc) <= csdc.weeks[0].end:
-        signup ="""
+#    if datetime.datetime.now(datetime.timezone.utc) <= csdc.weeks[0].end:
+    signup ="""
 <h2>Sign Up</h2>
 
-<p>In order to sign up, set the first line of your 0.33 rcfile to</p> <pre
-id="rc"># csdc</pre><p>on <a
-href="https://crawl.develz.org/play.htm">any of the official online servers</a>
-before the end of the first week. Your name will appear in the standings once
-you've done this correctly and started at least one 0.33 game (though it may take about 20 minutes before it does).</p>"""
-    else:
-        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed. See you in 0.33.</p>"
+<p>In order to sign up, set the first line of your 0.33 RC file to</p> 
+<pre id="rc"># ccsdt</pre>
+<p>on <a href="https://crawl.develz.org/play.htm">any of the official online servers</a>
+or CCO ( https://cco.crawlcosplay.org/ ) at any point during tournament. Your name will appear in the standings once
+you've done this correctly and started at least one 0.33 game (though it may take about 15 minutes before it does).</p>"""
+#    else:
+#        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed.</p>"
 
     return page( static = True, title="Crawl Cosplay Sudden Death Tournament", content = pagestr.format(wklist,signup))
 
@@ -268,7 +273,8 @@ def rulespage():
     pagestr ="""
     <ol>
 <li>Each challenge consists of playing a randomly chosen Crawl race/class combo
-(e.g. MiBe). The combo for each week of the competition will be announced at
+(e.g. MiBe) based on a Crawl Unique. 
+The combo for each week of the competition will be announced at
 00:00 UTC on the Friday starting that week. All players have one week to
 finish a game using that combo. Only milestones recorded during the week (from
 00:00 UTC on the start date until 00:00 UTC on the end date) will count for
@@ -337,4 +343,4 @@ def page(**kwargs):
             logoblock(kwargs.get("subhead","")),
             kwargs["content"],
             mainmenu() + kwargs.get("menu", wkmenu(None)) + (updated() if not kwargs["static"] else
-                ""))
+                """</div>"""))
