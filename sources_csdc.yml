@@ -1,59 +1,59 @@
 sources:
   - name: cao
     base: https://crawl.akrasiac.org
-    milestones: 'milestones33'
-    logfile: 'logfile33'
-    rcfiles: 'rcfiles/crawl-0.33'
+    milestones: 'milestones34'
+    logfile: 'logfile34'
+    rcfiles: 'rcfiles/crawl-0.34'
 
   - name: cue
     aliases:
       - cln
       - clan
     base: http://underhound.eu:81/crawl/
-    logfile: 'meta/0.33/logfile'
-    milestones: 'meta/0.33/milestones'
-    rcfiles: 'rcfiles/crawl-0.33'
+    logfile: 'meta/0.34/logfile'
+    milestones: 'meta/0.34/milestones'
+    rcfiles: 'rcfiles/crawl-0.34'
 
   - name: cbro
     aliases:
       - cbro2
     base: http://cbro.berotato.org/
-    logfile: 'meta/0.33/logfile'
-    milestones: 'meta/0.33/milestones'
-    rcfiles: 'rcfiles/crawl-0.33'
+    logfile: 'meta/0.34/logfile'
+    milestones: 'meta/0.34/milestones'
+    rcfiles: 'rcfiles/crawl-0.34'
 
   - name: cxc
     base: http://crawl.xtahua.com/crawl/
-    logfile: 'meta/0.33/logfile'
-    milestones: 'meta/0.33/milestones'
-    rcfiles: 'rcfiles/crawl-0.33'
+    logfile: 'meta/0.34/logfile'
+    milestones: 'meta/0.34/milestones'
+    rcfiles: 'rcfiles/crawl-0.34'
 
   - name: cdi
     base: https://crawl.dcss.io/crawl/
-    logfile: 'meta/crawl-0.33/logfile'
-    milestones: 'meta/crawl-0.33/milestones'
-    rcfiles: 'rcfiles/crawl-0.33'
+    logfile: 'meta/crawl-0.34/logfile'
+    milestones: 'meta/crawl-0.34/milestones'
+    rcfiles: 'rcfiles/crawl-0.34'
 
   - name: cnc
     base: https://archive.nemelex.cards/
-    logfile: 'meta/crawl-0.33/logfile'
-    milestones: 'meta/crawl-0.33/milestones'
-    rcfiles: 'rcfiles/crawl-0.33'
+    logfile: 'meta/crawl-0.34/logfile'
+    milestones: 'meta/crawl-0.34/milestones'
+    rcfiles: 'rcfiles/crawl-0.34'
 
   - name: cpo
     base: https://crawl.project357.org/
-    logfile: 'dcss-logfiles-0.33'
-    milestones: 'dcss-milestones-0.33'
-    rcfiles: 'rc-files/0.33'
+    logfile: 'dcss-logfiles-0.34'
+    milestones: 'dcss-milestones-0.34'
+    rcfiles: 'rc-files/0.34'
 
   - name: lld
     base: http://lazy-life.ddo.jp/
-    logfile: 'mirror/meta/0.33/logfile'
-    milestones: 'mirror/meta/0.33/milestones'
-    rcfiles: 'mirror/meta/0.33/rcfiles'
+    logfile: 'mirror/meta/0.34/logfile'
+    milestones: 'mirror/meta/0.34/milestones'
+    rcfiles: 'mirror/meta/0.34/rcfiles'
 
   - name: cco
     base: https://data.crawlcosplay.org/
-    logfile: 'meta/crawl-0.33/logfile'
-    milestones: 'meta/crawl-0.33/milestones'
-    rcfiles: 'rcfiles/crawl-0.33'
+    logfile: 'meta/crawl-0.34/logfile'
+    milestones: 'meta/crawl-0.34/milestones'
+    rcfiles: 'rcfiles/crawl-0.34'

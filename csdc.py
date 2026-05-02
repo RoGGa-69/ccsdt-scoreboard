@@ -557,51 +557,51 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "1",
-                species = "Na",
-                background = "Al",
-                gods = ("Qazlal", "Elyvilon", "Gozag"),
-                start = datetime.datetime(2025,9,5, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2025,9,12, tzinfo=datetime.timezone.utc),
+                species = "On",
+                background = "AE",
+                gods = ("Ashenzari", "Ashenzari", "Ashenzari"),
+                start = datetime.datetime(2026,4,17, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,4,24, tzinfo=datetime.timezone.utc),
                 bonus1 = lairendxl12,
                 bonus2 = runelowskill))
 
         weeks.append(CsdcWeek(
                 number = "2",
-                species = "Gn",
-                background = "Su",
-                gods = ("Lugonu", "Dithmenos", "The Shining One"),
-                start = datetime.datetime(2025,9,12, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2025,9,19, tzinfo=datetime.timezone.utc),
+                species = "Te",
+                background = "FE",
+                gods = ("Sif Muna", "Sif Muna", "Sif Muna"),
+                start = datetime.datetime(2026,4,24, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,1, tzinfo=datetime.timezone.utc),
                 bonus1 = depthsbeforerune,
                 bonus2 = hellpanrunefirst))
 
         weeks.append(CsdcWeek(
                 number = "3",
-                species = "Op",
-                background = "Al",
-                gods = ("Vehumet", "Okawaru", "Makhleb"),
-                start = datetime.datetime(2025,9,19, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2025,9,26, tzinfo=datetime.timezone.utc),
+                species = "Gr",
+                background = "EE",
+                gods = ("Makhleb", "Makhleb", "Makhleb"),
+                start = datetime.datetime(2026,5,1, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,8, tzinfo=datetime.timezone.utc),
                 bonus1 = slimefirst,
                 bonus2 = runebranchlowskill))
-	    
-        weeks.append(CsdcWeek(
-                number = "4",
-                species = "Mi",
-                background = "Fi",
-                gods = ("Makhleb", "Kikubaaqudgha", "Yredelemnul"),
-                start = datetime.datetime(2025,9,26, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2025,10,3, tzinfo=datetime.timezone.utc),
-                bonus1 = temple4k,
-                bonus2 = vaultendxl18))
 
         weeks.append(CsdcWeek(
+                number = "4",
+                species = "Po",
+                background = "En",
+                gods = ("Dithmenos", "Dithmenos", "Dithmenos"),
+                start = datetime.datetime(2026,5,8, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
+                bonus1 = temple4k,
+                bonus2 = vaultendxl18))
+        
+        weeks.append(CsdcWeek(
                 number = "5",
-                species = "Te",
-                background = "FE",
-                gods = ("Jiyva", "Vehumet", "Makhleb"),
-                start = datetime.datetime(2025,10,3, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2025,10,10, tzinfo=datetime.timezone.utc),
+                species = "Na",
+                background = "Gl",
+                gods = ("Hepliaklqana", "Hepliaklqana", "Hepliaklqana"),
+                start = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,22, tzinfo=datetime.timezone.utc),
                 bonus1 = runebranchlowskill,
                 bonus2 = rune15k))                
 

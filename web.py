@@ -20,13 +20,14 @@ def head(static, title):
     {1}""".format(title, refresh)
 
 
-version = '0.33'
+version = '0.34test'
 
 def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
     return """<div id="title">
-    <h2 id="sdc"><center>CCSDT#2 for DCSS v{}</center></h2>
+    <h2 id="sdc"><center>CCSDT#3 for DCSS v{}</center></h2>
     {}</div>""".format(version, sh)
+
 
 
 def mainmenu():
@@ -66,7 +67,7 @@ def wkinfo(wk):
     sp += ('<div id="gods"><span class="label">Gods: </span>')
     sp += ", ".join([ g.name for g in wk.gods])
     sp += '</div>'
-
+    sp += '<br><pre>LEGEND<br>------<br>Green = Won<br>Red   = Died<br>Grey  = ongoing or did not finish</right></pre>'
     return sp
 
 
@@ -161,7 +162,8 @@ def _ifnone(x, d):
 
 def standingstable():
     with get_session() as s:
-        sp = '<div class="card"><table>'
+        sp = '<pre>LEGEND<br>------<br>Green = Won<br>Red   = Died<br>White = ongoing or did not finish</right></pre>'
+        sp += '<div class="card"><table>'
         sp += '<tr class="head"><th></th><th>Player</th>'
         sp += ''.join(['<th>' + description(wk, True) +'</th>' for wk in csdc.weeks
             ])
@@ -259,11 +261,11 @@ Thank you to scrubbdaddy for python assistance. I am your host, RoGGa.</p>"""
     signup ="""
 <h2>Sign Up</h2>
 
-<p>In order to sign up, set the first line of your 0.33 RC file to</p> 
+<p>In order to sign up, set the first line of your 0.34 RC file to</p> 
 <pre id="rc"># ccsdt</pre>
 <p>on <a href="https://crawl.develz.org/play.htm">any of the official online servers</a>
 or CCO ( https://cco.crawlcosplay.org/ ) at any point during tournament. Your name will appear in the standings once
-you've done this correctly and started at least one 0.33 game (though it may take about 15 minutes before it does).</p>"""
+you've done this correctly and started at least one 0.34 game (though it may take about 15 minutes before it does).</p>"""
 #    else:
 #        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed.</p>"
 
@@ -332,7 +334,7 @@ week)</th><th></th></tr>
 require you to win to earn the point.</p>
 
 """
-    return page(static=True, subhead="Rules", content = pagestr.format("0.33"))
+    return page(static=True, subhead="Rules", content = pagestr.format("0.34"))
 
 
 def page(**kwargs):

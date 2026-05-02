@@ -18,7 +18,6 @@ SPECIES = {
     Species("Ds", "Demonspawn"),
     Species("Fe", "Felid"),
     Species("Fo", "Formicid"),
-    Species("Gh", "Ghoul"),
     Species("Gn", "Gnoll"),
     Species("Gr", "Gargoyle"),
     Species("Hu", "Human"),
@@ -30,11 +29,12 @@ SPECIES = {
     Species("Na", "Naga"),
     Species("On", "Oni"),
     Species("Op", "Octopode"),
+    Species("Po", "Poltergeist"),
+    Species("Re", "Revenant"),
     Species("Sp", "Spriggan"),
     Species("Te", "Tengu"),
     Species("Tr", "Troll"),
     Species("VS", "Vine Stalker"),
-    Species("Vp", "Vampire"),
 }
 
 BACKGROUNDS = {
@@ -316,6 +316,7 @@ SKILLS = (
     "Charms",
     "Summonings",
     "Necromancy",
+    "Forgecraft",
     "Translocations",
     "Shapeshifting",
     "Fire Magic",
