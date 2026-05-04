@@ -20,12 +20,12 @@ def head(static, title):
     {1}""".format(title, refresh)
 
 
-version = '0.34test'
+version = '0.34'
 
 def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
     return """<div id="title">
-    <h2 id="sdc"><center>CCSDT#3 for DCSS v{}</center></h2>
+    <h2 id="sdc"><center>Testing prior to CCSDT#3 for DCSS v{}</center></h2>
     {}</div>""".format(version, sh)
 
 
@@ -67,7 +67,7 @@ def wkinfo(wk):
     sp += ('<div id="gods"><span class="label">Gods: </span>')
     sp += ", ".join([ g.name for g in wk.gods])
     sp += '</div>'
-    sp += '<br><pre>LEGEND<br>------<br>Green = Won<br>Red   = Died<br>Grey  = ongoing or did not finish</right></pre>'
+    sp += '<br><pre>LEGEND<br>------<br>Green = Won<br>Red   = Died<br>Grey  = ongoing or did not finish before end of the week</right></pre>'
     return sp
 
 

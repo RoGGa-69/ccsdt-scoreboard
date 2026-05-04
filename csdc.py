@@ -616,11 +616,11 @@ def onetimescorecard():
     return Query([sc.c.player_id.label("player_id"),
         func.min(sc.c.account_id).label("account_id"),
         type_coerce((func.sum(sc.c.fifteenrune) > 0) * 3, Integer).label("fifteenrune"),
-        type_coerce((func.sum(sc.c.lowxlzot) > 0) * 3, Integer).label("lowxlzot"),
-        type_coerce((func.sum(sc.c.zig) > 0) * 3, Integer).label("zig"),
-        type_coerce((func.sum(sc.c.sub40k) > 0) * 6, Integer).label("sub40k"),
+        type_coerce((func.sum(sc.c.lowxlzot) > 0) * 5, Integer).label("lowxlzot"),
+        type_coerce((func.sum(sc.c.zig) > 0) * 4, Integer).label("zig"),
+        type_coerce((func.sum(sc.c.sub40k) > 0) * 2, Integer).label("sub40k"),
         type_coerce((func.sum(sc.c.nolairwin) > 0) * 6, Integer).label("nolairwin"),
-        type_coerce((func.sum(sc.c.asceticrune) > 0) * 6, Integer).label("asceticrune"),
+        type_coerce((func.sum(sc.c.asceticrune) > 0) * 7, Integer).label("asceticrune"),
         func.max(sc.c.score).label("hiscore")]).group_by(sc.c.player_id)
 
 def overview():
