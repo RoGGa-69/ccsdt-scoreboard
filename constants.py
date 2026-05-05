@@ -276,6 +276,7 @@ VERBS = (
     "zig.exit",
     "shaft",
     "rune",
+    "gem",
     "orb",
     "uniq",
     "uniq.ban",

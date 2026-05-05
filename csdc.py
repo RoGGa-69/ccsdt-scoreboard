@@ -174,7 +174,6 @@ class CsdcWeek:
                 Milestone.verb_id == abandon_id
             ).exists())
 
-
     def _brenter(self):
         with get_session() as s:
             verb_id = get_verb(s, "br.enter").id
@@ -215,11 +214,10 @@ class CsdcWeek:
             Milestone.runes >= n
         ).exists()
 
-#    def _onegem(self):
-#        with get_session() as s:
-#            to be defined
-
-#        return - To be defined
+    def _onegem(self, n):
+        return self._valid_milestone().filter(
+            Milestone.gems > 0
+        ).exists()
 
     def _orb(self):
         with get_session() as s:

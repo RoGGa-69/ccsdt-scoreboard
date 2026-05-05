@@ -97,10 +97,10 @@ def scoretable(wk, div):
     <th>Player</th>
     <th>Kill a Unique</th>
 <!--    <th>Reach XL5</th> -->
-    <th>Worship God</th>
+    <th>Worship a Valid God</th>
     <th>Branch Enter</th>
     <th>Branch End</th>
-    <th>Champion God</th>
+    <th>Champion a Valid God</th>
     <th>Collect a Rune</th>
     <th>Collect 2 Runes</th>
     <th>Collect 3 Runes</th>
@@ -128,11 +128,11 @@ def scoretable(wk, div):
             sp += (namestr.format(
                 url = morgue_url(g.Game), name = g.Game.player.name,
                 flag = serverflag(g.Game.account.server.name)))
-            sp += ( (('<td class="pt">{}</td>' * 10) 
+            sp += ( (('<td class="pt">{}</td>' * 12) 
                 + '<td class="total">{}</td>').format(
                 g.uniq,
 #               g.xl5,
-               g.worship,
+                g.worship,
                 g.brenter,
                 g.brend,
                 g.god,
@@ -332,8 +332,8 @@ week)</th><th></th></tr>
 <tr><td class="name">10. Collect 1 gem</td><td class="pt">1</td></tr>
 <tr><td class="name">11. Collect the Orb of Zot</td><td class="pt">1</td></tr>
 <tr><td class="name">12. Win</td><td class="pt">1</td></tr>
-<tr><td class="name">13. Complete Bonus 1</td><td class="pt">1</td></tr>
-<tr><td class="name">14. Complete Bonus 2</td><td class="pt">2</td></tr>
+<tr><td class="name">13. Complete Bonus #1</td><td class="pt">1</td></tr>
+<tr><td class="name">14. Complete Bonus #2</td><td class="pt">2</td></tr>
 <tr class="head" id="onetime"><th>One-time points (earned once during the tournament)</th><th></th></tr>
 <!-- <tr><td class="name">Win a game in under 40,000 turns:</td><td class="pt">2</td></tr> -->
 <tr><td class="name">Win a game with 15 runes</td><td class="pt">3</td></tr>
