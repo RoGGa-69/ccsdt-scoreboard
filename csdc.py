@@ -214,7 +214,7 @@ class CsdcWeek:
             Milestone.runes >= n
         ).exists()
 
-    def _onegem(self, n):
+    def _onegem(self):
         return self._valid_milestone().filter(
             Milestone.fgem >= 1
         ).exists()
