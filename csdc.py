@@ -216,7 +216,7 @@ class CsdcWeek:
 
     def _onegem(self, n):
         return self._valid_milestone().filter(
-            Milestone.fgem >= n
+            Milestone.gem >= n
         ).exists()
 
     def _orb(self):
