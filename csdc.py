@@ -86,7 +86,7 @@ def _worship_god(milestones, god):
                 "Gozag" : worship
             }
 
-    return worship_conditions.get(god.name)
+    return worship_conditions.get(god.name, worship)
     
 class CsdcWeek:
     """A csdc week
@@ -216,7 +216,7 @@ class CsdcWeek:
 
     def _onegem(self, n):
         return self._valid_milestone().filter(
-            Milestone.gems > 0
+            Milestone.fgem >= 1
         ).exists()
 
     def _orb(self):
@@ -315,7 +315,7 @@ class CsdcWeek:
             type_coerce(self._rune(1), Integer).label("rune"),
             type_coerce(self._rune(2), Integer).label("tworune"),
             type_coerce(self._rune(3), Integer).label("threerune"),
-#            type_coerce(self._gem(1), Integer).label("gem"),
+            type_coerce(self._onegem(1), Integer).label("gem"),
             type_coerce(self._orb(), Integer).label("orb"),
             self._win().label("win"),
             self._bonus(self.tier1).label("bonusone"),
@@ -337,7 +337,7 @@ class CsdcWeek:
                     sc.c.rune,
                     sc.c.tworune,
                     sc.c.threerune,
-#                    sc.c.onegem,
+                    sc.c.onegem,
                     sc.c.orb,
                     sc.c.win,
                     sc.c.bonusone.label("bonusone"),

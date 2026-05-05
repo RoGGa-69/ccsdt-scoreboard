@@ -104,7 +104,7 @@ def scoretable(wk, div):
     <th>Collect a Rune</th>
     <th>Collect 2 Runes</th>
     <th>Collect 3 Runes</th>
-<!--    <th>Collect a Gem</th> -->
+    <th>Collect a Gem</th>
     <th>Obtain the Orb</th>
     <th>Win</th>
     <th>Bonus #1</th>
@@ -139,7 +139,7 @@ def scoretable(wk, div):
                 g.rune,
                 g.tworune,
                 g.threerune,
-#               g.onegem,
+                g.onegem,
                 g.orb,
                 g.win,
                 g.bonusone,
