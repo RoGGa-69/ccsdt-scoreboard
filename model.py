@@ -400,6 +400,7 @@ def add_event(s: sqlalchemy.orm.session.Session, data: dict) -> None:
         "turn"     : data["turn"],
         "dur"      : data["dur"],
         "runes"    : data["runes"],
+        "fgem"     : data["fgem"],
         "time"     : modelutils.crawl_date_to_datetime(data["time"]),
         "potionsused": data["potionsused"],
         "scrollsused": data["scrollsused"],
