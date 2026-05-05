@@ -70,7 +70,24 @@ def _champion_god(milestones, god):
 
     return champion_conditions.get(god.name, maxpiety)
 
+def _worship_god(milestones, god):
+    with get_session() as s:
+        worship_id = get_verb(s, "god.worship").id
+    worship = milestones.filter(
+                            Milestone.god_id == god.id,
+                            Milestone.verb_id == worship_id
+                        ).exists()
+    neverworship = ~milestones.filter(
+                            Milestone.verb_id == worship_id
+                        ).exists()
+    worship_conditions = {
+                "GOD_NO_GOD" : neverworship,
+                "Xom" : worship,
+                "Gozag" : worship
+            }
 
+    return worship_conditions.get(god.name)
+    
 class CsdcWeek:
     """A csdc week
 
@@ -139,6 +156,25 @@ class CsdcWeek:
 
         return self._valid_milestone().filter(Milestone.verb_id.in_(verb_ids)).exists()
 
+#    def _xl5(self):
+#        with get_session() as s:
+#            to be defined
+
+#        return - To be defined
+
+    def _worship(self):
+        with get_session() as s:
+            worship_id = get_verb(s, "god.worship").id
+            abandon_id = get_verb(s, "god.renounce").id
+        god_ids = [g.id for g in self.gods]
+        return and_(
+            or_(*[_worship_god(self._valid_milestone(), g) for g in
+                self.gods]),
+            ~self._valid_milestone().filter(
+                Milestone.verb_id == abandon_id
+            ).exists())
+
+
     def _brenter(self):
         with get_session() as s:
             verb_id = get_verb(s, "br.enter").id
@@ -178,6 +214,12 @@ class CsdcWeek:
         return self._valid_milestone().filter(
             Milestone.runes >= n
         ).exists()
+
+#    def _onegem(self):
+#        with get_session() as s:
+#            to be defined
+
+#        return - To be defined
 
     def _orb(self):
         with get_session() as s:
@@ -267,11 +309,15 @@ class CsdcWeek:
         sc = Query([Game.gid,
             Game.player_id,
             type_coerce(self._uniq(), Integer).label("uniq"),
+#            type_coerce(self._xl5(), Integer).label("xl5"),
+            type_coerce(self._worship(), Integer).label("worship"),
             type_coerce(self._brenter(), Integer).label("brenter"),
             type_coerce(self._brend(), Integer).label("brend"),
             type_coerce(self._god(), Integer).label("god"),
             type_coerce(self._rune(1), Integer).label("rune"),
+            type_coerce(self._rune(2), Integer).label("tworune"),
             type_coerce(self._rune(3), Integer).label("threerune"),
+#            type_coerce(self._gem(1), Integer).label("gem"),
             type_coerce(self._orb(), Integer).label("orb"),
             self._win().label("win"),
             self._bonus(self.tier1).label("bonusone"),
@@ -285,11 +331,15 @@ class CsdcWeek:
                     Game.gid,
                     sc.c.player_id.label("player_id"),
                     sc.c.uniq,
+#                    sc.c.xl5,
+                    sc.c.worship,
                     sc.c.brenter,
                     sc.c.brend,
                     sc.c.god,
                     sc.c.rune,
+                    sc.c.tworune,
                     sc.c.threerune,
+#                    sc.c.onegem,
                     sc.c.orb,
                     sc.c.win,
                     sc.c.bonusone.label("bonusone"),
@@ -297,11 +347,15 @@ class CsdcWeek:
                     (sc.c.bonusone + sc.c.bonustwo).label("bonus"),
                     func.max(
                         sc.c.uniq
+#                       + sc.c.xl5
+                        + sc.c.worship
                         + sc.c.brenter
                         + sc.c.brend
                         + sc.c.god
                         + sc.c.rune
+                        + sc.c.tworune
                         + sc.c.threerune
+#                       + sc.c.onegem
                         + sc.c.win
                         + sc.c.orb
                         + sc.c.bonusone
@@ -313,8 +367,8 @@ class CsdcWeek:
             Game.account_id.label("account_id"), 
             Game.player_id.label("player_id"),
             Game.score.label("score"),
+#            type_coerce(self._sub40k(), Integer).label("sub40k"),
             type_coerce(self._fifteenrune(), Integer).label("fifteenrune"),
-            type_coerce(self._sub40k(), Integer).label("sub40k"),
             type_coerce(self._zig(), Integer).label("zig"),
             type_coerce(self._lowxlzot(), Integer).label("lowxlzot"),
             type_coerce(self._nolairwin(), Integer).label("nolairwin"),
@@ -352,7 +406,7 @@ def initialize_weeks():
                     Milestone.gid == m2.gid,
                     m2.verb_id == get_verb(s, "rune").id
                 ))],
-            "1")
+            "2")
 
         slimefirst = CsdcBonus("EnterSlime2nd",
             "Enter Slime as your second multi-level branch (don't get banished).",
@@ -376,7 +430,7 @@ def initialize_weeks():
                   m2.verb_id == get_verb(s, "br.enter").id,
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.MULTI_LEVEL_BRANCHES])
               ).as_scalar() <= 2],
-            "1")
+            "2")
 
         temple4k = CsdcBonus("TempleIn4kTurn",
             "Enter the Temple in less than 4,000 turns.",
@@ -389,7 +443,7 @@ def initialize_weeks():
             "Collect a rune in less than 15,000 turns.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.turn < 15000 ],
-            "1")
+            "2")
 
         lairendxl12 = CsdcBonus("LairEndXL12",
             "Reach the end of Lair at XL &leq; 12.",
@@ -403,7 +457,7 @@ def initialize_weeks():
             [ Milestone.verb_id == get_verb(s, "br.end").id,
               Milestone.place_id == get_place_from_string(s, "Vaults:5").id,
               Milestone.xl <= 18 ],
-            "1")
+            "2")
 
         elf3beforerune = CsdcBonus("Elf3BeforeRunes",
             "Reach the end of Elf before entering a rune branch (excluding getting banished to the Abyss).",
@@ -440,7 +494,7 @@ def initialize_weeks():
                   m2.verb_id == get_verb(s, "br.enter").id,
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in set(constants.RUNE_BRANCHES) - set(("Abyss",))]),
               ).exists() ],
-            "1")
+            "2")
 
         hellpanrunefirst = CsdcBonus("HellPanRuneFirst",
             "Get a rune from Hell or Pan before entering any other rune branch (excluding the Abyss).",
@@ -453,7 +507,7 @@ def initialize_weeks():
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id 
                       for b in set(constants.RUNE_BRANCHES) - set(("Abyss", "Coc", "Geh", "Dis", "Tar", "Pan"))]),
               ).exists() ],
-            "1")
+            "2")
 
         hellrunefirst = CsdcBonus("HellRuneFirst",
             "Get a rune from Hell before entering any other rune branch (excluding the Abyss).",
@@ -466,13 +520,13 @@ def initialize_weeks():
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id 
                       for b in set(constants.RUNE_BRANCHES) - set(("Abyss", "Coc", "Geh", "Dis", "Tar"))]),
               ).exists() ],
-            "1")
+            "2")
 
         goldenrune = CsdcBonus("GoldenRune",
             "Collect the golden rune.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.place_id == get_place_from_string(s, "Tomb:3").id ],
-            "1")
+            "2")
 
         vowofcourage = CsdcBonus("VowOfCourage",
             "Collect at least 5 runes before entering the Depths.",
@@ -483,7 +537,7 @@ def initialize_weeks():
                   m2.turn < Milestone.turn,
                   m2.verb_id == get_verb(s, "br.enter").id,
                   m2.place_id == get_place_from_string(s, "Depths:1").id).exists() ],
-            "1")
+            "2")
 
         runenosbranch = CsdcBonus("RuneNoSBranch",
             "Collect a rune before entering Shoals, Snake, Spider, or Swamp.",
@@ -517,7 +571,7 @@ def initialize_weeks():
              m2.gid == Milestone.gid,
              m2.turn < Milestone.turn,
              m2.verb_id == get_verb(s, "death").id).exists()],
-            "1")
+            "2")
 
         tworunedontdie = CsdcBonus("2RuneDont2Die",
             "Collect two runes without dying twice (felids).",
@@ -547,10 +601,10 @@ def initialize_weeks():
                       Milestone.msg.like("%Antaeus%"),
                       Milestone.msg.like("%Dispater%"),
                       Milestone.msg.like("%Ereshkigal%")) ],
-                "1")
+                "2")
 
         runebeforexl17 = CsdcBonus("RuneBeforeXL17",
-            "Collect a rune before reaching XL17",
+            "Collect a rune before reaching XL17.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.xl < 17 ],
             "1")
@@ -615,10 +669,10 @@ def onetimescorecard():
 
     return Query([sc.c.player_id.label("player_id"),
         func.min(sc.c.account_id).label("account_id"),
+#        type_coerce((func.sum(sc.c.sub40k) > 0) * 2, Integer).label("sub40k"),
         type_coerce((func.sum(sc.c.fifteenrune) > 0) * 3, Integer).label("fifteenrune"),
-        type_coerce((func.sum(sc.c.lowxlzot) > 0) * 5, Integer).label("lowxlzot"),
         type_coerce((func.sum(sc.c.zig) > 0) * 4, Integer).label("zig"),
-        type_coerce((func.sum(sc.c.sub40k) > 0) * 2, Integer).label("sub40k"),
+        type_coerce((func.sum(sc.c.lowxlzot) > 0) * 5, Integer).label("lowxlzot"),
         type_coerce((func.sum(sc.c.nolairwin) > 0) * 6, Integer).label("nolairwin"),
         type_coerce((func.sum(sc.c.asceticrune) > 0) * 7, Integer).label("asceticrune"),
         func.max(sc.c.score).label("hiscore")]).group_by(sc.c.player_id)
@@ -630,7 +684,7 @@ def overview():
     totalcols = []
     wktotal = []
     wkbonuses = []
-    for col in ("fifteenrune", "sub40k", "zig", "lowxlzot", "nolairwin", "asceticrune"):
+    for col in ("fifteenrune", "zig", "lowxlzot", "nolairwin", "asceticrune"):
         totalcols.append(func.ifnull(getattr(sc.c, col), 0))
         q = q.add_column(getattr(sc.c, col).label(col))
     for wk in weeks:

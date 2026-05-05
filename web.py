@@ -95,17 +95,21 @@ def scoretable(wk, div):
     sp = ""
     sp += ("""<div class="card"><table><tr class="head">
     <th>Player</th>
-    <th>Unique Kill</th>
+    <th>Kill a Unique</th>
+<!--    <th>Reach XL5</th> -->
+    <th>Worship God</th>
     <th>Branch Enter</th>
     <th>Branch End</th>
     <th>Champion God</th>
     <th>Collect a Rune</th>
+    <th>Collect 2 Runes</th>
     <th>Collect 3 Runes</th>
+<!--    <th>Collect a Gem</th> -->
     <th>Obtain the Orb</th>
     <th>Win</th>
-    <th>Bonus 1</th>
-    <th>Bonus 2</th>
-    <th>Total</th>
+    <th>Bonus #1</th>
+    <th>Bonus #2</th>
+    <th>Total (max=15)</th>
     </tr>""")
 
     with get_session() as s:
@@ -127,11 +131,15 @@ def scoretable(wk, div):
             sp += ( (('<td class="pt">{}</td>' * 10) 
                 + '<td class="total">{}</td>').format(
                 g.uniq,
+#               g.xl5,
+               g.worship,
                 g.brenter,
                 g.brend,
                 g.god,
                 g.rune,
+                g.tworune,
                 g.threerune,
+#               g.onegem,
                 g.orb,
                 g.win,
                 g.bonusone,
@@ -167,8 +175,9 @@ def standingstable():
         sp += '<tr class="head"><th></th><th>Player</th>'
         sp += ''.join(['<th>' + description(wk, True) +'</th>' for wk in csdc.weeks
             ])
+#       sp +='<th>Win &lt;40k Turns</th>'
         sp +='<th>15 Rune Win</th><th>Full Zig</th><th>Zot <= XL20</th>'
-        sp +='<th>Win &lt;40k Turns</th><th>No Lair Win</th><th>Ascetic Rune</th>'
+        sp +='<th>No Lair Win</th><th>Ascetic Rune</th>'
         sp += '<th>Total Score</th><th>Weekly Bonuses</th><th>Game High Score</th></tr>'
         place = 1
         for p in csdc.overview().with_session(s).all():
@@ -181,7 +190,7 @@ def standingstable():
             for wk in csdc.weeks:
                 sp += '<td class="pt{}">{}</td>'.format(game_status(getattr(p,"wk" + wk.number + "gid")),
                                                         _ifnone(getattr(p, "wk" + wk.number), ""))
-            for c in ("fifteenrune", "zig", "lowxlzot", "sub40k", "nolairwin", "asceticrune"):
+            for c in ("fifteenrune", "zig", "lowxlzot", "nolairwin", "asceticrune"):
                 sp += ('<td class="pt">{}</td>').format(_ifnone(getattr(p, c), ""))
             sp += '<td class="total">{}</td>'.format(p.grandtotal)
             sp += '<td class="pt">{}</td><td class="hs">{}</td>'.format(p.tiebreak, _ifnone(p.hiscore, ""))
@@ -311,27 +320,31 @@ games achieve them.</p>
 
 <table class="info"><tr class="head"><th>Weekly points (can be earned each
 week)</th><th></th></tr>
-<tr><td class="name">Kill a unique:</td><td class="pt">1</td></tr>
-<tr><td class="name">Enter a multi-level branch of the dungeon:</td><td class="pt">1</td></tr>
-<tr><td class="name">Reach the end of a multi-level branch (including D):</td><td class="pt">1</td></tr>
-<tr><td class="name">Champion a listed god:</td><td class="pt">1</td></tr>
-<tr><td class="name">Collect a rune:</td><td class="pt">1</td></tr>
-<tr><td class="name">Collect 3 or more runes:</td><td class="pt">1</td></tr>
-<tr><td class="name">Collect the Orb of Zot:</td><td class="pt">1</td></tr>
-<tr><td class="name">Win:</td><td class="pt">1</td></tr>
-<tr><td class="name">Complete Bonus 1:</td><td class="pt">1</td></tr>
-<tr><td class="name">Complete Bonus 2:</td><td class="pt">1</td></tr>
+<tr><td class="name"> 1. Kill a unique</td><td class="pt">1</td></tr>
+<tr><td class="name"> 2. Reach XL 5</td><td class="pt">1</td></tr>
+<tr><td class="name"> 3. Worship one of three gods</td><td class="pt">1</td></tr>
+<tr><td class="name"> 4. Enter a multi-level branch of the dungeon</td><td class="pt">1</td></tr>
+<tr><td class="name"> 5. Reach the end of a multi-level branch (including D)</td><td class="pt">1</td></tr>
+<tr><td class="name"> 6. Champion a listed god</td><td class="pt">1</td></tr>
+<tr><td class="name"> 7. Collect 1 rune</td><td class="pt">1</td></tr>
+<tr><td class="name"> 8. Collect 2 runes</td><td class="pt">1</td></tr>
+<tr><td class="name"> 9. Collect 3 runes</td><td class="pt">1</td></tr>
+<tr><td class="name">10. Collect 1 gem</td><td class="pt">1</td></tr>
+<tr><td class="name">11. Collect the Orb of Zot</td><td class="pt">1</td></tr>
+<tr><td class="name">12. Win</td><td class="pt">1</td></tr>
+<tr><td class="name">13. Complete Bonus 1</td><td class="pt">1</td></tr>
+<tr><td class="name">14. Complete Bonus 2</td><td class="pt">2</td></tr>
 <tr class="head" id="onetime"><th>One-time points (earned once during the tournament)</th><th></th></tr>
-<tr><td class="name">Win a game with 15 runes:</td><td class="pt">3</td></tr>
-<tr><td class="name">Clear a Ziggurat:</td><td class="pt">3</td></tr>
-<tr><td class="name">Enter Zot at XL 20 or lower:</td><td class="pt">3</td></tr>
-<tr><td class="name">Win a game in under 40,000 turns:</td><td class="pt">6</td></tr>
-<tr><td class="name">Win a game without entering lair:</td><td class="pt">6</td></tr>
-<tr><td class="name">Get a rune without using potions or scrolls:</td><td class="pt">6</td></tr>
+<!-- <tr><td class="name">Win a game in under 40,000 turns:</td><td class="pt">2</td></tr> -->
+<tr><td class="name">Win a game with 15 runes</td><td class="pt">3</td></tr>
+<tr><td class="name">Clear a Ziggurat</td><td class="pt">4</td></tr>
+<tr><td class="name">Enter Zot at XL 20 or lower</td><td class="pt">5</td></tr>
+<tr><td class="name">Win a game without entering lair</td><td class="pt">6</td></tr>
+<tr><td class="name">Get a rune without using potions or scrolls (aesetic rune)</td><td class="pt">7</td></tr>
 </table>
 
-<p class="notes"> Unless specified, a bonus or one time point does not
-require you to win to earn the point.</p>
+<!-- <p class="notes"> Unless specified, a bonus or one time point does not
+require you to win to earn the point.</p> -->
 
 """
     return page(static=True, subhead="Rules", content = pagestr.format("0.34"))

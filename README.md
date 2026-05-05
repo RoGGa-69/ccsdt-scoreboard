@@ -14,7 +14,7 @@ In Ubuntu terminal type:
 
    pip install sqlalchemy=='1.3.24'
 
-I've made quite a few tweaks to the webpages to make it integrate with the Crawl Cosplay website: cosplay.kelbi.org
+I've made quite a few tweaks to the webpages to make it integrate with the Crawl Cosplay website: crawlcosplay.org
 
 If you are thinking of forking this repo, I would suggest you fork ebering's since it works out-of-the-box except for the 2 bonuses which are not setup. (see: middle of csdc.py
 
