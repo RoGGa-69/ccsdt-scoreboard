@@ -69,4 +69,3 @@ sources:
     logfile: 'meta/0.34/logfile'
     milestones: 'meta/0.34/milestones'
     rcfiles: 'rcfiles/crawl-0.34'
-

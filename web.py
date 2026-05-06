@@ -56,8 +56,8 @@ def wkinfo(wk):
     sp = ""
     sp += '<div id="times"><span class="label">Week of: </span>'
     sp += wk.start.strftime(DATEFMT) + ' (ends at start of ' + wk.end.strftime(DATEFMT) + ' 00:00 UTC)</div>'
-    sp += ('<div id="combo"><span class="label">Character: </span>' +
-            '{0} {1}</div>\n'.format(wk.species.name, wk.background.name))
+    sp += ('<div id="combo"><span class="label">Character: </span>' 
+            + '{0} ({1}{2})</div>\n'.format(wk.unique.name, wk.species.name, wk.background.name))
     sp += ('<div id="bonus"><span class="label">Bonus 1: </span>'
             + wk.tier1.description + '<br/>\n'
             + '<span class="label">Bonus 2: </span>'
