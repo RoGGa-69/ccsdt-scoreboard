@@ -33,6 +33,10 @@ def logline_to_dict(logline: str) -> dict:
         data["type"] = "death.final"
         data["milestone"] = data["tmsg"]
 
+    data["xl"] = data.get("xl", 0)
+
+    data["gems"] = data.get("fgem", 0)
+
     data["runes"] = data.get("urune", 0)
     # D:0 is D:$ in logfile so we came from D:1 in that case
     data["oplace"] = data.get("oplace",

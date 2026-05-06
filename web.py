@@ -28,11 +28,9 @@ def logoblock(subhead):
     <h2 id="sdc"><center>Testing prior to CCSDT#3 for DCSS v{}</center></h2>
     {}</div>""".format(version, sh)
 
-
-
 def mainmenu():
     return ('<span class="menu"><a href="index.html">Overview</a> - </span>' +
-        '<span class="menu"><a href="../about_ccsdt.html">Details</a> - </span>' + 
+        '<span class="menu"><a href="rules.html">Details</a> - </span>' + 
         '<span class="menu"><a href="standings.html">Standings</a></span>' +
         '<span class="menuspacer"></span>')
 
@@ -53,7 +51,6 @@ def wkmenu(wk):
             w.number))
     return sp
 
-
 def wkinfo(wk):
     sp = ""
     sp += '<div id="times"><span class="label">Week of '
@@ -69,7 +66,6 @@ def wkinfo(wk):
     sp += '</div>'
     sp += '<br><pre>LEGEND<br>------<br>Green = Won<br>Red   = Died<br>Grey  = ongoing or did not finish before end of the week</right></pre>'
     return sp
-
 
 def wkurl(wk):
     return '<a href="'+ wk.number + '.html">{}</a>'
@@ -95,16 +91,17 @@ def scoretable(wk, div):
     sp = ""
     sp += ("""<div class="card"><table><tr class="head">
     <th>Player</th>
+    <th>Reach XL5</th>
     <th>Kill a Unique</th>
-<!--    <th>Reach XL5</th> -->
     <th>Worship a Valid God</th>
+    <th>Reach XL10</th>
     <th>Branch Enter</th>
     <th>Branch End</th>
     <th>Champion a Valid God</th>
+    <th>Collect a Gem</th>
     <th>Collect a Rune</th>
     <th>Collect 2 Runes</th>
     <th>Collect 3 Runes</th>
-    <th>Collect a Gem</th>
     <th>Obtain the Orb</th>
     <th>Win</th>
     <th>Bonus #1</th>
@@ -116,7 +113,7 @@ def scoretable(wk, div):
         for g in wk.sortedscorecard().with_session(s).all():
             if g.Game == None:
                 sp += """<tr class="{}"><td class="name">{}</td>
-                <td colspan="10"></td><td class="total">0</td></tr>""".format(
+                <td colspan="15"></td><td class="total">0</td></tr>""".format(
                         "none", g.Player.name)
                 continue
 
@@ -128,18 +125,19 @@ def scoretable(wk, div):
             sp += (namestr.format(
                 url = morgue_url(g.Game), name = g.Game.player.name,
                 flag = serverflag(g.Game.account.server.name)))
-            sp += ( (('<td class="pt">{}</td>' * 12) 
+            sp += ( (('<td class="pt">{}</td>' * 15) 
                 + '<td class="total">{}</td>').format(
+                g.xl5,
                 g.uniq,
-#               g.xl5,
                 g.worship,
+                g.xl10,
                 g.brenter,
                 g.brend,
                 g.god,
+                g.gem,
                 g.rune,
                 g.tworune,
                 g.threerune,
-                g.onegem,
                 g.orb,
                 g.win,
                 g.bonusone,
@@ -241,7 +239,7 @@ simultaneously encouraging unusual characters and play styles that you might not
 points by reaching various in-game milestones.</li>
 <li>Only games played and milestones scored between 00:00 UTC on the start and end dates count.</li>
 <li>Details on rules and scoring are available on the <a
-href="../about_ccsdt.html">details/about page</a>.</li>
+href="rules.html">details/about page</a>.</li>
 </ul>
 
 <p>* There is 1 caveat detailed on the details/about page at item 4.</p>
@@ -256,7 +254,7 @@ href="../about_ccsdt.html">details/about page</a>.</li>
 
 <p>Original CSDC rules and organization by <a href="http://crawl.akrasiac.org/scoring/players/walkerboh.html">WalkerBoh</a> and 
 <a href="http://crawl.akrasiac.org/scoring/players/ebering.html">ebering</a>.
-Thank you to scrubbdaddy for python assistance. I am your host, RoGGa.</p>"""
+Thank you to scrubbdaddy/scrubbuddy (CCSDT#1&3) & grumposus (CCSDT#2) for python assistance. I am your host, RoGGa.</p>"""
 
     wklist = '<ul id="schedule">'
     for wk in csdc.weeks:
@@ -282,16 +280,26 @@ you've done this correctly and started at least one 0.34 game (though it may tak
 
 def rulespage():
     pagestr ="""
-    <ol>
-<li>Each challenge consists of playing a randomly chosen Crawl race/class combo
-(e.g. MiBe) based on a Crawl Unique. 
-The combo for each week of the competition will be announced at
-00:00 UTC on the Friday starting that week. All players have one week to
-finish a game using that combo. Only milestones recorded during the week (from
-00:00 UTC on the start date until 00:00 UTC on the end date) will count for
-scoring.</li>
-<li>Your first {} game started on an official server during the week will count
-for scoring. This is the only allowed attempt, subject to rule 3 below.</li>
+<p>The Crawl Cosplay Sudden Death Tournament is a competition that 
+aims to fill a Crawl niche not currently filled by the DCSS version 
+release tournament or the other Crawl Cosplay initiatives. The idea 
+is for players to compete by trying to do as well as possible in a 
+game of Crawl with one attempt only; if you die, that challenge is 
+over (thus "sudden death"). This competition is a lower time 
+commitment event that aims to challenge players while playing 5 of 
+the ~100 Crawl Unique characters.</p>
+<h3>Rules</h3>
+        <ol>
+<li>Each weekly challenge consists of playing a randomly chosen 
+Crawl Unqiue's starting combo (e.g. Snorg, a TrBe). 
+The chosen combo for each week of the competition will streamed on 
+Twitch.tv by Platt ( www.twitch.tv/platt_mallar ) 30 minutes before 
+the start of the new week. A spin-the-wheel format will be used to 
+make the choices random.</li>
+<li>Participants have one week to finish a game using that combo. 
+Only milestones recorded during the week (from 00:00 UTC on the 
+start date until 00:00 UTC on the end date) will count for scoring.</li>
+<li>Your first {} game started on an official DCSS server (or CCO: https://cco.crawlcosplay.org/ ) during the week will count for scoring. This is the only allowed attempt, subject to rule 4 below.
 <li>One redo per week is allowed if your first game ended in death with player
 XL < 5 (i.e., no redo once you hit XL 5). The redo game must be started after
 the end of the first game (no startscumming!).  The highest CSDC score of the
@@ -318,36 +326,34 @@ score.</li>
 played, and one-time points awarded once per season regardless of how many
 games achieve them.</p>
 
-<table class="info"><tr class="head"><th>Weekly points (can be earned each
-week)</th><th></th></tr>
-<tr><td class="name"> 1. Kill a unique</td><td class="pt">1</td></tr>
-<tr><td class="name"> 2. Reach XL 5</td><td class="pt">1</td></tr>
-<tr><td class="name"> 3. Worship one of three gods</td><td class="pt">1</td></tr>
-<tr><td class="name"> 4. Enter a multi-level branch of the dungeon</td><td class="pt">1</td></tr>
-<tr><td class="name"> 5. Reach the end of a multi-level branch (including D)</td><td class="pt">1</td></tr>
-<tr><td class="name"> 6. Champion a listed god</td><td class="pt">1</td></tr>
-<tr><td class="name"> 7. Collect 1 rune</td><td class="pt">1</td></tr>
-<tr><td class="name"> 8. Collect 2 runes</td><td class="pt">1</td></tr>
-<tr><td class="name"> 9. Collect 3 runes</td><td class="pt">1</td></tr>
-<tr><td class="name">10. Collect 1 gem</td><td class="pt">1</td></tr>
-<tr><td class="name">11. Collect the Orb of Zot</td><td class="pt">1</td></tr>
-<tr><td class="name">12. Win</td><td class="pt">1</td></tr>
-<tr><td class="name">13. Complete Bonus #1</td><td class="pt">1</td></tr>
-<tr><td class="name">14. Complete Bonus #2</td><td class="pt">2</td></tr>
-<tr class="head" id="onetime"><th>One-time points (earned once during the tournament)</th><th></th></tr>
+<table class="info"><tr class="head"><th>15 Weekly Points (can be earned each
+week)</th><th>Points</th></tr>
+<tr><td class="name"> 1. Reach XL 5*</td><td class="pt">1</td></tr>
+<tr><td class="name"> 2. Kill a unique</td><td class="pt">1</td></tr>
+<tr><td class="name"> 3. Worship one of three gods*</td><td class="pt">1</td></tr>
+<tr><td class="name"> 4. Reach XL 10*</td><td class="pt">1</td></tr>
+<tr><td class="name"> 5. Enter a multi-level branch of the dungeon</td><td class="pt">1</td></tr>
+<tr><td class="name"> 6. Reach the end of a multi-level branch (including D)</td><td class="pt">1</td></tr>
+<tr><td class="name"> 7. Champion a listed god</td><td class="pt">1</td></tr>
+<tr><td class="name"> 8. Collect 1 gem*</td><td class="pt">1</td></tr>
+<tr><td class="name"> 9. Collect 1 rune</td><td class="pt">1</td></tr>
+<tr><td class="name">10. Collect 2 runes*</td><td class="pt">1</td></tr>
+<tr><td class="name">11. Collect 3 runes</td><td class="pt">1</td></tr>
+<tr><td class="name">12. Collect the Orb of Zot</td><td class="pt">1</td></tr>
+<tr><td class="name">13. Win</td><td class="pt">1</td></tr>
+<tr><td class="name">14. Complete Bonus #1</td><td class="pt">1</td></tr>
+<tr><td class="name">15. Complete Bonus #2</td><td class="pt">1</td></tr>
+<tr class="head" id="onetime"><th>One-time points (earned once during the tournament)</th><th>Points</th></tr>
 <!-- <tr><td class="name">Win a game in under 40,000 turns:</td><td class="pt">2</td></tr> -->
-<tr><td class="name">Win a game with 15 runes</td><td class="pt">3</td></tr>
-<tr><td class="name">Clear a Ziggurat</td><td class="pt">4</td></tr>
-<tr><td class="name">Enter Zot at XL 20 or lower</td><td class="pt">5</td></tr>
-<tr><td class="name">Win a game without entering lair</td><td class="pt">6</td></tr>
-<tr><td class="name">Get a rune without using potions or scrolls (aesetic rune)</td><td class="pt">7</td></tr>
+<tr><td class="name">1. Win a game with 15 runes</td><td class="pt">3</td></tr>
+<tr><td class="name">2. Clear a Ziggurat</td><td class="pt">4</td></tr>
+<tr><td class="name">3. Enter Zot at XL 20 or lower</td><td class="pt">5</td></tr>
+<tr><td class="name">4. Win a game without entering lair</td><td class="pt">6</td></tr>
+<tr><td class="name">5. Get a rune without using potions or scrolls (aesetic rune)</td><td class="pt">7</td></tr>
 </table>
-
-<!-- <p class="notes"> Unless specified, a bonus or one time point does not
-require you to win to earn the point.</p> -->
-
+<p>* 5 new milestones were created for CCSDT#3.
 """
-    return page(static=True, subhead="Rules", content = pagestr.format("0.34"))
+    return page(static=True, subhead="<h2 style='color:rgb(69, 136, 5);'>About CCSDT#3</h2>", content = pagestr.format("0.34"))
 
 
 def page(**kwargs):

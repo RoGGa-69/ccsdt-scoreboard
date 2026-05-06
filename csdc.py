@@ -156,11 +156,10 @@ class CsdcWeek:
 
         return self._valid_milestone().filter(Milestone.verb_id.in_(verb_ids)).exists()
 
-#    def _xl5(self):
-#        with get_session() as s:
-#            to be defined
-
-#        return - To be defined
+    def _xl(self, n):
+        return self._valid_milestone().filter(
+            Milestone.xl >= n
+        ).exists()
 
     def _worship(self):
         with get_session() as s:
@@ -209,14 +208,14 @@ class CsdcWeek:
                 Milestone.verb_id == abandon_id
             ).exists())
 
+    def _gem(self, n):
+        return self._valid_milestone().filter(
+            Milestone.gems >= n
+        ).exists()
+
     def _rune(self, n):
         return self._valid_milestone().filter(
             Milestone.runes >= n
-        ).exists()
-
-    def _onegem(self, n):
-        return self._valid_milestone().filter(
-            Milestone.gem >= n
         ).exists()
 
     def _orb(self):
@@ -306,16 +305,17 @@ class CsdcWeek:
     def scorecard(self):
         sc = Query([Game.gid,
             Game.player_id,
+            type_coerce(self._xl(5), Integer).label("xl5"),
             type_coerce(self._uniq(), Integer).label("uniq"),
-#            type_coerce(self._xl5(), Integer).label("xl5"),
             type_coerce(self._worship(), Integer).label("worship"),
+            type_coerce(self._xl(10), Integer).label("xl10"),
             type_coerce(self._brenter(), Integer).label("brenter"),
             type_coerce(self._brend(), Integer).label("brend"),
             type_coerce(self._god(), Integer).label("god"),
+            type_coerce(self._gem(1), Integer).label("gem"),
             type_coerce(self._rune(1), Integer).label("rune"),
             type_coerce(self._rune(2), Integer).label("tworune"),
             type_coerce(self._rune(3), Integer).label("threerune"),
-            type_coerce(self._onegem(1), Integer).label("gem"),
             type_coerce(self._orb(), Integer).label("orb"),
             self._win().label("win"),
             self._bonus(self.tier1).label("bonusone"),
@@ -328,32 +328,34 @@ class CsdcWeek:
                 Game.gid == sc.c.gid).add_columns(
                     Game.gid,
                     sc.c.player_id.label("player_id"),
+                    sc.c.xl5,
                     sc.c.uniq,
-#                    sc.c.xl5,
                     sc.c.worship,
+                    sc.c.xl10,
                     sc.c.brenter,
                     sc.c.brend,
                     sc.c.god,
+                    sc.c.gem,
                     sc.c.rune,
                     sc.c.tworune,
                     sc.c.threerune,
-                    sc.c.onegem,
                     sc.c.orb,
                     sc.c.win,
                     sc.c.bonusone.label("bonusone"),
                     sc.c.bonustwo.label("bonustwo"),
                     (sc.c.bonusone + sc.c.bonustwo).label("bonus"),
                     func.max(
-                        sc.c.uniq
-#                       + sc.c.xl5
+                        sc.c.xl5
+                        + sc.c.uniq
                         + sc.c.worship
+                        + sc.c.xl10
                         + sc.c.brenter
                         + sc.c.brend
                         + sc.c.god
+                        + sc.c.gem
                         + sc.c.rune
                         + sc.c.tworune
                         + sc.c.threerune
-#                       + sc.c.onegem
                         + sc.c.win
                         + sc.c.orb
                         + sc.c.bonusone
@@ -609,6 +611,7 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "1",
+                unique = "Antaeus",
                 species = "On",
                 background = "AE",
                 gods = ("Ashenzari", "Ashenzari", "Ashenzari"),
@@ -619,6 +622,7 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "2",
+                unique = "Asmodeus",
                 species = "Te",
                 background = "FE",
                 gods = ("Sif Muna", "Sif Muna", "Sif Muna"),
@@ -629,6 +633,7 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "3",
+                unique = "Dispater",
                 species = "Gr",
                 background = "EE",
                 gods = ("Makhleb", "Makhleb", "Makhleb"),
@@ -639,6 +644,7 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "4",
+                unique = "Ereshkigal",
                 species = "Po",
                 background = "En",
                 gods = ("Dithmenos", "Dithmenos", "Dithmenos"),
@@ -649,6 +655,7 @@ def initialize_weeks():
         
         weeks.append(CsdcWeek(
                 number = "5",
+                unique = "Geryon",
                 species = "Na",
                 background = "Gl",
                 gods = ("Hepliaklqana", "Hepliaklqana", "Hepliaklqana"),

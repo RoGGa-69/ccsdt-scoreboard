@@ -402,6 +402,7 @@ class Milestone(Base):
     xl = Column(Integer, nullable=True)  # type: int
     turn = Column(Integer, nullable=True)  # type: int
     dur = Column(Integer, nullable=True)  # type: int
+    gems = Column(Integer, nullable=True)  # type: int
     runes = Column(Integer, nullable=True)  # type: int
     time = Column(DateTime, nullable=False, index=True)  # type: DateTime
     potionsused = Column(Integer, nullable=True)  # type: int
@@ -434,6 +435,7 @@ class Milestone(Base):
             "xl": self.xl,
             "turn": self.turn,
             "dur": self.dur,
+            "gems": self.fgem,
             "runes": self.runes,
             "verb" : self.verb.name,
             "noun" : self.noun,
