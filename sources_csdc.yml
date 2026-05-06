@@ -57,3 +57,16 @@ sources:
     logfile: 'meta/crawl-0.34/logfile'
     milestones: 'meta/crawl-0.34/milestones'
     rcfiles: 'rcfiles/crawl-0.34'
+
+  - name: cbrg
+    base: https://crawl-br.roguelikes.gg/
+    logfile: 'meta/0.34/logfile'
+    milestones: 'meta/0.34/milestones'
+    rcfiles: 'rcfiles/crawl-0.34'
+
+  - name: crg
+    base: https://crawl.roguelikes.gg/
+    logfile: 'meta/0.34/logfile'
+    milestones: 'meta/0.34/milestones'
+    rcfiles: 'rcfiles/crawl-0.34'
+
