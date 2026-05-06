@@ -20,6 +20,7 @@ from orm import (
     Player,
     Species,
     Background,
+    Unique,
     God,
     Version,
     Branch,
@@ -168,6 +169,16 @@ def setup_backgrounds(s: sqlalchemy.orm.session.Session) -> None:
     s.commit()
 
 
+def setup_uniques(s: sqlalchemy.orm.session.Session) -> None:
+    """Load unique data into the database."""
+    new = []
+    for unique in const.UNIQUES:
+        if not s.query(Unique).filter(Unique.name == Unique.name).first():
+            logging.info("Adding Unique '%s'" % unique.name)
+            new.append({"name": unique.name})
+    s.bulk_insert_mappings(Unique, new)
+    s.commit()
+
 def setup_gods(s: sqlalchemy.orm.session.Session) -> None:
     """Load god data into the database."""
     new = []
@@ -295,6 +306,23 @@ def get_background(s: sqlalchemy.orm.session.Session, bg: str) -> Background:
             " and update the database." % bg
         )
         return background
+
+
+@functools.lru_cache(maxsize=32)
+def get_unique(s: sqlalchemy.orm.session.Session, name: str) -> Unique:
+    """Get a unique by name, creating it if needed."""
+    god = s.query(Unique).filter(Unique.name == name).first()
+    if unique:
+        return unique
+    else:
+        unique = Unique(name=name)
+        s.add(unique)
+        s.commit()
+        logging.warning(
+            "Found new unique %s, please add me to constants.py"
+            " and update the database." % name
+        )
+        return unique
 
 
 @functools.lru_cache(maxsize=32)
@@ -536,6 +564,13 @@ def list_backgrounds(
     return _generic_char_type_lister(s, cls=Background)
 
 
+def list_uniques(
+    s: sqlalchemy.orm.session.Session) -> Sequence[Unique]:
+    """Return a list of uniques.
+    """
+    return _generic_char_type_lister(s, cls=Unique)
+
+
 def list_gods(
     s: sqlalchemy.orm.session.Session) -> Sequence[God]:
     """Return a list of gods.
@@ -666,6 +701,7 @@ def setup_database():
         if os.environ.get('SCOREBOARD_SKIP_DB_SETUP') == None:
             setup_species(sess)
             setup_backgrounds(sess)
+            setup_uniques(sess)
             setup_gods(sess)
             setup_branches(sess)
             setup_ktyps(sess)

@@ -127,6 +127,22 @@ class Background(Base):
 
 
 @characteristic.with_repr(["name"])  # pylint: disable=too-few-public-methods
+class Unique(Base):
+    """A DCSS Unique.
+
+    Columns:
+        name: full unique name, eg 'Antaeus', 'Geryon'.
+#        playable: if the god is playable in the current version.
+#            Not quite sure what to do in the case of a mismatch between stable
+#            and trunk...
+    """
+
+    __tablename__ = "uniques"
+    id = Column(Integer, primary_key=True, nullable=False)  # type: int
+    name = Column(String(20), nullable=False, index=True, unique=True)  # type: str
+
+
+@characteristic.with_repr(["name"])  # pylint: disable=too-few-public-methods
 class God(Base):
     """A DCSS god.
 
@@ -395,6 +411,9 @@ class Milestone(Base):
     place = relationship("Place", foreign_keys=place_id)
     oplace_id = Column(Integer, ForeignKey("places.id"), nullable=True)  # type: int
     oplace = relationship("Place", foreign_keys=oplace_id)
+
+    unique_id = Column(Integer, ForeignKey("uniques.id"), nullable=True)  # type: int
+    unique = relationship("Unique")
 
     god_id = Column(Integer, ForeignKey("gods.id"), nullable=True)  # type: int
     god = relationship("God")

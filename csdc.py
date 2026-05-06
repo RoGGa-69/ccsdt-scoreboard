@@ -8,6 +8,7 @@ from model import (
     get_place,
     get_branch,
     get_place_from_string,
+    get_unique,
     get_god,
     get_ktyp,
     get_verb
@@ -19,6 +20,7 @@ from orm import (
     Player,
     Species,
     Background,
+    Unique,
     God,
     Version,
     Branch,
@@ -118,6 +120,7 @@ class CsdcWeek:
             self.species = get_species(s, kwargs["species"])
             self.background = get_background(s, kwargs["background"])
             self.char = self.species.short + self.background.short
+            self.uniques = [ get_unique(s, g) for g in kwargs["uniques"] ]
             self.gods = [ get_god(s, g) for g in kwargs["gods"] ]
             self.start = kwargs["start"]
             self.end = kwargs["end"]

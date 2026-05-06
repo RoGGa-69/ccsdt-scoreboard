@@ -5,6 +5,7 @@ from collections import namedtuple
 
 Species = namedtuple("Species", ["short", "full"])
 Background = namedtuple("Background", ["short", "full"])
+Unique = namedtuple("God", ["name"])
 God = namedtuple("God", ["name"])
 
 SPECIES = {
@@ -65,6 +66,13 @@ BACKGROUNDS = {
     Background("Al", "Alchemist"),
     Background("Wn", "Wanderer"),
     Background("Wr", "Warper"),
+}
+UNIQUES = {
+    Unique("Antaeus"),
+    Unique("Asmodeus"),
+    Unique("Dispater"),
+    Unique("Ereshkigal"),
+    Unique("Geryon"),
 }
 
 GODS = {
