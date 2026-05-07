@@ -56,10 +56,8 @@ def wkinfo(wk):
     sp = ""
     sp += '<div id="times"><span class="label">Week of: </span>'
     sp += wk.start.strftime(DATEFMT) + ' (ends at start of ' + wk.end.strftime(DATEFMT) + ' 00:00 UTC)</div>'
-#    sp += ('<div id="combo"><span class="label">Character: </span>' +
-#            '{0} {1}</div>\n'.format(wk.species.name, wk.background.name))
     sp += ('<div id="combo"><span class="label">Character: </span>' 
-            + '{0} ({1}{2})</div>\n'.format(wk.uniques, wk.species.name, wk.background.name))
+            + '{0} {1}</div>\n'.format(wk.species.name, wk.background.name))
     sp += ('<div id="bonus"><span class="label">Bonus 1: </span>'
             + wk.tier1.description + '<br/>\n'
             + '<span class="label">Bonus 2: </span>'
@@ -80,12 +78,12 @@ def description(wk, url):
     if wk.start > datetime.datetime.now(datetime.timezone.utc):
         s += "Week {0}"
     else:
-        s += "Week {0} &mdash; {1}{2}"
+        s += "Week {0} &mdash; {1} ({2}{3})"
 
     if url and wk.start <= datetime.datetime.now(datetime.timezone.utc):
         s = wkurl(wk).format(s)
 
-    return s.format(wk.number, wk.species.short,
+    return s.format(wk.number, wk.uniques, wk.species.short,
                 wk.background.short)
 
 
