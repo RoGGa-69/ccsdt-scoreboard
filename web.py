@@ -59,7 +59,7 @@ def wkinfo(wk):
 #    sp += ('<div id="combo"><span class="label">Character: </span>' +
 #            '{0} {1}</div>\n'.format(wk.species.name, wk.background.name))
     sp += ('<div id="combo"><span class="label">Character: </span>' 
-            + '{0} ({1}{2})</div>\n'.format(wk.unique, wk.species.name, wk.background.name))
+            + '{0} ({1}{2})</div>\n'.format(wk.uniques, wk.species.name, wk.background.name))
     sp += ('<div id="bonus"><span class="label">Bonus 1: </span>'
             + wk.tier1.description + '<br/>\n'
             + '<span class="label">Bonus 2: </span>'
