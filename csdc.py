@@ -120,7 +120,8 @@ class CsdcWeek:
             self.species = get_species(s, kwargs["species"])
             self.background = get_background(s, kwargs["background"])
             self.char = self.species.short + self.background.short
-            self.uniques = [ get_unique(s, g) for g in kwargs["uniques"] ]
+            self.uniques = kwargs["unique"]
+#            self.uniques = get_unique(s, kwargs["unique"])
             self.gods = [ get_god(s, g) for g in kwargs["gods"] ]
             self.start = kwargs["start"]
             self.end = kwargs["end"]

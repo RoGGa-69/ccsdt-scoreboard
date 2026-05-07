@@ -412,9 +412,6 @@ class Milestone(Base):
     oplace_id = Column(Integer, ForeignKey("places.id"), nullable=True)  # type: int
     oplace = relationship("Place", foreign_keys=oplace_id)
 
-    unique_id = Column(Integer, ForeignKey("uniques.id"), nullable=True)  # type: int
-    unique = relationship("Unique")
-
     god_id = Column(Integer, ForeignKey("gods.id"), nullable=True)  # type: int
     god = relationship("God")
 
