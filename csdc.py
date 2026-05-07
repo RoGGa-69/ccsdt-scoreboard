@@ -410,7 +410,7 @@ def initialize_weeks():
                     Milestone.gid == m2.gid,
                     m2.verb_id == get_verb(s, "rune").id
                 ))],
-            "2")
+            "1")
 
         slimefirst = CsdcBonus("EnterSlime2nd",
             "Enter Slime as your second multi-level branch (don't get banished).",
@@ -434,7 +434,7 @@ def initialize_weeks():
                   m2.verb_id == get_verb(s, "br.enter").id,
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.MULTI_LEVEL_BRANCHES])
               ).as_scalar() <= 2],
-            "2")
+            "1")
 
         temple4k = CsdcBonus("TempleIn4kTurn",
             "Enter the Temple in less than 4,000 turns.",
@@ -447,7 +447,14 @@ def initialize_weeks():
             "Collect a rune in less than 15,000 turns.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.turn < 15000 ],
-            "2")
+            "1")
+
+        enterelf3under12kturn = CsdcBonus("EnterElf3under12kTurn",
+            "Enter Elf:3 in under 12,000 turns.",
+            [ Milestone.verb_id == get_verb(s, "br.end").id,
+              Milestone.place_id == get_place_from_string(s, "Elf:3").id,
+              Milestone.turn < 12000 ],
+           "1")
 
         lairendxl12 = CsdcBonus("LairEndXL12",
             "Reach the end of Lair at XL &leq; 12.",
@@ -461,7 +468,7 @@ def initialize_weeks():
             [ Milestone.verb_id == get_verb(s, "br.end").id,
               Milestone.place_id == get_place_from_string(s, "Vaults:5").id,
               Milestone.xl <= 18 ],
-            "2")
+            "1")
 
         elf3beforerune = CsdcBonus("Elf3BeforeRunes",
             "Reach the end of Elf before entering a rune branch (excluding getting banished to the Abyss).",
@@ -498,7 +505,7 @@ def initialize_weeks():
                   m2.verb_id == get_verb(s, "br.enter").id,
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in set(constants.RUNE_BRANCHES) - set(("Abyss",))]),
               ).exists() ],
-            "2")
+            "1")
 
         hellpanrunefirst = CsdcBonus("HellPanRuneFirst",
             "Get a rune from Hell or Pan before entering any other rune branch (excluding the Abyss).",
@@ -511,7 +518,7 @@ def initialize_weeks():
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id 
                       for b in set(constants.RUNE_BRANCHES) - set(("Abyss", "Coc", "Geh", "Dis", "Tar", "Pan"))]),
               ).exists() ],
-            "2")
+            "1")
 
         hellrunefirst = CsdcBonus("HellRuneFirst",
             "Get a rune from Hell before entering any other rune branch (excluding the Abyss).",
@@ -524,13 +531,13 @@ def initialize_weeks():
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id 
                       for b in set(constants.RUNE_BRANCHES) - set(("Abyss", "Coc", "Geh", "Dis", "Tar"))]),
               ).exists() ],
-            "2")
+            "1")
 
         goldenrune = CsdcBonus("GoldenRune",
             "Collect the golden rune.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.place_id == get_place_from_string(s, "Tomb:3").id ],
-            "2")
+            "1")
 
         vowofcourage = CsdcBonus("VowOfCourage",
             "Collect at least 5 runes before entering the Depths.",
@@ -541,7 +548,13 @@ def initialize_weeks():
                   m2.turn < Milestone.turn,
                   m2.verb_id == get_verb(s, "br.enter").id,
                   m2.place_id == get_place_from_string(s, "Depths:1").id).exists() ],
-            "2")
+            "1")
+
+        collect5gems = CsdcBonus("Collect5Gems",
+            "Collect at least 5 gems. (they don't need to stay intact)",
+            [ Milestone.verb_id == get_verb(s, "gem").id,
+              Milestone.gems >= 5],
+            "1")
 
         runenosbranch = CsdcBonus("RuneNoSBranch",
             "Collect a rune before entering Shoals, Snake, Spider, or Swamp.",
@@ -654,8 +667,8 @@ def initialize_weeks():
                 gods = ("Dithmenos", "Dithmenos", "Dithmenos"),
                 start = datetime.datetime(2026,5,8, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                bonus1 = temple4k,
-                bonus2 = vaultendxl18))
+                bonus1 = enterelf3under12kturn,
+                bonus2 = collect5gems))
         
         weeks.append(CsdcWeek(
                 number = "5",

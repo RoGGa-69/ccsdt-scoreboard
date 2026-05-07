@@ -99,15 +99,15 @@ def scoretable(wk, div):
     <th>Branch Enter</th>
     <th>Branch End</th>
     <th>Champion a Valid God</th>
-    <th><abbr title="Does not need to stay intact">Collect 1 Gem ²</abbr></th>
+    <th><abbr title="Does not need to stay intact">Collect 1 Gem</abbr></th>
     <th>Collect 1 Rune</th>
     <th>Collect 2 Runes</th>
     <th>Collect 3 Runes</th>
-    <th>Obtain the Orb</th>
+    <th>Obtain Orb of Zot</th>
     <th>Win</th>
     <th>Bonus #1</th>
     <th>Bonus #2</th>
-    <th>Total (max=15)</th>
+    <th>Week's Total (max=15)</th>
     </tr>""")
 
     with get_session() as s:
@@ -348,7 +348,7 @@ week)</th><th>Points</th></tr>
 <tr><td class="name">5. Get a rune without using potions or scrolls (aesetic rune)</td><td class="pt">7</td></tr>
 </table>
 <p>¹ 5 new milestones were created for CCSDT#3.</p>
-<p>² add the follwoing to your DCSS v0.34 RC file:</p>
+<p>² add the following to your DCSS v0.34 RC file:</p>
 <pre>always_show_gems = true
 more_gem_info = true</pre>
 

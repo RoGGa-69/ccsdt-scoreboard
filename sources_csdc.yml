@@ -9,7 +9,7 @@ sources:
     aliases:
       - cln
       - clan
-    base: http://underhound.eu:81/crawl/
+    base: https://underhound.eu/crawl/
     logfile: 'meta/0.34/logfile'
     milestones: 'meta/0.34/milestones'
     rcfiles: 'rcfiles/crawl-0.34'
@@ -17,13 +17,13 @@ sources:
   - name: cbro
     aliases:
       - cbro2
-    base: http://cbro.berotato.org/
+    base: https://cbro.berotato.org/
     logfile: 'meta/0.34/logfile'
     milestones: 'meta/0.34/milestones'
     rcfiles: 'rcfiles/crawl-0.34'
 
   - name: cxc
-    base: http://crawl.xtahua.com/crawl/
+    base: https://crawl.xtahua.com/crawl/
     logfile: 'meta/0.34/logfile'
     milestones: 'meta/0.34/milestones'
     rcfiles: 'rcfiles/crawl-0.34'
@@ -62,10 +62,10 @@ sources:
     base: https://crawl-br.roguelikes.gg/
     logfile: 'meta/0.34/logfile'
     milestones: 'meta/0.34/milestones'
-    rcfiles: 'rcfiles/crawl-0.34'
+    rcfiles: 'rcfiles/crawl-0.34/'
 
   - name: crg
     base: https://crawl.roguelikes.gg/
     logfile: 'meta/0.34/logfile'
     milestones: 'meta/0.34/milestones'
-    rcfiles: 'rcfiles/crawl-0.34'
+    rcfiles: 'rcfiles/crawl-0.34/'

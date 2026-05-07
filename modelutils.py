@@ -89,6 +89,10 @@ def _morgue_prefix(src: str, version: str) -> Optional[str]:
 #        prefix += "/" + version_url(version)
     elif src == "cco":
         prefix = "https://data.crawlcosplay.org/morgue/"
+    elif src == "crg":
+        prefix = "https://crawl.roguelikes.gg/morgue/"
+    elif src == "cbrg":
+        prefix = "https://crawl-br.roguelikes.gg/morgue/"
     elif src in ("ckr", "csn", "rhf", "cjr", "cszo"):
         return None
     else:
