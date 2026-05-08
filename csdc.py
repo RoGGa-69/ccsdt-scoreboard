@@ -443,6 +443,21 @@ def initialize_weeks():
               Milestone.turn < 4000 ],
             "1")
 
+        endofgehennaunder27kturn = CsdcBonus("EndOfGehennaUnder27kTurn",
+            "Enter the final floor of Gehenna (Geh:7) in under 27,000 turns.",
+            [ Milestone.verb_id == get_verb(s, "br.end").id,
+              Milestone.place_id == get_place_from_string(s, "Geh:7").id,
+              Milestone.turn < 27000 ],
+            "1")
+
+
+        floor10ofzig = CsdcBonus("Floor10ofZig",
+            "Reach the 10th floor of a Ziggurat.",
+            [ Milestone.place_id == get_place_from_string(s, "Zig:10").id ],
+            "1")
+
+
+
         rune15k = CsdcBonus("RuneIn15kTurn",
             "Collect a rune in less than 15,000 turns.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
@@ -550,10 +565,10 @@ def initialize_weeks():
                   m2.place_id == get_place_from_string(s, "Depths:1").id).exists() ],
             "1")
 
-        collect5gems = CsdcBonus("Collect5Gems",
-            "Collect at least 5 gems. (they don't need to stay intact)",
+        collect3gems = CsdcBonus("Collect3Gems",
+            "Collect at least 3 gems. (they don't need to stay intact)",
             [ Milestone.verb_id == get_verb(s, "gem").id,
-              Milestone.gems >= 5],
+              Milestone.gems >= 3],
             "1")
 
         runenosbranch = CsdcBonus("RuneNoSBranch",
@@ -665,10 +680,10 @@ def initialize_weeks():
                 species = "Po",
                 background = "En",
                 gods = ("Dithmenos", "Dithmenos", "Dithmenos"),
-                start = datetime.datetime(2026,5,8, tzinfo=datetime.timezone.utc),
+                start = datetime.datetime(2026,5,7, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
                 bonus1 = enterelf3under12kturn,
-                bonus2 = collect5gems))
+                bonus2 = collect3gems))
         
         weeks.append(CsdcWeek(
                 number = "5",
@@ -678,8 +693,8 @@ def initialize_weeks():
                 gods = ("Hepliaklqana", "Hepliaklqana", "Hepliaklqana"),
                 start = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,22, tzinfo=datetime.timezone.utc),
-                bonus1 = runebranchlowskill,
-                bonus2 = rune15k))                
+                bonus1 = floor10ofzig,
+                bonus2 = endofgehennaunder27kturn))                
 
 
 def all_games():
