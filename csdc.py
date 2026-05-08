@@ -450,13 +450,10 @@ def initialize_weeks():
               Milestone.turn < 27000 ],
             "1")
 
-
         floor10ofzig = CsdcBonus("Floor10ofZig",
             "Reach the 10th floor of a Ziggurat.",
             [ Milestone.place_id == get_place_from_string(s, "Zig:10").id ],
             "1")
-
-
 
         rune15k = CsdcBonus("RuneIn15kTurn",
             "Collect a rune in less than 15,000 turns.",
@@ -567,8 +564,7 @@ def initialize_weeks():
 
         collect3gems = CsdcBonus("Collect3Gems",
             "Collect at least 3 gems. (they don't need to stay intact)",
-            [ Milestone.verb_id == get_verb(s, "gem").id,
-              Milestone.gems >= 3],
+            [ Milestone.gems >= 3 ],
             "1")
 
         runenosbranch = CsdcBonus("RuneNoSBranch",
@@ -647,8 +643,8 @@ def initialize_weeks():
                 species = "On",
                 background = "AE",
                 gods = ("Ashenzari", "Ashenzari", "Ashenzari"),
-                start = datetime.datetime(2026,4,17, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,4,24, tzinfo=datetime.timezone.utc),
+                start = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,22, tzinfo=datetime.timezone.utc),
                 bonus1 = lairendxl12,
                 bonus2 = runelowskill))
 
@@ -658,8 +654,8 @@ def initialize_weeks():
                 species = "Te",
                 background = "FE",
                 gods = ("Sif Muna", "Sif Muna", "Sif Muna"),
-                start = datetime.datetime(2026,4,24, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,5,1, tzinfo=datetime.timezone.utc),
+                start = datetime.datetime(2026,5,22, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,29, tzinfo=datetime.timezone.utc),
                 bonus1 = depthsbeforerune,
                 bonus2 = hellpanrunefirst))
 
