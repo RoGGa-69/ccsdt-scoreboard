@@ -691,8 +691,8 @@ def initialize_weeks():
                 species = "Na",
                 background = "Gl",
                 gods = ("Hepliaklqana", "Hepliaklqana", "Hepliaklqana"),
-                start = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,5,22, tzinfo=datetime.timezone.utc),
+                start = datetime.datetime(2026,5,8, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
                 bonus1 = floor10ofzig,
                 bonus2 = endofgehennaunder27kturn))                
 

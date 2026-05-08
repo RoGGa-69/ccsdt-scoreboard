@@ -240,10 +240,10 @@ simultaneously encouraging unusual characters and play styles that you might not
 points by reaching various in-game milestones.</li>
 <li>Only games played and milestones scored between 00:00 UTC on the start and end dates count.</li>
 <li>Details on rules and scoring are available on the 
-<ahref="rules.html">details/about page</a>.</li>
+<a href="rules.html">Details page</a>.</li>
 </ul>
 
-<p>* There is 1 caveat detailed on the details/about page at item 4.</p>
+<p>* There is 1 caveat detailed on the <a href="rules.html">Details page</a> at item 4.</p>
 
 <h2>Schedule</h2>
 
@@ -274,7 +274,7 @@ Thank you to scrubbdaddy/scrubbuddy (CCSDT#1&3) & grumposus (CCSDT#2) for python
 <pre id="rc"># ccsdt</pre>
 <p>on <a href="https://crawl.develz.org/play.htm" target="_blank">any of the official online servers</a>
 or CCO ( <a href="https://cco.crawlcosplay.org/" target="_blank">cco.crawlcosplay.org</a> ) at any point during tournament. Your name will appear in the standings once
-you've done this correctly and started at least one 0.34 game (though it may take about 15 minutes before it does).</p>"""
+you've done this correctly and started at least one 0.34 game (though it may take about 10-15 minutes before it does).</p>"""
 #    else:
 #        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed.</p>"
 
@@ -387,7 +387,7 @@ more_gem_info = true</pre>
 </ol>
    
 """
-    return page(static=True, subhead="<h2 style='color:rgb(69, 136, 5);'>About CCSDT#3</h2>", content = pagestr.format("0.34"))
+    return page(static=True, subhead="<h2 style='color:rgb(69, 136, 5);'>Details for CCSDT#3</h2>", content = pagestr.format("0.34"))
 
 
 def page(**kwargs):
