@@ -443,10 +443,10 @@ def initialize_weeks():
               Milestone.turn < 4000 ],
             "1")
 
-        endofgehennaunder27kturn = CsdcBonus("EndOfGehennaUnder27kTurn",
-            "Enter the final floor of Gehenna (Geh:7) in under 27,000 turns.",
-            [ Milestone.verb_id == get_verb(s, "br.end").id,
-              Milestone.place_id == get_place_from_string(s, "Geh:7").id,
+        abyssruneunder27kturn = CsdcBonus("AbyssRuneUnder27kTurn",
+            "Get the Abyssal rune in under 27,000 turns.",
+            [ Milestone.verb_id == get_verb(s, "rune").id,
+              Milestone.place_id == get_place_from_string(s, "Abyss").id,
               Milestone.turn < 27000 ],
             "1")
 
@@ -505,6 +505,20 @@ def initialize_weeks():
 			      m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.RUNE_BRANCHES]),
 			  ).exists() ],
 			"1")
+
+        depths4beforelair = CsdcBonus("Depths4BeforeLair",
+            "Reach the last level of the Depths without having entered the Lair.",
+            [ Milestone.verb_id == get_verb(s, "br.end").id,
+              Milestone.place_id == get_place_from_string(s, "Depths:4").id,
+              ~Query(m2).filter(
+                    m2.gid == Milestone.gid,
+                    m2.turn < Milestone.turn,
+                    m2.verb_id == get_verb(
+                         s, "br.enter").id,
+                    m2.place_id == get_place_from_string(
+                        s, "Lair:1").id,
+              ).exists() ],
+        	"1")
 
         geryonbeforerune = CsdcBonus("GeryonBeforeRune",
             "Kill or slimify Geryon before entering a rune branch (excluding the Abyss).",
@@ -643,10 +657,10 @@ def initialize_weeks():
                 species = "On",
                 background = "AE",
                 gods = ("Ashenzari", "Ashenzari", "Ashenzari"),
-                start = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,5,22, tzinfo=datetime.timezone.utc),
-                bonus1 = lairendxl12,
-                bonus2 = runelowskill))
+                start = datetime.datetime(2026,5,10, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
+                bonus1 = runelowskill,
+                bonus2 = depths4beforelair))
 
         weeks.append(CsdcWeek(
                 number = "2",
@@ -690,7 +704,7 @@ def initialize_weeks():
                 start = datetime.datetime(2026,5,8, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
                 bonus1 = floor10ofzig,
-                bonus2 = endofgehennaunder27kturn))                
+                bonus2 = abyssruneunder27kturn))                
 
 
 def all_games():

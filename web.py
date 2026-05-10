@@ -29,7 +29,8 @@ def logoblock(subhead):
     {}</div>""".format(version, sh)
 
 def mainmenu():
-    return ('<span class="menu">CCSDT #3 for v0.34</a> : </span>' +
+    return ('<span class="menu"><img src="/img/animated-arrow.gif" width="40" height="10">' +
+                               'CCSDT #3 for v0.34</a> : </span>' +
             '<span class="menu"><a href="index.html">Overview</a> - </span>' +
             '<span class="menu"><a href="rules.html">Details</a> - </span>' + 
             '<span class="menu"><a href="standings.html">Standings</a></span>' +
@@ -270,10 +271,10 @@ Thank you to scrubbdaddy/scrubbuddy (CCSDT#1&3) & grumposus (CCSDT#2) for python
     signup ="""
 <h2>Sign Up</h2>
 
-<p>In order to sign up, set the first line of your 0.34 RC file to</p> 
+<p>In order to sign up, set the first line of your DCSS 0.34 RC file to</p>
 <pre id="rc"># ccsdt</pre>
-<p>on <a href="https://crawl.develz.org/play.htm" target="_blank">any of the official online servers</a>
-or CCO ( <a href="https://cco.crawlcosplay.org/" target="_blank">cco.crawlcosplay.org</a> ) at any point during tournament. Your name will appear in the standings once
+<p>on <a href="https://www.dungeoncrawlcentral.org/online_servers.html" target="_blank">any of the DCSS online servers</a> 
+ at any point during tournament. Your name will appear in the standings once
 you've done this correctly and started at least one 0.34 game (though it may take about 10-15 minutes before it does).</p>"""
 #    else:
 #        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed.</p>"
@@ -383,11 +384,14 @@ more_gem_info = true</pre>
    <li>Collect at least 5 runes before entering the Depths.</li>
    <li>Collect a rune without dying (felids).</li>
    <li><b>NEW</b>: Collect at least 3 gems. (they don't need to stay intact)</li>
-   <li><b>NEW</b>: Enter the final floor of Gehenna (Geh:7) in under 27,000 turns.</li>
+   <li><b>NEW</b>: Get the Abyssal rune in under 27,000 turns.</li>
+   <li><b>NEW</b>: Reach the last level of the Depths without having entered the Lair.</li>
 </ol>
    
 """
-    return page(static=True, subhead="<h2 style='color:rgb(69, 136, 5);'>Details for CCSDT#3</h2>", content = pagestr.format("0.34"))
+    return page(static=True, 
+                subhead="<h2 style='color:rgb(69, 136, 5);'>" +
+                        "Details for CCSDT#3</h2>", content = pagestr.format("0.34"))
 
 
 def page(**kwargs):
