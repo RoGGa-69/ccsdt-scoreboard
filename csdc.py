@@ -666,8 +666,8 @@ def initialize_weeks():
                 gods = ("Ashenzari", "Ashenzari", "Ashenzari"),
                 start = datetime.datetime(2026,5,10, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                bonus1 = orcendbeforexl11,
-                bonus2 = depths4beforelair))
+                bonus1 = abyssruneunder27kturn,
+                bonus2 = floor10ofzig))
 
         weeks.append(CsdcWeek(
                 number = "2",
