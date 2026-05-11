@@ -660,14 +660,14 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "1",
-                unique = "Antaeus",
-                species = "On",
-                background = "AE",
-                gods = ("Ashenzari", "Ashenzari", "Ashenzari"),
+                unique = "Donald",
+                species = "Mf",
+                background = "Fi",
+                gods = ("Ashenzari", "Okawaru", "Dithmenos"),
                 start = datetime.datetime(2026,5,10, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
                 bonus1 = abyssruneunder27kturn,
-                bonus2 = floor10ofzig))
+                bonus2 = enterelf3under12kturn))
 
         weeks.append(CsdcWeek(
                 number = "2",
@@ -675,10 +675,10 @@ def initialize_weeks():
                 species = "Te",
                 background = "FE",
                 gods = ("Sif Muna", "Sif Muna", "Sif Muna"),
-                start = datetime.datetime(2026,5,22, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,5,29, tzinfo=datetime.timezone.utc),
-                bonus1 = depthsbeforerune,
-                bonus2 = hellpanrunefirst))
+                start = datetime.datetime(2026,5,11, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
+                bonus1 = enterelf3under12kturn,
+                bonus2 = abyssruneunder27kturn))
 
         weeks.append(CsdcWeek(
                 number = "3",

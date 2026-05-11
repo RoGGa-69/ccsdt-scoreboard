@@ -177,7 +177,7 @@ def standingstable():
             ])
 #       sp +='<th>Win &lt;40k Turns</th>'
         sp +='<th>15 Rune Win</th><th>Full Zig</th><th>Zot <= XL20</th>'
-        sp +='<th>No Lair Win</th><th>Ascetic Rune</th>'
+        sp +='<th>No Lair Win</th><th><abbr title="Get a rune without using potions or scrolls">Ascetic Rune</abbr></th>'
         sp += '<th>Total Score</th><th>Weekly Bonuses</th><th>Game High Score</th></tr>'
         place = 1
         for p in csdc.overview().with_session(s).all():
@@ -294,8 +294,7 @@ make the choices random.</li>
 <li>Participants have one week to finish a game using that combo. 
 Only milestones recorded during the week (from 00:00 UTC on the 
 start date until 00:00 UTC on the end date) will count for scoring.</li>
-<li>Your first {} game started on an <a href="https://crawl.develz.org/play.htm" target="_blank">official DCSS server</a> 
-( or CCO: <a href="https://cco.crawlcosplay.org/" target="_blank">cco.crawlcosplay.org/</a> ) 
+<li>Your first DCSS v{} game started on an <a href="https://www.dungeoncrawlcentral.org/online_servers.html" target="_blank">DCSS Webtiles server</a>  
 during the week will count for scoring. This is the only allowed attempt, subject to rule 4 below.
 <li>One redo per week is allowed if your first game ended in death with player
 XL < 5 (i.e., no redo once you hit XL 5). The redo game must be started after
@@ -346,7 +345,7 @@ week)</th><th>Points</th></tr>
 <tr><td class="name">2. Clear a Ziggurat</td><td class="pt">4</td></tr>
 <tr><td class="name">3. Enter Zot at XL 20 or lower</td><td class="pt">5</td></tr>
 <tr><td class="name">4. Win a game without entering lair</td><td class="pt">6</td></tr>
-<tr><td class="name">5. Get a rune without using potions or scrolls (aesetic rune)</td><td class="pt">7</td></tr>
+<tr><td class="name">5. Get a rune without using potions or scrolls (ascetic rune)</td><td class="pt">7</td></tr>
 </table>
 <p>¹ 5 new milestones were created for CCSDT#3 along with 
 the removal of 1 one-time point: Win a game in under 40,000 turns</p>
