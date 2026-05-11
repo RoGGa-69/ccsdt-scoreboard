@@ -478,7 +478,7 @@ def initialize_weeks():
         orcendbeforexl11 = CsdcBonus("OrcEndBeforeXL11",
             "Enter the bottom floor of the Orcish Mines before XL11.",
             [ Milestone.verb_id == get_verb(s, "br.end").id,
-              Milestone.place_id == get_place_from_string(s, "Orc:5").id,
+              Milestone.place_id == get_place_from_string(s, "Orc:2").id,
               Milestone.xl < 11 ],
             "1")
 
