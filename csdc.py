@@ -475,6 +475,13 @@ def initialize_weeks():
               Milestone.xl <= 12 ],
             "1")
 
+        orcendbeforexl11 = CsdcBonus("OrcEndBeforeXL11",
+            "Enter the bottom floor of the Orcish Mines before XL11.",
+            [ Milestone.verb_id == get_verb(s, "br.end").id,
+              Milestone.place_id == get_place_from_string(s, "Orc:5").id,
+              Milestone.xl < 11 ],
+            "1")
+
         vaultendxl18 = CsdcBonus("VaultEndXL18",
             "Reach the end of the Vaults at XL &leq; 18.",
             [ Milestone.verb_id == get_verb(s, "br.end").id,
@@ -659,7 +666,7 @@ def initialize_weeks():
                 gods = ("Ashenzari", "Ashenzari", "Ashenzari"),
                 start = datetime.datetime(2026,5,10, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                bonus1 = runelowskill,
+                bonus1 = orcendbeforexl11,
                 bonus2 = depths4beforelair))
 
         weeks.append(CsdcWeek(
