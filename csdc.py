@@ -655,7 +655,7 @@ def initialize_weeks():
                 "1")
 
         killpanlord = CsdcBonus("KillPanLord",
-            "Kill a Pan Lord unique.",
+            "Kill a non-random Pan Lord unique. (Cerebov, Mnoleg, Lom Lobon, or Gloorx Vloq)",
                 [ Milestone.verb_id == get_verb(s, "uniq").id,
                   or_(Milestone.msg.like("%Cerebov%"),
                       Milestone.msg.like("%Mnoleg%"),
@@ -686,8 +686,8 @@ def initialize_weeks():
                 gods = ("Sif Muna", "Okawaru", "Jiyva"),
                 start = datetime.datetime(2026,5,10, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                bonus1 = slimerune,
-                bonus2 = slimegem))
+                bonus1 = killpanlord,
+                bonus2 = killhelllord))
 
         weeks.append(CsdcWeek(
                 number = "2",
