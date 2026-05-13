@@ -121,7 +121,6 @@ class CsdcWeek:
             self.background = get_background(s, kwargs["background"])
             self.char = self.species.short + self.background.short
             self.uniques = kwargs["unique"]
-#            self.uniques = get_unique(s, kwargs["unique"])
             self.gods = [ get_god(s, g) for g in kwargs["gods"] ]
             self.start = kwargs["start"]
             self.end = kwargs["end"]
@@ -424,16 +423,28 @@ def initialize_weeks():
               ).as_scalar() < 2],
             "1")
 
-        slimerunefirst = CsdcBonus("GetTheSlimyRuneFirst",
-            "Get the slimy rune without entering any multi-level branch other than Lair, Slime, and Dungeon (don't get banished).",
+#        slimerunefirst = CsdcBonus("GetTheSlimyRuneFirst",
+#            "Get the slimy rune without entering any multi-level branch other than Lair, Slime, and Dungeon (don't get banished).",
+#            [ Milestone.verb_id == get_verb(s, "rune").id,
+#              Milestone.place_id  == get_place_from_string(s, "Slime:5").id,
+#              Query(func.count(m2.id)).filter(
+#                  Milestone.gid == m2.gid,
+#                  m2.turn < Milestone.turn,
+#                  m2.verb_id == get_verb(s, "br.enter").id,
+#                  m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.MULTI_LEVEL_BRANCHES])
+#              ).as_scalar() <= 2],
+#            "1")
+
+        slimerune = CsdcBonus("GetTheSlimyRune",
+            "Get the slimy rune.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
-              Milestone.place_id  == get_place_from_string(s, "Slime:5").id,
-              Query(func.count(m2.id)).filter(
-                  Milestone.gid == m2.gid,
-                  m2.turn < Milestone.turn,
-                  m2.verb_id == get_verb(s, "br.enter").id,
-                  m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id for b in constants.MULTI_LEVEL_BRANCHES])
-              ).as_scalar() <= 2],
+              Milestone.place_id  == get_place_from_string(s, "Slime:5").id],
+            "1")
+
+        slimegem = CsdcBonus("GetTheSlimyGem",
+            "Get the slimy gem. (it doesn't need to stay intact)",
+            [ Milestone.verb_id == get_verb(s, "gem.found").id,
+              Milestone.place_id  == get_place_from_string(s, "Slime:5").id],
             "1")
 
         temple4k = CsdcBonus("TempleIn4kTurn",
@@ -443,10 +454,9 @@ def initialize_weeks():
               Milestone.turn < 4000 ],
             "1")
 
-        abyssruneunder27kturn = CsdcBonus("AbyssRuneUnder27kTurn",
-            "Get the Abyssal rune in under 27,000 turns.",
-            [ Milestone.verb_id == get_verb(s, "rune").id,
-              Milestone.place_id == get_place_from_string(s, "Abyss").id,
+        exitabyssunder27kturn = CsdcBonus("ExitAbyssUnder27kTurn",
+            "Exit the Abyss in under 27,000 turns.",
+            [ Milestone.verb_id == get_verb(s, "abyss.exit").id,
               Milestone.turn < 27000 ],
             "1")
 
@@ -541,7 +551,7 @@ def initialize_weeks():
             "1")
 
         hellpanrunefirst = CsdcBonus("HellPanRuneFirst",
-            "Get a rune from Hell or Pan before entering any other rune branch (excluding the Abyss).",
+            "Get a rune from Pan before entering any other rune branch (excluding the Abyss).",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               ~Milestone.msg.like("%byssal%"),
               ~Query(m2).filter( 
@@ -549,7 +559,7 @@ def initialize_weeks():
                   m2.turn < Milestone.turn,
                   m2.verb_id == get_verb(s, "br.enter").id,
                   m2.place_id.in_([ get_place(s, get_branch(s, b), 1).id 
-                      for b in set(constants.RUNE_BRANCHES) - set(("Abyss", "Coc", "Geh", "Dis", "Tar", "Pan"))]),
+                      for b in set(constants.RUNE_BRANCHES) - set(("Abyss", "Pan"))]),
               ).exists() ],
             "1")
 
@@ -570,6 +580,12 @@ def initialize_weeks():
             "Collect the golden rune.",
             [ Milestone.verb_id == get_verb(s, "rune").id,
               Milestone.place_id == get_place_from_string(s, "Tomb:3").id ],
+            "1")
+
+        cryptgem = CsdcBonus("CryptGem",
+            "Pickup the gem in Crypt:3. (it doesn't need to stay intact)",
+            [ Milestone.verb_id == get_verb(s, "gem.found").id,
+              Milestone.place_id == get_place_from_string(s, "Crypt:3").id ],
             "1")
 
         vowofcourage = CsdcBonus("VowOfCourage",
@@ -632,25 +648,29 @@ def initialize_weeks():
              m2.verb_id == get_verb(s, "death").id).as_scalar() < 2],
             "1")
 
-        batformuniq = CsdcBonus("BatformUniq",
-                "Kill a unique in bat form (vampires).",
+        treeformuniq = CsdcBonus("TreeFormUniq",
+                "Kill a unique in tree form (using lignification potion).",
                 [ Milestone.verb_id == get_verb(s, "uniq").id,
-                    Milestone.status.like("%bat-form%")],
+                    Milestone.status.like("%tree-form%")],
                 "1")
 
-        batformuniq = CsdcBonus("BatformHellPanLord",
-            "Kill a Hell or Pan Lord unique in bat form (vampires).",
+        killpanlord = CsdcBonus("KillPanLord",
+            "Kill a Pan Lord unique.",
                 [ Milestone.verb_id == get_verb(s, "uniq").id,
-                  Milestone.status.like("%bat-form%"),
                   or_(Milestone.msg.like("%Cerebov%"),
                       Milestone.msg.like("%Mnoleg%"),
                       Milestone.msg.like("%Lom Lobon%"),
-                      Milestone.msg.like("%Gloorx Vloq%"),
-                      Milestone.msg.like("%Asmodeus%"),
+                      Milestone.msg.like("%Gloorx Vloq%")) ],
+                "1")
+
+        killhelllord = CsdcBonus("KillHellLord",
+            "Kill a Hell Lord unique. (Geryon does not count)",
+                [ Milestone.verb_id == get_verb(s, "uniq").id,
+                  or_(Milestone.msg.like("%Asmodeus%"),
                       Milestone.msg.like("%Antaeus%"),
                       Milestone.msg.like("%Dispater%"),
                       Milestone.msg.like("%Ereshkigal%")) ],
-                "2")
+                "1")
 
         runebeforexl17 = CsdcBonus("RuneBeforeXL17",
             "Collect a rune before reaching XL17.",
@@ -660,25 +680,25 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "1",
-                unique = "Donald",
-                species = "Mf",
+                unique = "Gargoyle",
+                species = "Gr",
                 background = "Fi",
-                gods = ("Ashenzari", "Okawaru", "Dithmenos"),
+                gods = ("Sif Muna", "Okawaru", "Jiyva"),
                 start = datetime.datetime(2026,5,10, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                bonus1 = abyssruneunder27kturn,
-                bonus2 = enterelf3under12kturn))
+                bonus1 = slimerune,
+                bonus2 = slimegem))
 
         weeks.append(CsdcWeek(
                 number = "2",
-                unique = "Asmodeus",
-                species = "Te",
-                background = "FE",
-                gods = ("Sif Muna", "Sif Muna", "Sif Muna"),
+                unique = "Donald2",
+                species = "Mf",
+                background = "Fi",
+                gods = ("Okawaru", "Okawaru", "Okawaru"),
                 start = datetime.datetime(2026,5,11, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                bonus1 = enterelf3under12kturn,
-                bonus2 = abyssruneunder27kturn))
+                bonus1 = treeformuniq,
+                bonus2 = cryptgem))
 
         weeks.append(CsdcWeek(
                 number = "3",
@@ -704,14 +724,14 @@ def initialize_weeks():
         
         weeks.append(CsdcWeek(
                 number = "5",
-                unique = "Geryon",
-                species = "Na",
-                background = "Gl",
-                gods = ("Hepliaklqana", "Hepliaklqana", "Hepliaklqana"),
+                unique = "Donald3",
+                species = "Mf",
+                background = "Fi",
+                gods = ("Okawaru", "Okawaru", "Okawaru"),
                 start = datetime.datetime(2026,5,8, tzinfo=datetime.timezone.utc),
                 end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                bonus1 = floor10ofzig,
-                bonus2 = abyssruneunder27kturn))                
+                bonus1 = killpanlord,
+                bonus2 = killhelllord))                
 
 
 def all_games():
