@@ -308,10 +308,10 @@ class CsdcWeek:
     def scorecard(self):
         sc = Query([Game.gid,
             Game.player_id,
-            type_coerce(self._xl(4), Integer).label("xl5"),
+            type_coerce(self._xl(5), Integer).label("xl5"),
             type_coerce(self._uniq(), Integer).label("uniq"),
             type_coerce(self._worship(), Integer).label("worship"),
-            type_coerce(self._xl(9), Integer).label("xl10"),
+            type_coerce(self._xl(10), Integer).label("xl10"),
             type_coerce(self._brenter(), Integer).label("brenter"),
             type_coerce(self._brend(), Integer).label("brend"),
             type_coerce(self._god(), Integer).label("god"),
