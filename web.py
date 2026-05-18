@@ -25,12 +25,12 @@ version = '0.34'
 def logoblock(subhead):
     sh = "<h2>{}</h2>".format(subhead) if subhead != None else ""
     return """<div id="title">
-    <h2 id="sdc"><center>Testing prior to CCSDT#3 for DCSS v{}</center></h2>
+    <h2 id="sdc"><center>CCSDT#3 for DCSS v{}</center></h2>
     {}</div>""".format(version, sh)
 
 def mainmenu():
-    return ('<span class="menu"><img src="/img/animated-arrow.gif" width="40" height="10">' +
-                               'CCSDT #3 for v0.34</a> : </span>' +
+    return ('<span class="menu">CCSDT for v0.34</a> : </span>' +
+            '<span class="menu"><img src="/img/animated-arrow.gif" width="40" height="10"></span>' +
             '<span class="menu"><a href="index.html">Overview</a> - </span>' +
             '<span class="menu"><a href="rules.html">Details</a> - </span>' + 
             '<span class="menu"><a href="standings.html">Standings</a></span>' +
@@ -66,7 +66,9 @@ def wkinfo(wk):
     sp += ('<div id="gods"><span class="label">Gods: </span>')
     sp += ", ".join([ g.name for g in wk.gods])
     sp += '</div>'
-    sp += '<br><pre>LEGEND<br>------<br>Green = Won<br>Red   = Died<br>Grey  = ongoing or did not finish before end of the week</right></pre>'
+    sp += '<br><pre>LEGEND<br>------<br>Green = Won<br>Red   = Died<br>Grey  = ongoing or did not finish<br>        before end of the week</right></pre>'
+    sp += '<pre>SPECIAL NOTE<br>------------<br>There is an issue/bug with the CCSDT scoring when reaching XL5 and XL10. New XL levels are <br>not captured in the milestones file on webtiles servers. This means the point for each only<br>gets given when another milestone is triggered (like killing a Unique) after reaching said XL. <br>I filled a bug report on github but it was closed right away. <br>TLDR: As a partial fix for this CCSDT, I am leaving the XL5 and XL10 labels as is, but <br>programmed them to trigger when a "milstones" entry occurs after XL4 and XL9 respectively.</pre>'
+
     return sp
 
 def wkurl(wk):
@@ -170,7 +172,8 @@ def _ifnone(x, d):
 
 def standingstable():
     with get_session() as s:
-        sp = '<pre>LEGEND<br>------<br>Green = Won<br>Red   = Died<br>White = ongoing or did not finish</right></pre>'
+        sp = '<pre>LEGEND<br>------<br>Green = Won<br>Red   = Died<br>White = ongoing or did not finish <br>        before the end of the week</right></pre>'
+        sp += '<pre>SPECIAL NOTE<br>------------<br>There is an issue/bug with the CCSDT scoring when reaching XL5 and XL10. New XL levels are <br>not captured in the milestones file on webtiles servers. This means the point for each only<br>gets given when another milestone is triggered (like killing a Unique) after reaching said XL. <br>I will be filling a bug report on github but I am guessing this <br>will not get fixed quickly to be applied to DCSS v0.34 .</pre>'
         sp += '<div class="card"><table>'
         sp += '<tr class="head"><th></th><th>Player</th>'
         sp += ''.join(['<th>' + description(wk, True) +'</th>' for wk in csdc.weeks
@@ -257,7 +260,8 @@ points by reaching various in-game milestones.</li>
 <p>Original CSDC rules and organization by <a href="http://crawl.akrasiac.org/scoring/players/walkerboh.html">WalkerBoh</a> and 
 <a href="http://crawl.akrasiac.org/scoring/players/ebering.html">ebering</a>.
 Thank you to scrubbdaddy/scrubbuddy (CCSDT#1&3) & grumposus (CCSDT#2) for python assistance.</p>
-<p>I am your host, RoGGa.</p>"""
+<p>I am your host,</p>
+<p>RoGGa ;-p</p>"""
 
     wklist = '<ul id="schedule">'
     for wk in csdc.weeks:
@@ -307,6 +311,7 @@ reaching ****** piety (or on worship with Gozag or Xom) with one of the listed
 gods. The point is lost if you ever abandon your god or are excommunicated. If
 the combo for the week is a zealot background, god points are only for sticking
 with the starting god. If the combo for the week is a demigod, the god point is automatically awarded.</li>
+<li><b>CLARIFICATION</b>: If you worship another good before one of the 3 gods you lose your 2 god points.</li>
 <li>The season consists of 5 challenges total (i.e., 5 different combos). Each
 race and background will be selected at most once during the competition.</li>
 <li>The final rankings will be tallied at the end of week 5 and represent the
@@ -393,7 +398,7 @@ more_gem_info = true</pre>
    <li><b>NEW</b>: Pickup the gem in Slime:5. (it doesn't need to stay intact)</li>
    <li>Collect a rune without dying (felids).</li>
 </ol>
-   
+
 """
     return page(static=True, 
                 subhead="<h2 style='color:rgb(69, 136, 5);'>" +

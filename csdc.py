@@ -308,10 +308,10 @@ class CsdcWeek:
     def scorecard(self):
         sc = Query([Game.gid,
             Game.player_id,
-            type_coerce(self._xl(5), Integer).label("xl5"),
+            type_coerce(self._xl(4), Integer).label("xl5"),
             type_coerce(self._uniq(), Integer).label("uniq"),
             type_coerce(self._worship(), Integer).label("worship"),
-            type_coerce(self._xl(10), Integer).label("xl10"),
+            type_coerce(self._xl(9), Integer).label("xl10"),
             type_coerce(self._brenter(), Integer).label("brenter"),
             type_coerce(self._brend(), Integer).label("brend"),
             type_coerce(self._god(), Integer).label("god"),
@@ -680,13 +680,13 @@ def initialize_weeks():
 
         weeks.append(CsdcWeek(
                 number = "1",
-                unique = "Gargoyle",
-                species = "Gr",
-                background = "Fi",
-                gods = ("Sif Muna", "Okawaru", "Jiyva"),
-                start = datetime.datetime(2026,5,10, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
-                bonus1 = killpanlord,
+                unique = "Dowan",
+                species = "DE",
+                background = "Cj",
+                gods = ("Xom", "Trog", "Qazlal"),
+                start = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,22, tzinfo=datetime.timezone.utc),
+                bonus1 = orcendbeforexl11,
                 bonus2 = killhelllord))
 
         weeks.append(CsdcWeek(
@@ -695,8 +695,8 @@ def initialize_weeks():
                 species = "Mf",
                 background = "Fi",
                 gods = ("Okawaru", "Okawaru", "Okawaru"),
-                start = datetime.datetime(2026,5,11, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
+                start = datetime.datetime(2026,5,22, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,5,29, tzinfo=datetime.timezone.utc),
                 bonus1 = treeformuniq,
                 bonus2 = cryptgem))
 
@@ -706,8 +706,8 @@ def initialize_weeks():
                 species = "Gr",
                 background = "EE",
                 gods = ("Makhleb", "Makhleb", "Makhleb"),
-                start = datetime.datetime(2026,5,1, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,5,8, tzinfo=datetime.timezone.utc),
+                start = datetime.datetime(2026,5,29, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,6,5, tzinfo=datetime.timezone.utc),
                 bonus1 = slimefirst,
                 bonus2 = runebranchlowskill))
 
@@ -717,8 +717,8 @@ def initialize_weeks():
                 species = "Po",
                 background = "En",
                 gods = ("Dithmenos", "Dithmenos", "Dithmenos"),
-                start = datetime.datetime(2026,5,7, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
+                start = datetime.datetime(2026,6,5, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,6,12, tzinfo=datetime.timezone.utc),
                 bonus1 = enterelf3under12kturn,
                 bonus2 = collect3gems))
         
@@ -728,8 +728,8 @@ def initialize_weeks():
                 species = "Mf",
                 background = "Fi",
                 gods = ("Okawaru", "Okawaru", "Okawaru"),
-                start = datetime.datetime(2026,5,8, tzinfo=datetime.timezone.utc),
-                end = datetime.datetime(2026,5,15, tzinfo=datetime.timezone.utc),
+                start = datetime.datetime(2026,6,12, tzinfo=datetime.timezone.utc),
+                end = datetime.datetime(2026,6,19, tzinfo=datetime.timezone.utc),
                 bonus1 = killpanlord,
                 bonus2 = killhelllord))                
 
