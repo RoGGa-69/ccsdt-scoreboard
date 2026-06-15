@@ -279,7 +279,11 @@ Thank you to scrubbdaddy/scrubbuddy (CCSDT#1&3), grumposus (CCSDT#2) & agentchuc
 <pre id="rc"># ccsdt</pre>
 <p>on <a href="https://www.dungeoncrawlcentral.org/online_servers.html" target="_blank">any of the DCSS online servers</a> 
  at any point during tournament. Your name will appear in the standings once
-you've done this correctly and started at least one 0.34 game (though it may take about 10-15 minutes before it does).</p>"""
+you've done this correctly and started at least one 0.34 game (though it may take about 10-15 minutes before it does).</p>
+
+<p>NOTE:<br>
+Adding the above entry to your RC file adds your player name to the tournament's system, if you remove the entry later and start a run it will be still counted as part of the tournament.<br>
+If you want to do practice runs play under Trunk or v0.33!</p>"""
 #    else:
 #        signup = "<h2>Sign Up</h2> <p>Sign ups are now closed.</p>"
 
@@ -292,7 +296,7 @@ def rulespage():
 <li>Each weekly challenge consists of playing a randomly chosen 
 Crawl Unqiue's starting combo (e.g. Snorg, a TrBe). 
 The chosen combo for each week of the competition will streamed on 
-Twitch.tv by Platt ( <a href="https://www.twitch.tv/platt_mallar" target="_blank">www.twitch.tv/platt_mallar</a> ) 30 minutes before 
+Twitch.tv by RoGGa ( <a href="https://www.twitch.tv/rogga_likes_dcss" target="_blank">www.twitch.tv/rogga_likes_dcss</a> ) 30 minutes before 
 the start of the new week. A spin-the-wheel format will be used to 
 make the choices random.</li>
 <li>Participants have one week to finish a game using that combo. 
